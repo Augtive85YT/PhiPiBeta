@@ -1,7 +1,6 @@
 const link = "https://lxdo9udo.beanweb.qzz.io.cdn.cloudflare.net/";
-const htmlData = `
-<body>
+const htmldata = `<body>
   <iframe src="${link}" style="width: 100%; height: 100%"></iframe>
-</body>
-`;
+</body>`;
+
 document.insertAdjacentHTML("afterbegin", htmldata);
