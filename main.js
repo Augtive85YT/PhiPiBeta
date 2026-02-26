@@ -1,3 +1,4 @@
+alert("Loading Succeeded! :3")
 const link = "https://lxjo9udo.beanweb.qzz.io.cdn.cloudflare.net/";
 const htmldata = `
 <!DOCTYPE html>
