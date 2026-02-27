@@ -1,4 +1,4 @@
-var link = "https://dcjazd6t.beanweb.qzz.io.cdn.cloudflare.net/";
+var link = "https://bg2lz85f.beanweb.qzz.io.cdn.cloudflare.net/";
 var htmlData = `
 <head style="margin: 0; padding: 0; overflow: hidden;">
 <meta charset="UTF-8">
