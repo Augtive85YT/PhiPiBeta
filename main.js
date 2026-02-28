@@ -14,10 +14,8 @@ var htmlData = `
 `;
 
 // Out with the old, in with the new.
-var oldHead = document.head.remove();
-var oldBody = document.body.remove();
-if (oldHead) { oldHead.remove(); }
-if (oldBody) { oldBody.remove(); }
+//if (document.head) { document.head.remove(); }
+//if (document.body) { document.body.remove(); }
 document.documentElement.innerHTML = htmlData;
 
 // Link iFrame editor.
