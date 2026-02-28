@@ -17,13 +17,6 @@ var htmlData = `
 // Out with the old, in with the new.
 document.documentElement.innerHTML = htmlData;
 
-// Link iFrame editor.
-document.getElementById("mainIframe").addEventListener("load", () => {
-  var doc = document.getElementById("mainIframe").contentDocument;
-  
-  // Nothing right now.
-});
-
 // Add console notes. 
 console.log("IXLambda loaded successfully! :3");
 console.log("Maintained by ΦΠΒ!")
