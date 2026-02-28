@@ -10,7 +10,7 @@ var htmlData = `
 	<link rel="icon" href="https://github.com/Augtive85YT/PhiPiBeta/blob/main/IXLambda/assets/img/ixlambda-favicon.png?raw=true">
 </head>
 <body>
-	<iframe id="mainIframe" src="${link}" style="position:fixed; top:0; left:0; width: 100%; height: 100%; border:none;"></iframe>
+	<iframe src="${link}" style="position:fixed; top:0; left:0; width: 100%; height: 100%; border:none;"></iframe>
 </body>
 `;
 
