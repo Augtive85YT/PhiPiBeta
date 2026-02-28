@@ -14,8 +14,6 @@ var htmlData = `
 `;
 
 // Out with the old, in with the new.
-//if (document.head) { document.head.remove(); }
-//if (document.body) { document.body.remove(); }
 document.documentElement.innerHTML = htmlData;
 
 // Link iFrame editor.
@@ -27,4 +25,5 @@ document.getElementById("mainIframe").addEventListener("load", () => {
 
 // Add console notes. 
 console.log("IXLambda loaded successfully! :3");
+console.log("Maintained by ΦΠΒ!")
 console.log("Lovingly made by SUDO! UwU");
