@@ -1,5 +1,5 @@
 # MSTaums
-## MSTaums is an extension loader that takes a link and loads an extenstion.
+## MSTaums is an extension loader that takes a link and loads an extenstion.<br>Pronounced "Ehm-Ess-Tomes"
 Instructions here
 ```js
 code here
