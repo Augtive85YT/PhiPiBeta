@@ -10,12 +10,15 @@ var htmlData = `
 	<link rel="icon" href="https://cdn.jsdelivr.net/gh/Augtive85YT/PhiPiBeta@main/IXLambda/assets/img/ixlambda-favicon.png">
 </head>
 <body>
-	<iframe src="${link}" style="position:fixed; top:0; left:0; width: 100%; height: 100%; border:none;"></iframe>
+	<iframe id="mainIframe" src="${link}" style="position:fixed; top:0; left:0; width: 100%; height: 100%; border:none;"></iframe>
 </body>
 `;
 
 // Out with the old, in with the new.
 document.documentElement.innerHTML = htmlData;
+
+// Reload because it doesn't work.
+document.getElementById("mainIframe").contentWindow.location.reload();
 
 // Add console notes. 
 console.log("IXLambda loaded successfully! :3");
