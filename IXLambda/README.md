@@ -6,4 +6,4 @@ javascript:(function()%7Bvar%20script%20%3D%20document.createElement(%22script%2
 ```
 Please note you mustn't be in a new tab you must be in a tab with a link.
 ### Brought to you by ΦΠΒ's owner, SUDO.
-Also, updates may be pushed at any time, that is intended.
+Updates may be pushed at any time, that is intended.
