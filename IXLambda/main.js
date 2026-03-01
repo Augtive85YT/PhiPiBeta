@@ -10,15 +10,17 @@ var htmlData = `
 	<link rel="icon" href="https://cdn.jsdelivr.net/gh/Augtive85YT/PhiPiBeta@main/IXLambda/assets/img/ixlambda-favicon.png">
 </head>
 <body>
-	<iframe id="mainIframe" src="${link}" style="position:fixed; top:0; left:0; width: 100%; height: 100%; border:none;"></iframe>
+<p>If you see this text, the iFrame failed to load and... I don't know. Just be patient and I'll probably fix it.</p>
 </body>
 `;
 
 // Out with the old, in with the new.
 document.documentElement.innerHTML = htmlData;
 
-// THIS WORKS BUT THE LITERAL RELOAD FUNCTION DOESN'T???
-document.getElementById("mainIframe").src += "";
+// OK, now it gets programatically generated.
+var iframe = document.body.createElement('iframe')
+iframe.src = link;
+iframe.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;";
 
 // Add console notes. 
 console.log("IXLambda loaded successfully! :3");
