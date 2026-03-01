@@ -17,8 +17,8 @@ var htmlData = `
 // Out with the old, in with the new.
 document.documentElement.innerHTML = htmlData;
 
-// Reload because it doesn't work.
-document.getElementById("mainIframe").contentWindow.location.reload();
+// THIS WORKS BUT THE LITERAL RELOAD FUNCTION DOESN'T???
+document.getElementById("mainIframe").src += "";
 
 // Add console notes. 
 console.log("IXLambda loaded successfully! :3");
