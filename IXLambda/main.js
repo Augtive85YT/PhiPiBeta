@@ -18,9 +18,10 @@ var htmlData = `
 document.documentElement.innerHTML = htmlData;
 
 // OK, now it gets programatically generated.
-var iframe = document.body.createElement('iframe')
+var iframe = document.createElement('iframe');
 iframe.src = link;
 iframe.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;";
+document.body.appendChild(iframe);
 
 // Add console notes. 
 console.log("IXLambda loaded successfully! :3");
