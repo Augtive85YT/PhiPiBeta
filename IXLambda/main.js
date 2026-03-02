@@ -22,7 +22,3 @@ document.documentElement.innerHTML = htmlData;
 console.log("IXLambda loaded successfully! :3");
 console.log("Maintained by ΦΠΒ!")
 console.log("Lovingly made by SUDO! UwU");
-
-// Reload iFrame
-new Promise(resolve => setTimeout(resolve, 3000));
-document.getElementById("mainIframe").src += "";
