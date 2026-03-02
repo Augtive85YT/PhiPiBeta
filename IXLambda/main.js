@@ -10,6 +10,7 @@ var htmlData = `
 	<link rel="icon" href="https://cdn.jsdelivr.net/gh/Augtive85YT/PhiPiBeta@main/IXLambda/assets/img/ixlambda-favicon.png">
 </head>
 <body>
+<iframe id="mainIframe" src="${link}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
 <p>If you see this text, the iFrame failed to load and... I don't know. Just be patient and I'll probably fix it.</p>
 </body>
 `;
@@ -17,13 +18,11 @@ var htmlData = `
 // Out with the old, in with the new.
 document.documentElement.innerHTML = htmlData;
 
-// OK, now it gets programatically generated.
-var iframe = document.createElement('iframe');
-iframe.src = link;
-iframe.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;";
-document.body.appendChild(iframe);
-
 // Add console notes. 
 console.log("IXLambda loaded successfully! :3");
 console.log("Maintained by ΦΠΒ!")
 console.log("Lovingly made by SUDO! UwU");
+
+// Reload iFrame
+new Promise(resolve => setTimeout(resolve, 3000));
+document.getElementById("mainIframe").src += "";
