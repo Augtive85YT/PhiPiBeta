@@ -24,4 +24,4 @@ console.log("Maintained by ΦΠΒ!")
 console.log("Lovingly made by SUDO! UwU");
 
 // Reload iFrame or something. I don't know anymore. 😭
-document.getElementById("mainIframe").src = `${link}${link.includes("?") ? "&" : "?"}cb=${Date.now()}
+document.getElementById("mainIframe").src = `${link}${link.includes("?") ? "&" : "?"}cb=${Date.now()}`;
