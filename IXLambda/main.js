@@ -12,7 +12,7 @@ var htmlData = `
 		<link rel="icon" href="https://cdn.jsdelivr.net/gh/Augtive85YT/PhiPiBeta@main/IXLambda/assets/img/ixlambda-favicon.png">
 	</head>
 	<body>
-		<iframe id="mainIframe" src="${link}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+		<iframe id="mainIframe" src="${link}?cb=${Date.now()}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
 		<p>If you see this text, the iFrame failed to load or you are in the loading phase.<br>This is only an issue if it persists. I will possibly fix this soon.</p>
 	</body>
 </html>
@@ -27,6 +27,3 @@ document.close();
 console.log("IXLambda loaded successfully! :3");
 console.log("Maintained by ΦΠΒ!")
 console.log("Lovingly made by SUDO! UwU");
-
-// Reload iFrame or something. I don't know anymore. 😭
-document.getElementById("mainIframe").src = `${link}?cb=${Date.now()}`;
