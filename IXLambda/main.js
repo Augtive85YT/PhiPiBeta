@@ -13,8 +13,7 @@ var htmlData = `
 	</head>
 	<body>
 		<iframe id="mainIframe" src="${link}?cb=${Date.now()}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
-		<p>If you see this text, the iFrame failed to load or you are in the loading phase.<br>This is only an issue if it persists. I will possibly fix this soon.</p>
-		<br>
+		<p>Waiting for load...<br>This is only an issue if it persists, if so, I fix this soon.</p>
 		<button type="button" onclick="document.getElementById('mainIframe').src = '${link}?cb=${Date.now()}'">Click to Possibly Fix</button>
 	</body>
 </html>
