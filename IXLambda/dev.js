@@ -15,9 +15,8 @@ var htmlData = `
   </head>
 	<body>
 		<iframe id="mainIframe" src="${link}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
-		<p>Waiting for load...<br>This is only an issue if it persists, if so, I fix this soon.
+		<p>Waiting for load...<br>This is only an issue if it persists, if so, I fix this soon.</p>
 		<button type="button" onclick="document.getElementById('mainIframe').src = '${link}';">Click to Possibly Fix</button>
-    </p>
 	</body>
 </html>
 `;
