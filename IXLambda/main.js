@@ -1,5 +1,5 @@
 // The link hidden with b64.
-var link = atob("YmlvbG9neS5pbmZvLm5vcnRoLWthemFraHN0YW4uc3UuY2RuLmNsb3VkZmxhcmUubmV0");
+var link = atob("aHR0cHM6Ly9iaW9sb2d5LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv");
 
 // HTML data to inject.
 var htmlData = `
@@ -29,3 +29,6 @@ document.close();
 console.log("IXLambda loaded successfully! :3");
 console.log("Maintained by ΦΠΒ!")
 console.log("Lovingly made by SUDO! UwU");
+
+// Reload iFrame again.
+document.getElementById("mainIframe").src = `${link}?cb=${Date.now()}`
