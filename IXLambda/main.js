@@ -36,12 +36,11 @@ var htmlDataBad = `
 `;
 
 // Eradicate entire page because I'm silly!
-document.open(); 
-
+document.open();
 document.write(htmlData);
 // USER AGENT FILTER document.write(navigator.platform.startsWith("Mac") ? htmlData : htmlDataBad);
 document.close();
-	
+
 // Add silly console notes. 
 console.log("IXLambda loaded successfully! :3");
 console.log("Maintained by ΦΠΒ's Owner!");
