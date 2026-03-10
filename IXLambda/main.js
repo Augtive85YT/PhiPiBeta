@@ -33,7 +33,7 @@ var htmlDataBad = `
 		<p>-ΦΠΒ's Owner SUDO UwU</p>
 	</body>
 </html>
-`
+`;
 
 // Eradicate entire page because I'm silly!
 document.open(); 
@@ -42,5 +42,5 @@ document.close();
 	
 // Add silly console notes. 
 console.log("IXLambda loaded successfully! :3");
-console.log("Maintained by ΦΠΒ's Owner!")
+console.log("Maintained by ΦΠΒ's Owner!");
 console.log("Lovingly made by SUDO! UwU");
