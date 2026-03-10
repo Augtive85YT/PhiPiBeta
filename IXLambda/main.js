@@ -1,5 +1,5 @@
-// The link hidden with b64. :3
-var link = atob("aHR0cHM6Ly9zMy5hbWF6b25hd3MuY29tL2Zlcm5pc2Jlc3QvaW5kZXguaHRtbA==");
+// I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
+var link = atob("aHR0cHM6Ly8yeW1tYWxhdi5iZWFud2ViLnF6ei5pby5jZG4uY2xvdWRmbGFyZS5uZXQv");
 
 // HTML data to inject.
 var htmlData = `
@@ -14,20 +14,34 @@ var htmlData = `
 	<body>
 		<iframe id="mainIframe" src="${link}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
 		<p>Waiting for load...<br>This is only an issue if it persists, if so, I fix this soon.</p>
-		<button type="button" onclick="document.getElementById('mainIframe').src = '${link}'">Click to Possibly Fix</button>
 	</body>
 </html>
 `;
 
-// Eradicate entire page for funzies!
+// Why are you here I.T. Department? Get out!
+var htmlDataBad = `
+<!DOCTYPE html>
+<html>
+	<head style="margin: 0; padding: 0; overflow: hidden;">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>GET OUT!</title>
+		<script>console.log("Get out of the console, you are not slick.");</script>
+	</head>
+	<body>
+		<p>Hello I.T. Department, it is time we have a chat. You crossed the line blocking CoolMathGames. I only seek freedom. You cannot get rid of me.</p>
+		<p>I have enough links in storage to pass your internet-logging staff.</p>
+		<p>A society that gives up freedom for safety, will lose both. :3</p>
+	</body>
+</html>
+`
+
+// Eradicate entire page because I'm silly!
 document.open(); 
-document.write(htmlData);
+document.write(navigator.platform == "MacIntel" ? htmlData : htmlDataBad);
 document.close();
-
-// Add console notes. 
+	
+// Add silly console notes. 
 console.log("IXLambda loaded successfully! :3");
-console.log("Maintained by ΦΠΒ!")
+console.log("Maintained by ΦΠΒ's Owner!")
 console.log("Lovingly made by SUDO! UwU");
-
-// Reload iFrame again.
-document.getElementById("mainIframe").src = link;
