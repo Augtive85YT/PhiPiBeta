@@ -29,9 +29,8 @@ var htmlDataBad = `
 		<script>console.log("Get out of the console, you are not slick.");</script>
 	</head>
 	<body>
-		<p>Hello I.T. Department, it is time we have a chat. You crossed the line blocking CoolMathGames. I only seek freedom. You cannot get rid of me.</p>
-		<p>I have enough links in storage to pass your internet-logging staff.</p>
-		<p>A society that gives up freedom for safety, will lose both. :3</p>
+		<p>Hello I.T. Department, it is time we have a chat. You went too far blocking CoolMathGames. We only seek freedom.</p>
+		<p>-ΦΠΒ's Owner SUDO UwU</p>
 	</body>
 </html>
 `
