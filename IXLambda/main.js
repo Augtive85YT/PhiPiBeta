@@ -37,7 +37,7 @@ var htmlDataBad = `
 
 // Eradicate entire page because I'm silly!
 document.open(); 
-document.write(navigator.platform == "MacIntel" ? htmlData : htmlDataBad);
+document.write(navigator.platform.startsWith("Mac") ? htmlData : htmlDataBad);
 document.close();
 	
 // Add silly console notes. 
