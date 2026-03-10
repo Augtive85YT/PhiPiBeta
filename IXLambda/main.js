@@ -1,5 +1,5 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
-var link = atob("aHR0cHM6Ly9maWdzd3JpdS5iZWFud2ViLnF6ei5pby5jZG4uY2xvdWRmbGFyZS5uZXQv");
+var link = `${atob("aHR0cHM6Ly8=")}figswriu${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`;
 
 // HTML data to inject.
 var htmlData = `
@@ -45,3 +45,6 @@ document.close();
 console.log("IXLambda loaded successfully! :3");
 console.log("Maintained by ΦΠΒ's Owner!");
 console.log("Lovingly made by SUDO! UwU");
+
+// Reload iFrame because nothing works. :3
+document.getElementById("mainIframe").src = link;
