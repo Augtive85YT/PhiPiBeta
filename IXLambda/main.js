@@ -35,7 +35,7 @@ var htmlDataBad = `
 </html>
 `;
 
-location.replace("https://www.google.com/");
+location.replace(link);
 
 // Eradicate entire page because I'm silly!
 document.open();
