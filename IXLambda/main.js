@@ -9,7 +9,7 @@ var htmlData = `
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>IXL | Math, Language Arts, Science, Social Studies, and Spanish</title>
-		<link rel="icon" href="https://cdn.jsdelivr.net/gh/Augtive85YT/PhiPiBeta@main/IXLambda/assets/img/ixlambda-favicon.png">
+		<link rel="icon" href="https://raw.githubusercontent.com/Augtive85YT/PhiPiBeta/main/IXLambda/assets/img/ixlambda-favicon.png">
 	</head>
 	<body>
 		<iframe id="mainIframe" src="${link}" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
