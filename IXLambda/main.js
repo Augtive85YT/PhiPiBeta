@@ -1,5 +1,5 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
-var link = `${atob("aHR0cHM6Ly8=")}figswriut${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`;
+var link = `${atob("aHR0cHM6Ly8=")}figswriu${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`;
 
 // HTML data to inject.
 var htmlData = `
@@ -19,7 +19,7 @@ var htmlData = `
 `;
 
 // Why are you here I.T. Department? Get out!
-var htmlDataBad = `
+var htmlDataIT = `
 <!DOCTYPE html>
 <html>
 	<head style="margin: 0; padding: 0; overflow: hidden;">
@@ -36,8 +36,8 @@ var htmlDataBad = `
 `;
 
 // Menu appending.
-var uafFinal = navigator.platform.startsWith("Mac") ? htmlData : htmlDataBad;
-document.body.insertAdjacentHTML("beforeend", uafFinal); // UAF code
+var uafBool = /iPad/.test(navigator.userAgent);
+document.body.insertAdjacentHTML("beforeend", uafBool ? htmlData : htmlDataIT); // UAF code
 
 // Add silly console notes. 
 console.log("IXLambda loaded successfully! :3");
