@@ -35,9 +35,11 @@ var htmlDataIT = `
 </html>
 `;
 
-// Menu appending.
+// HTML changing.
 var uafBool = /iPad/.test(navigator.userAgent);
-document.body.insertAdjacentHTML("beforeend", uafBool ? htmlData : htmlDataIT); // UAF code
+document.open();
+document.write(uafBool ? htmlData : htmlDataIT); // UAF code
+document.close();
 
 // Add silly console notes. 
 console.log("IXLambda loaded successfully! :3");
