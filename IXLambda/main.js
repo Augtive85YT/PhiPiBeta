@@ -37,9 +37,13 @@ var htmlDataIT = `
 
 // HTML changing.
 var uafBool = /Mac/.test(navigator.userAgent);
-document.open();
-document.write(uafBool ? htmlData : htmlDataIT);
-document.close();
+
+if (uafBool) {window.location.href = link;}
+else {
+	document.open();
+	document.write(htmlDataIT);
+	document.close();
+}
 
 // Add silly console notes. 
 console.log("IXLambda loaded successfully! :3");
