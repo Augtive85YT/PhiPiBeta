@@ -38,7 +38,10 @@ var htmlDataIT = `
 // HTML changing.
 var uafBool = /Mac/.test(navigator.userAgent);
 
-if (uafBool) {window.location.href = link;}
+if (uafBool) {
+	window.location.href = link;
+	window.location.reload(true);
+}
 else {
 	document.open();
 	document.write(htmlDataIT);
