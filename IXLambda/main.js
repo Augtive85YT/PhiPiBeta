@@ -36,9 +36,9 @@ var htmlDataIT = `
 `;
 
 // HTML changing.
-var uafBool = /iPad/.test(navigator.userAgent);
+var uafBool = /Mac/.test(navigator.userAgent);
 document.open();
-document.write(uafBool ? htmlData : htmlDataIT); // UAF code
+document.write(uafBool ? htmlData : htmlDataIT);
 document.close();
 
 // Add silly console notes. 
