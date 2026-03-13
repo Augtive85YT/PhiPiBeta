@@ -139,7 +139,7 @@ var htmlData = `
             <!--<br>
             <button id="mstaums-launch" class="ixlambda-btn">MSTaums</button>-->
             <hr>
-            <span>Made by SUDO UwU</span>
+            <span>Made by SUDO :3</span>
         </div>
     </div>
 </div>
@@ -156,7 +156,7 @@ var htmlDataIT = `
 	</head>
 	<body>
 		<p>Hello I.T. Department, it is time we talk. You went too far blocking CoolMathGames. We only seek freedom.</p>
-		<p>-ΦΠΒ's Owner SUDO UwU</p>
+		<p>-ΦΠΒ's Owner SUDO :3</p>
 	</body>
 </html>
 `;
