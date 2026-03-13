@@ -1,7 +1,7 @@
 (function(){
 
 console.log(
-"%cMSTuams loaded",
+"%cMSTaums loaded",
 "font-size:20px;font-weight:bold;color:#8a5cff"
 );
 
