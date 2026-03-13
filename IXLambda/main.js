@@ -15,6 +15,7 @@ var htmlData = `
     width: 220px;
     background: #313244;
     color: #cdd6f4;
+	font-family: 'JetBrains Mono', monospace;
     position: fixed;
     top: 100px;
     left: 100px;
@@ -77,6 +78,7 @@ var htmlData = `
 
 .ixlambda-btn {
     width: 100%;
+	font-family: 'JetBrains Mono', monospace;
     padding: 10px;
     margin-top: 8px;
     border: none;
@@ -97,6 +99,7 @@ var htmlData = `
 
 #ixlambda-selector {
     width: 100%;
+	font-family: 'JetBrains Mono', monospace;
     padding: 10px;
     margin-top: 8px;
     border: none;
@@ -115,7 +118,7 @@ var htmlData = `
     color: #6c7086;
 }
 </style>
-
+<link href='https://fonts.googleapis.com/css?family=JetBrains+Mono' rel='stylesheet'>
 <div id="ixlambda-gui">
     <div id="ixlambda-header">
         <span><b>IXLambda Loader</b></span>
