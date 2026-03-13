@@ -1,9 +1,7 @@
 # MSTaums
-## MSTaums is a bookmarklet loader to load bookmarklets straight from github.<br>Pronounced "Ehm-Ess-Tomes"
-Instructions here
-```js
-code here
-```
-This comes with a game bookmarklet prebuilt in.
-### Brought to you by ΦΠΒ's co-owner, TEDA.
-Updates may be pushed at any time, that is intended.
+
+<img src="icon.png" style="width: 100px;">
+
+## MSTaums is a bookmarklet loader to load bookmarklets straight from github.
+To use it just go to: https://github.com/MohanISher47/MSTaums and do the instructions given there
+
