@@ -118,7 +118,7 @@ var htmlData = `
     color: #6c7086;
 }
 </style>
-<link href='https://fonts.googleapis.com/css?family=JetBrains+Mono' rel='stylesheet'>
+<link style="ixlambda-destroy" href='https://fonts.googleapis.com/css?family=JetBrains+Mono' rel='stylesheet'>
 <div id="ixlambda-gui">
     <div id="ixlambda-header">
         <span><b>IXLambda Loader</b></span>
