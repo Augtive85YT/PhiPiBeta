@@ -182,23 +182,37 @@ if (/Mac/i.test(window.navigator.userAgent) || bypassUAF) {
         document.querySelectorAll('.ixlambda-destroy').forEach(e => e.remove());
         gui.remove();
     });
-
+	
+	// Launch as about:blank.
+	function openLink(link) {
+  		var newTab = window.open('about:blank', '_blank');
+		if (newTab) {
+    		var iframe = aboutblank.document.createElement('iframe');
+    		iframe.style.width = "100%";
+    		iframe.style.height = "100%";
+   			iframe.style.border = "none";
+    		iframe.style.margin = "0";
+    		iframe.style.padding = "0";
+			iframe.src = link;
+    		aboutblank.document.body.appendChild(iframe);
+    		aboutblank.document.body.style.margin = "0"; 
+  		} else { alert('Pop-up blocked! Please allow pop-ups in the Safari settings.'); }
+	
     // The actual loader code.
     document.getElementById("ixlambda-launch").addEventListener("click", () => {
-        var currentText = document.getElementById("ixlambda-selector").value;
-        switch (currentText) {
+        switch (document.getElementById("ixlambda-selector").value) {
             case "overcloaked":
-                window.open(overcloakedLink, "");
+                openLink(overcloakedLink);
                 break;
             case "fern":
-                window.open(fernLink, "");
+                openLink(fernLink);
                 break;
             case "selenite":
                 alert("Sorry, Selenite links are really restricted.");
-                // window.open(seleniteLink, "");
+                // openLink(seleniteLink);
                 break;
             case "daydreamx":
-                window.open(dayDreamXLink, "");
+                openLink(dayDreamXLink);
                 break;
         }
     });
