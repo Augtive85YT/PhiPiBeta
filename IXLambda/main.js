@@ -1,6 +1,6 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
 var overcloakedLink = `${atob("aHR0cHM6Ly8=")}figswriu${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`;
-var fernLink = `${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`;
+var fernLink = `${atob("aHR0cHM6Ly8=")}${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`;
 var seleniteLink = ``;
 var dayDreamXLink = `${atob("aHR0cHM6Ly8=")}com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`;
 
