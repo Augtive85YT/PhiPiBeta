@@ -4,7 +4,6 @@ var fernLink = `${atob("aHR0cHM6Ly8=")}${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZ
 var seleniteLink = ``;
 var dayDreamXLink = `${atob("aHR0cHM6Ly8=")}com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`;
 
-
 // Developer stuff! :3
 var bypassUAF = false;
 var devTools = false;
