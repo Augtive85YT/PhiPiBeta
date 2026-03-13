@@ -330,7 +330,7 @@ document.head.appendChild(s);
 
 document.getElementById("bh").onclick=()=>{
 const s=document.createElement("script");
-s.src="https://gl.githack.com/CidCaribou/x-gui/-/raw/main/x-gui.js";
+s.src="https://gl-githack-com.translate.goog/CidCaribou/x-gui/-/raw/main/x-gui.js?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en-US&_x_tr_pto=wapp";
 document.head.appendChild(s);
 };
 
