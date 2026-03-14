@@ -8,25 +8,172 @@ var links = {
 }
 
 // Developer stuff! :3
-var bypassUAF = false;
+var bypassUAF = true;
 var devTools = false;
-var ixlambdaVersion = "v2.2";
+var ixlambdaVersion = "v2.1.3";
+
+// Stylesheet to be imported.
+var htmlStyles = `
+<style>
+:root {
+    --ixlm-bg: #313244;
+    --ixlm-header: #1e1e2e;
+    --ixlm-control-bg: #181825;
+    --ixlm-text: #cdd6f4;
+    --ixlm-accent: #89b4fa;
+    --ixlm-accent-hover: #b4befe;
+    --ixlm-btn-text: #11111b;
+    --ixlm-border: #6c7086;
+
+    --ixlm-min: #f9e2af;
+    --ixlm-min-active: #a6e3a1;
+    --ixlm-close: #f38ba8;
+
+    --ixlm-radius: 6px;
+    --ixlm-font: "JetBrains Mono", monospace;
+}
+
+#ixlambda-gui {
+    width: 250px;
+    position: fixed;
+    top: 100px;
+    left: 100px;
+    z-index: 9999999999;
+
+    font-family: var(--ixlm-font);
+    color: var(--ixlm-text);
+    background: var(--ixlm-bg);
+    border-radius: var(--ixlm-radius);
+}
+
+#ixlambda-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px;
+    background: var(--ixlm-header);
+    border-radius: var(--ixlm-radius) var(--ixlm-radius) 0 0;
+}
+
+#ixlambda-controls {
+    display: flex;
+    gap: 8px;
+
+    padding: 8px 12px;
+    border-radius: 100px;
+    background: var(--ixlm-control-bg);
+}
+
+#ixlambda-header button {
+    width: 12px;
+    height: 12px;
+
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    transition: filter 0.3s, background 0.3s;
+}
+
+#ixlambda-header button:hover {
+    filter: brightness(0.8);
+}
+
+#ixlambda-minimize { background: var(--ixlm-min); }
+#ixlambda-close { background: var(--ixlm-close); }
+
+#ixlambda-gui.minimized #ixlambda-minimize {
+    background: var(--ixlm-min-active);
+}
+
+#ixlambda-content {
+    overflow: hidden;
+    max-height: 500px;
+    transition: max-height 0.3s ease;
+}
+
+#ixlambda-content-inner {
+    padding: 0 10px 10px;
+}
+
+#ixlambda-content-inner span {
+    font-size: 12px;
+    display: table;
+    margin: 8px auto;
+}
+
+#ixlambda-gui.minimized #ixlambda-content {
+    max-height: 0;
+}
+
+#ixlambda-gui.minimized #ixlambda-header {
+    border-radius: var(--ixlm-radius);
+    transition: border-radius 0.3s steps(1, end);
+}
+
+.ixlambda-btn, #ixlambda-selector {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+
+    font-family: var(--ixlm-font);
+    border: none;
+    border-radius: var(--ixlm-radius);
+    cursor: pointer;
+
+    background: var(--ixlm-accent);
+    color: var(--ixlm-btn-text);
+}
+
+.ixlambda-btn {
+    transition: background 0.2s, transform 0.1s;
+}
+
+.ixlambda-btn:hover {
+    background: var(--ixlm-accent-hover);
+}
+
+.ixlambda-btn:active {
+    transform: translateY(1px);
+}
+
+.ixlambda-sidebyside {
+    display: flex;
+    gap: 6px;
+}
+
+#ixlambda-gui hr {
+    width: 100%;
+    height: 2px;
+    margin: 8px 0;
+
+    border: none;
+    border-top: 1px solid var(--ixlm-border);
+}
+</style>
+`;
 
 // HTML body data to inject.
 var htmlData = `
-<link class="ixlambda-destroy" href="https://raw-githack-com.translate.goog/Augtive85YT/PhiPiBeta/main/IXLambda/assets/css/main.css" rel="stylesheet">
-<link class="ixlambda-destroy" href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
+${htmlStyles}
+<link style="ixlambda-destroy" href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
 <div id="ixlambda-gui">
     <div id="ixlambda-header">
-        <span><b>IXLambda Loader</b></span>
+        <div class="ixlambda-sidebyside">
+            <svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" fill="none" width="16" height="16" stroke-width="2.5"><path d="M17 2v6"></path><path d="M13 2H6.5A2.5 2.5 0 0 0 4 4.5v15"></path><path d="M17 4h2"></path><path d="M20 15.2V21a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path><circle cx="17" cy="10" r="2"></circle></svg>
+            <b>IXLambda Loader</b>
+        </div>
         <div id="ixlambda-controls">
             <button id="ixlambda-minimize"></button>
             <button id="ixlambda-close"></button>
         </div>
     </div>
-
     <div id="ixlambda-content">
         <div id="ixlambda-content-inner">
+            <span>Freedom is a universal right.</span>
+            <hr>
             <div class="ixlambda-sidebyside">
                 <select id="ixlambda-selector">
                     <option value="overcloaked">OverCloaked</option>
@@ -158,6 +305,6 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     console.log("%cAlso, I am a few steps ahead of you... The original link is encrypted, along with the code being hidden...", "color: #f38ba8; font-size: 16px; font-weight: bold;")
     console.log("%cPlease, just leave us alone...", "color: #eba0ac; font-size: 16px;");
 } else {
-	// Complain about duplicates.
+    // Complain about duplicates.
     console.log("%cAnother instance of IXLambda exists, please use the current instance.", "color: #89b4fa; font-size: 16px;");
 }
