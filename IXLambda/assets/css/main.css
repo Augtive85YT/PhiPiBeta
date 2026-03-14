@@ -41,7 +41,7 @@
 
 #ixlambda-controls {
     display: flex;
-    gap: 4px;
+    gap: 8px;
 
     padding: 8px 12px;
     border-radius: 100px;
@@ -90,8 +90,7 @@
     transition: border-radius 0.3s steps(1, end);
 }
 
-.ixlambda-btn,
-#ixlambda-selector {
+.ixlambda-btn, #ixlambda-selector {
     width: 100%;
     margin-top: 8px;
     padding: 10px;
