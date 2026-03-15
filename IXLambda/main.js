@@ -1,23 +1,25 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
 var links = {
-    overcloaked: `${atob("aHR0cHM6Ly8=")}figswriu${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
-    fern: `${atob("aHR0cHM6Ly8=")}${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`,
-    infamous: `${atob("aHR0cHM6Ly8=")}secure-mathclass${atob("LmItY2RuLm5ldC8=")}`,
-    space: `${atob("aHR0cHM6Ly8=")}planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
-    daydreamx: `${atob("aHR0cHM6Ly8=")}com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
+    overcloaked: `figswriu${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
+    fern: `${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`,
+    infamous: `secure-mathclass${atob("LmItY2RuLm5ldC8=")}`,
+    space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
+    gnmath: `nowayway${atob("LmItY2RuLm5ldC8=")}`,
+    daydreamx: `com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
 }
 
 // Developer stuff! :3
 var bypassUAF = true;
 var devTools = false;
-var ixlambdaVersion = "v2.1.3";
+var ixlambdaVersion = "v3.BETA.1";
 
 // Stylesheet to be imported.
 var htmlStyles = `
 <style>
-:root {
-    --ixlm-bg: #313244;
-    --ixlm-header: #1e1e2e;
+#ixlambda-gui {
+    all: revert;
+    --ixlm-bg: rgba(49, 50, 68, 0.6);
+    --ixlm-header: rgba(30, 30, 46, 0.8); 
     --ixlm-control-bg: #181825;
     --ixlm-text: #cdd6f4;
     --ixlm-accent: #89b4fa;
@@ -30,11 +32,10 @@ var htmlStyles = `
     --ixlm-close: #f38ba8;
 
     --ixlm-radius: 6px;
+    --ixlm-blur: 16px;
     --ixlm-font: "JetBrains Mono", monospace;
-}
-
-#ixlambda-gui {
-    width: 250px;
+    
+    width: 300px;
     position: fixed;
     top: 100px;
     left: 100px;
@@ -42,25 +43,25 @@ var htmlStyles = `
 
     font-family: var(--ixlm-font);
     color: var(--ixlm-text);
-    background: var(--ixlm-bg);
-    border-radius: var(--ixlm-radius);
 }
 
 #ixlambda-header {
     display: flex;
+    font-size: 15px;
     justify-content: space-between;
     align-items: center;
-
+    
     padding: 8px;
     background: var(--ixlm-header);
     border-radius: var(--ixlm-radius) var(--ixlm-radius) 0 0;
+    backdrop-filter: blur(var(--ixlm-blur));
 }
 
 #ixlambda-controls {
     display: flex;
-    gap: 8px;
-
-    padding: 8px 12px;
+    gap: 12px;
+    
+    padding: 8px 8px;
     border-radius: 100px;
     background: var(--ixlm-control-bg);
 }
@@ -90,17 +91,18 @@ var htmlStyles = `
 
 #ixlambda-content {
     overflow: hidden;
+    padding: 0 10px 10px;
+    background: var(--ixlm-bg);
     max-height: 500px;
     transition: max-height 0.3s ease;
+    border-radius: 0 0 var(--ixlm-radius) var(--ixlm-radius);
+    
+    backdrop-filter: blur(var(--ixlm-blur));
 }
 
-#ixlambda-content-inner {
-    padding: 0 10px 10px;
-}
-
-#ixlambda-content-inner span {
+#ixlambda-content span {
     font-size: 12px;
-    display: table;
+    display: flex;
     margin: 8px auto;
 }
 
@@ -108,14 +110,14 @@ var htmlStyles = `
     max-height: 0;
 }
 
-#ixlambda-gui.minimized #ixlambda-header {
+/*#ixlambda-gui.minimized #ixlambda-header {
     border-radius: var(--ixlm-radius);
     transition: border-radius 0.3s steps(1, end);
-}
+}*/
 
-.ixlambda-btn, #ixlambda-selector {
+.ixlambda-btn, .ixlambda-selector {
     width: 100%;
-    margin-top: 8px;
+    font-size: 14px;
     padding: 10px;
 
     font-family: var(--ixlm-font);
@@ -144,6 +146,10 @@ var htmlStyles = `
     gap: 6px;
 }
 
+#ixlambda-content .ixlambda-description {
+    font-size: 14px;
+}
+
 #ixlambda-gui hr {
     width: 100%;
     height: 2px;
@@ -157,12 +163,12 @@ var htmlStyles = `
 
 // HTML body data to inject.
 var htmlData = `
-${htmlStyles}
-<link style="ixlambda-destroy" href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
 <div id="ixlambda-gui">
+    ${htmlStyles}
+    <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
     <div id="ixlambda-header">
         <div class="ixlambda-sidebyside">
-            <svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" fill="none" width="16" height="16" stroke-width="2.5"><path d="M17 2v6"></path><path d="M13 2H6.5A2.5 2.5 0 0 0 4 4.5v15"></path><path d="M17 4h2"></path><path d="M20 15.2V21a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"></path><circle cx="17" cy="10" r="2"></circle></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" fill="none" width="20" stroke-width="2.5"><path d="m10.852 14.772-.383.923"/><path d="M13.148 14.772a3 3 0 1 0-2.296-5.544l-.383-.923"/><path d="m13.148 9.228.383-.923"/><path d="m13.53 15.696-.382-.924a3 3 0 1 1-2.296-5.544"/><path d="m14.772 10.852.923-.383"/><path d="m14.772 13.148.923.383"/><path d="M4.5 10H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-.5"/><path d="M4.5 14H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-.5"/><path d="M6 18h.01"/><path d="M6 6h.01"/><path d="m9.228 10.852-.923-.383"/><path d="m9.228 13.148-.923.383"/></svg>
             <b>IXLambda Loader</b>
         </div>
         <div id="ixlambda-controls">
@@ -171,24 +177,25 @@ ${htmlStyles}
         </div>
     </div>
     <div id="ixlambda-content">
-        <div id="ixlambda-content-inner">
-            <span>Freedom is a universal right.</span>
-            <hr>
-            <div class="ixlambda-sidebyside">
-                <select id="ixlambda-selector">
-                    <option value="overcloaked">OverCloaked</option>
-                    <option value="fern">Fern</option>
-                    <option value="infamous">Infamous</option>
-                    <option value="space">Space</option>
-                    <option value="daydreamx">DayDreamX</option>
-                </select>
-                <button id="ixlambda-launch" class="ixlambda-btn" style="width: 50%;">Launch</button>
-            </div>
-            <!--<br>
-            <button id="mstaums-launch" class="ixlambda-btn">MSTaums</button>-->
-            <hr>
-            <span>Made by SUDO :3 ${ixlambdaVersion}</span>
+        <span>Freedom is a universal right.</span>
+        <hr>
+        <span class="ixlambda-description">Proxy Loader</span>
+        <div class="ixlambda-sidebyside">
+            <select id="ixlambda-proxy-selector" class="ixlambda-selector">
+                <option value="overcloaked">OverCloaked</option>
+                <option value="fern">Fern</option>
+                <option value="infamous">Infamous</option>
+                <option value="space">Space</option>
+                <option value="gnmath">GN-Math</option>
+                <option value="daydreamx">DayDreamX</option>
+            </select>
+            <button id="ixlambda-launch" class="ixlambda-btn" style="width: 50%;">Launch</button>
         </div>
+        <hr>
+        <span class="ixlambda-description">Javascript Loader</span>
+        <button id="mstaums-launch" class="ixlambda-btn">MSTaums</button>
+        <hr>
+        <span style="display: table;">Made by SUDO :3 ${ixlambdaVersion}</span>
     </div>
 </div>
 `;
@@ -228,37 +235,41 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     });
     document.getElementById("ixlambda-close").addEventListener("click", () => {
         document.querySelectorAll(".ixlambda-destroy").forEach(e => e.remove());
+        if (devTools) { eruda.destroy(); }
         gui.remove();
     });
 
     // Launch as about:blank.
     function openLink(link) {
         var aboutblank = window.open("about:blank", "_blank");
-        if (aboutblank) {
-            var iframe = aboutblank.document.createElement("iframe");
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.style.border = "none";
-            iframe.style.margin = "0";
-            iframe.style.padding = "0";
-            iframe.src = link;
-            aboutblank.document.body.appendChild(iframe);
-            aboutblank.document.body.style.margin = "0";
-            var title = aboutblank.document.createElement("title");
-            title.textContent = "IXL :3";
-            aboutblank.document.head.appendChild(title);
-        } else {
-            alert('Pop-up blocked! Please allow pop-ups in the Safari settings.');
+        if (!aboutblank) {
+            alert("Pop-up blocked!");
+            return;
         }
+        aboutblank.document.write(`
+        <title>IXLambda</title>
+        ${devTools ? "" : `<script>
+            if (window.eruda) { eruda.destroy(); }
+            Object.defineProperty(window,"eruda",{set(v){v&&(v.init=()=>{});this._e=v},get(){return this._e}});
+        </script>`}
+        <style>
+            html,body{margin:0;height:100%}
+            iframe{position:fixed;width:100%;height:100%;border:none;inset:0;}
+        </style>
+        <iframe src="${link}"></iframe>`);
+        aboutblank.document.close();
     }
 
     // Loading code.
     document.getElementById("ixlambda-launch").addEventListener("click", () => {
-        openLink(links[document.getElementById("ixlambda-selector").value]);
+        openLink("https://" + links[document.getElementById("ixlambda-proxy-selector").value]);
     });
-    //document.getElementById("mstaums-launch").addEventListener("click", () => {
-    //    alert("Sorry, my friend is still working on this.");
-    //});
+    document.getElementById("mstaums-launch").addEventListener("click", () => {
+        var script = document.createElement("script");
+        script.src = "https://raw-githack-com.translate.goog/MohanIShim47/MSTaums/main/Bookmarklet%20Manager/main.js";
+        document.head.appendChild(script);
+
+    });
 
     // Movement variables.
     var dragging = false;
@@ -286,6 +297,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     if (devTools) {
         var erudaScript = document.createElement("script");
         erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
+        erudaScript.className = "ixlambda-destroy";
         erudaScript.onload = e => { eruda.init(); }
         document.head.appendChild(erudaScript);
     }
@@ -306,5 +318,6 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     console.log("%cPlease, just leave us alone...", "color: #eba0ac; font-size: 16px;");
 } else {
     // Complain about duplicates.
+    alert("Another instance of IXLambda exists, please use the current instance.")
     console.log("%cAnother instance of IXLambda exists, please use the current instance.", "color: #89b4fa; font-size: 16px;");
 }
