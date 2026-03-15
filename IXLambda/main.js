@@ -11,30 +11,35 @@ var links = {
 // Developer stuff! :3
 var bypassUAF = true;
 var devTools = false;
-var ixlambdaVersion = "v3.BETA.1";
+var ixlambdaVersion = "v2.3.1";
 
-// Stylesheet to be imported.
+// Stylesheet to be appended.
 var htmlStyles = `
 <style>
+@import url("https://fonts.googleapis.com/css?family=JetBrains+Mono");
+
+:host { all: initial; }
+
 #ixlambda-gui {
-    all: revert;
-    --ixlm-bg: rgba(49, 50, 68, 0.6);
-    --ixlm-header: rgba(30, 30, 46, 0.8); 
+    --ixlm-bg: rgba(49,50,68,0.7);
+    --ixlm-header: rgba(30,30,46,0.9);
     --ixlm-control-bg: #181825;
     --ixlm-text: #cdd6f4;
     --ixlm-accent: #89b4fa;
     --ixlm-accent-hover: #b4befe;
     --ixlm-btn-text: #11111b;
-    --ixlm-border: #6c7086;
+    --ixlm-border: #45475a;
 
+    --ixlm-settings: #74c7ec;
     --ixlm-min: #f9e2af;
     --ixlm-min-active: #a6e3a1;
     --ixlm-close: #f38ba8;
 
     --ixlm-radius: 6px;
     --ixlm-blur: 16px;
+    --ixlm-anim-time: 2s;
     --ixlm-font: "JetBrains Mono", monospace;
-    
+
     width: 300px;
     position: fixed;
     top: 100px;
@@ -43,25 +48,34 @@ var htmlStyles = `
 
     font-family: var(--ixlm-font);
     color: var(--ixlm-text);
+    border: 1px solid var(--ixlm-border);
+    border-radius: var(--ixlm-radius);
 }
 
+/* ---------- HEADER ---------- */
 #ixlambda-header {
     display: flex;
-    font-size: 15px;
+    font-size: 18px;
     justify-content: space-between;
     align-items: center;
-    
+
     padding: 8px;
     background: var(--ixlm-header);
     border-radius: var(--ixlm-radius) var(--ixlm-radius) 0 0;
     backdrop-filter: blur(var(--ixlm-blur));
 }
 
+.ixlambda-sidebyside {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
 #ixlambda-controls {
     display: flex;
     gap: 12px;
-    
-    padding: 8px 8px;
+
+    padding: 8px;
     border-radius: 100px;
     background: var(--ixlm-control-bg);
 }
@@ -69,58 +83,83 @@ var htmlStyles = `
 #ixlambda-header button {
     width: 12px;
     height: 12px;
-
-    padding: 0;
     border: none;
+    padding: 0;
     border-radius: 50%;
     cursor: pointer;
 
-    transition: filter 0.3s, background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: transparent;
+    filter: brightness(.9);
+    transition: filter 0.2s;
 }
 
 #ixlambda-header button:hover {
-    filter: brightness(0.8);
+    filter: brightness(1.1);
 }
 
 #ixlambda-minimize { background: var(--ixlm-min); }
 #ixlambda-close { background: var(--ixlm-close); }
 
-#ixlambda-gui.minimized #ixlambda-minimize {
+#ixlambda-gui.ixlm-minimized #ixlambda-minimize {
     background: var(--ixlm-min-active);
 }
 
+#ixlambda-header svg {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* ---------- CONTENT ---------- */
 #ixlambda-content {
     overflow: hidden;
-    padding: 0 10px 10px;
-    background: var(--ixlm-bg);
-    max-height: 500px;
-    transition: max-height 0.3s ease;
+    padding: 0 8px 8px 8px;
+    max-height: 600px;
     border-radius: 0 0 var(--ixlm-radius) var(--ixlm-radius);
     
+    background: var(--ixlm-bg);
     backdrop-filter: blur(var(--ixlm-blur));
 }
 
-#ixlambda-content span {
-    font-size: 12px;
-    display: flex;
-    margin: 8px auto;
+/* ---------- PANELS ---------- */
+.ixlambda-panel {
+    max-height: 600px;
+    
+    /*opacity: 1;
+    overflow: hidden;
+    transition: opacity 0.15s ease, height 0.3s ease;*/
 }
 
-#ixlambda-gui.minimized #ixlambda-content {
+.ixlambda-panel.hidden {
     max-height: 0;
+    
+    display: none;
+    /*opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.15s ease, height 0.3s ease;*/
 }
 
-/*#ixlambda-gui.minimized #ixlambda-header {
-    border-radius: var(--ixlm-radius);
-    transition: border-radius 0.3s steps(1, end);
-}*/
+/* ---------- TEXT ---------- */
+#ixlambda-main-content span {
+    display: block;
+    margin: 8px 0;
+}
 
+.ixlambda-description {
+    font-size: 14px;
+}
+
+/* ---------- BUTTONS ---------- */
 .ixlambda-btn, .ixlambda-selector {
     width: 100%;
     font-size: 14px;
     padding: 10px;
 
     font-family: var(--ixlm-font);
+
     border: none;
     border-radius: var(--ixlm-radius);
     cursor: pointer;
@@ -130,6 +169,7 @@ var htmlStyles = `
 }
 
 .ixlambda-btn {
+    height: 40px;
     transition: background 0.2s, transform 0.1s;
 }
 
@@ -141,61 +181,90 @@ var htmlStyles = `
     transform: translateY(1px);
 }
 
-.ixlambda-sidebyside {
+.ixlambda-half {
+    width: 50%;
+}
+
+.ixlambda-icon-btn {
+    width: 40px;
+    padding: 10px;
+}
+
+/* ---------- FOOTER ---------- */
+.ixlambda-footer {
     display: flex;
-    gap: 6px;
+    align-items: center;
+    justify-content: space-between;
 }
 
-#ixlambda-content .ixlambda-description {
-    font-size: 14px;
+.ixlambda-footer span {
+    font-size: 12px;
 }
 
+/* ---------- DIVIDER ---------- */
 #ixlambda-gui hr {
-    width: 100%;
     height: 2px;
     margin: 8px 0;
 
     border: none;
-    border-top: 1px solid var(--ixlm-border);
+    border-top: 2px solid var(--ixlm-border);
+}
+
+/* ---------- MINIMIZED ---------- */
+#ixlambda-gui.ixlm-minimized #ixlambda-content {
+    max-height: 0;
+    transition: max-height var(--ixlm-anim-time) ease;
 }
 </style>
 `;
 
 // HTML body data to inject.
 var htmlData = `
+${htmlStyles}
 <div id="ixlambda-gui">
-    ${htmlStyles}
-    <link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
     <div id="ixlambda-header">
         <div class="ixlambda-sidebyside">
-            <svg xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" fill="none" width="20" stroke-width="2.5"><path d="m10.852 14.772-.383.923"/><path d="M13.148 14.772a3 3 0 1 0-2.296-5.544l-.383-.923"/><path d="m13.148 9.228.383-.923"/><path d="m13.53 15.696-.382-.924a3 3 0 1 1-2.296-5.544"/><path d="m14.772 10.852.923-.383"/><path d="m14.772 13.148.923.383"/><path d="M4.5 10H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-.5"/><path d="M4.5 14H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2h-.5"/><path d="M6 18h.01"/><path d="M6 6h.01"/><path d="m9.228 10.852-.923-.383"/><path d="m9.228 13.148-.923.383"/></svg>
+            <div id="ixlambda-controls">
+                <button id="ixlambda-close"></button>
+                <button id="ixlambda-minimize"></button>
+            </div>
+            <i data-lucide="server-cog"></i>
             <b>IXLambda Loader</b>
+            </div>
         </div>
-        <div id="ixlambda-controls">
-            <button id="ixlambda-minimize"></button>
-            <button id="ixlambda-close"></button>
-        </div>
-    </div>
     <div id="ixlambda-content">
-        <span>Freedom is a universal right.</span>
-        <hr>
-        <span class="ixlambda-description">Proxy Loader</span>
-        <div class="ixlambda-sidebyside">
-            <select id="ixlambda-proxy-selector" class="ixlambda-selector">
-                <option value="overcloaked">OverCloaked</option>
-                <option value="fern">Fern</option>
-                <option value="infamous">Infamous</option>
-                <option value="space">Space</option>
-                <option value="gnmath">GN-Math</option>
-                <option value="daydreamx">DayDreamX</option>
-            </select>
-            <button id="ixlambda-launch" class="ixlambda-btn" style="width: 50%;">Launch</button>
+        <!-- MAIN PANEL -->
+        <div id="ixlambda-main-content" class="ixlambda-panel">
+            <span class="ixlambda-description">Freedom is a universal right.</span>
+            <hr>
+            <span class="ixlambda-description">Proxy Loader</span>
+            <div class="ixlambda-sidebyside">
+                <select id="ixlambda-proxy-selector" class="ixlambda-selector">
+                    <option value="overcloaked">OverCloaked</option>
+                    <option value="fern">Fern</option>
+                    <option value="infamous">Infamous</option>
+                    <option value="space">Space</option>
+                    <option value="gnmath">GN-Math</option>
+                    <option value="daydreamx">DayDreamX</option>
+                </select>
+                <button id="ixlambda-launch" class="ixlambda-btn ixlambda-half">Launch</button>
+            </div>
+            <hr>
+            <span class="ixlambda-description">Javascript Loader</span>
+            <button id="ixlambda-mstaums-launch" class="ixlambda-btn">Launch MSTaums</button>
+            <hr>
+            <div class="ixlambda-footer">
+                <span>Made by SUDO :3 ${ixlambdaVersion}</span>
+                <button id="ixlambda-settings" class="ixlambda-btn ixlambda-icon-btn">
+                    <i data-lucide="cog" width="20" height="20"></i>
+                </button>
+            </div>
         </div>
-        <hr>
-        <span class="ixlambda-description">Javascript Loader</span>
-        <button id="mstaums-launch" class="ixlambda-btn">MSTaums</button>
-        <hr>
-        <span style="display: table;">Made by SUDO :3 ${ixlambdaVersion}</span>
+
+        <!-- SETTINGS PANEL -->
+        <div id="ixlambda-settings-content" class="ixlambda-panel hidden">
+            <p>todo: add settings!!!</p>
+        </div>
     </div>
 </div>
 `;
@@ -217,27 +286,67 @@ var htmlDataIT = `
 `;
 
 // User agent filtration and confirming GUI unexistence.
-if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getElementById("ixlambda-gui")) {
+if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getElementById("ixlambda-host")) {
     // Confirm page existence.
     if (location.href === "about:blank") { document.location.href = "https://google.com/"; alert("Please re-run the bookmark here."); }
 
     // Inject HTML.
-    document.body.insertAdjacentHTML("beforeend", htmlData);
+    var host = document.createElement("div");
+    host.id = "ixlambda-host";
+    document.body.appendChild(host);
+
+    // Spooky shadow div!
+    var root = host.attachShadow({ mode: "open" })
+    root.innerHTML = htmlData;
 
     // Get GUI elements.
-    var gui = document.getElementById("ixlambda-gui");
-    var header = document.getElementById("ixlambda-header");
-    var content = document.getElementById("ixlambda-content");
+    var gui = root.getElementById("ixlambda-gui");
+    var header = root.getElementById("ixlambda-header");
+    var mainContent = root.getElementById("ixlambda-main-content");
+    var settingsContent = root.getElementById("ixlambda-settings-content");
+
+    // Settings menu functions.
+    root.getElementById("ixlambda-settings").addEventListener("click", () => {
+        mainContent.classList.toggle("hidden");
+        settingsContent.classList.toggle("hidden");
+        //// Animation stuff.
+        //mainContent.style.height = mainContent.offsetHeight + "px";
+        //mainContent.style.opacity = "0";
+        //mainContent.addEventListener('transitionend', function handler() {
+        //    mainContent.style.display = 'none';
+        //    mainContent.style.height = null; // reset inline height
+        //    mainContent.removeEventListener('transitionend', handler);
+        //    settingsContent.style.display = 'block';
+        //    settingsContent.style.height = "0px";
+        //    settingsContent.style.opacity = "0";
+        //    requestAnimationFrame(() => {
+        //        settingsContent.style.height = settingsContent.offsetHeight + "px";
+        //        settingsContent.style.opacity = "1";
+        //    });
+        //    settingsContent.addEventListener('transitionend', function h2() {
+        //        settingsContent.style.height = null;
+        //        settingsContent.removeEventListener('transitionend', h2);
+        //    });
+        //});
+    });
 
     // Minimize and close functions.
-    document.getElementById("ixlambda-minimize").addEventListener("click", () => {
-        gui.classList.toggle("minimized");
+    root.getElementById("ixlambda-minimize").addEventListener("click", () => {
+        gui.classList.toggle("ixlm-minimized");
     });
-    document.getElementById("ixlambda-close").addEventListener("click", () => {
-        document.querySelectorAll(".ixlambda-destroy").forEach(e => e.remove());
+    root.getElementById("ixlambda-close").addEventListener("click", () => {
+        root.querySelectorAll(".ixlambda-destroy").forEach(e => e.remove());
         if (devTools) { eruda.destroy(); }
-        gui.remove();
+        document.getElementById("ixlambda-host").remove();
     });
+
+    // Lucide implementation.
+    var lucideScript = document.createElement("script");
+    lucideScript.src = "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js";
+    lucideScript.onload = () => {
+        lucide.createIcons({root: root});
+    }
+    gui.appendChild(lucideScript);
 
     // Launch as about:blank.
     function openLink(link) {
@@ -253,22 +362,21 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
             Object.defineProperty(window,"eruda",{set(v){v&&(v.init=()=>{});this._e=v},get(){return this._e}});
         </script>`}
         <style>
-            html,body{margin:0;height:100%}
-            iframe{position:fixed;width:100%;height:100%;border:none;inset:0;}
+            html, body{ margin:0; height:100%; }
+            iframe { position:fixed; width:100%; height:100%; border:none; inset:0; }
         </style>
         <iframe src="${link}"></iframe>`);
         aboutblank.document.close();
     }
 
     // Loading code.
-    document.getElementById("ixlambda-launch").addEventListener("click", () => {
-        openLink("https://" + links[document.getElementById("ixlambda-proxy-selector").value]);
+    root.getElementById("ixlambda-launch").addEventListener("click", () => {
+        openLink("https://" + links[root.getElementById("ixlambda-proxy-selector").value]);
     });
-    document.getElementById("mstaums-launch").addEventListener("click", () => {
+    root.getElementById("ixlambda-mstaums-launch").addEventListener("click", () => {
         var script = document.createElement("script");
         script.src = "https://raw-githack-com.translate.goog/MohanIShim47/MSTaums/main/Bookmarklet%20Manager/main.js";
         document.head.appendChild(script);
-
     });
 
     // Movement variables.
@@ -306,7 +414,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     console.log("%cIXLambda loaded successfully! :3", "color: #74c7ec; font-size: 24px; font-weight: bold;");
     console.log("%cMaintained by ΦΠΒ's Owner!", "color: #89b4fa; font-size: 16px;");
     console.log("%cLovingly made by SUDO! UwU", "color: #f38ba8; font-size: 16px; font-weight: bold;");
-} else if (!document.getElementById("ixlambda-gui")) {
+} else if (!document.getElementById("ixlambda-host")) {
     // Eradicate page evily!
     document.open();
     document.write(htmlDataIT);
@@ -314,7 +422,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
 
     // Add evil console notes. >:3
     console.log("%cGet out of the console, you are not slick.", "color: red; font-size: 24px; font-weight: bold;");
-    console.log("%cAlso, I am a few steps ahead of you... The original link is encrypted, along with the code being hidden...", "color: #f38ba8; font-size: 16px; font-weight: bold;")
+    console.log("%cAlso, I am a few steps ahead of you.", "color: #f38ba8; font-size: 16px; font-weight: bold;")
     console.log("%cPlease, just leave us alone...", "color: #eba0ac; font-size: 16px;");
 } else {
     // Complain about duplicates.
