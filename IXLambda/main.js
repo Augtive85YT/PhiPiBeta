@@ -1,8 +1,8 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
 var links = {
-    overcloaked: `figswriu${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}home.html`,
+    overcloaked: `ndjdxbv${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}home.html`,
     fern: `${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`,
-    infamous: `secure-mathclass${atob("LmItY2RuLm5ldC8=")}`,
+    infamous: `lizard${atob("LmItY2RuLm5ldC8=")}`,
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     gnmath: `nowayway${atob("LmItY2RuLm5ldC8=")}`,
     daydreamx: `com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
@@ -16,9 +16,7 @@ var ixlambdaVersion = "v3.BETARELEASE.FIX1";
 // Stylesheet to be appended.
 var htmlStyles = `
 <style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
-
-:host { all: initial; }
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
 #ixlambda-gui {
     --ixlm-bg: rgba(49,50,68,0.7);
@@ -50,6 +48,7 @@ var htmlStyles = `
     color: var(--ixlm-text);
     border: 1px solid var(--ixlm-border);
     border-radius: var(--ixlm-radius);
+	transform: translateZ(0);
 }
 
 /* ---------- HEADER ---------- */
@@ -370,10 +369,10 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
             Object.defineProperty(window,"eruda",{set(v){v&&(v.init=()=>{});this._e=v},get(){return this._e}});
         </script>`}
         <style>
-            html, body{ margin:0; height:100%; }
-            embed { position:fixed; width:100%; height:100%; border:none; inset:0; }
+            html, body { margin:0; height:100%; }
+            iframe { position:fixed; width:100%; height:100%; border:none; inset:0; }
         </style>
-        <embed id="mainPage" type="text/html" src="${link}">`;
+        <iframe id="mainPage" type="text/html" src="${link + "?" + Date.now()}">If you see this text, the link did not load.</iframe>`;
 
 		// Main loading code.
 		var blobUrl = URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" }));
