@@ -7,7 +7,7 @@ var links = {
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     gnmath: `nowayway${atob("LmItY2RuLm5ldC8=")}`,
     daydreamx: `com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
-}
+};
 
 // Developer stuff! :3
 var bypassUAF = true;
@@ -443,6 +443,6 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     console.log("%cPlease, just leave us alone...", "color: #eba0ac; font-size: 16px;");
 } else {
     // Complain about duplicates.
-    alert("Another instance of IXLambda exists, please use the current instance.")
+    alert("Another instance of IXLambda exists, please use the current instance.");
     console.log("%cAnother instance of IXLambda exists, please use the current instance.", "color: #89b4fa; font-size: 16px;");
 }
