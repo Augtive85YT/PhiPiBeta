@@ -1,6 +1,6 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
 var links = {
-    overcloaked: `ndjdxbv${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}home.html`,
+    overcloaked: `ndjdxbv${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     fern: `${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`,
     infamous: `lizard${atob("LmItY2RuLm5ldC8=")}`,
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
