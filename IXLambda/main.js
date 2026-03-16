@@ -104,10 +104,12 @@ var htmlStyles = `
     background: var(--ixlm-close);
     transition: background var(--ixlm-anim-time);
 }
+
 #ixlambda-minimize {
     background: var(--ixlm-min);
     transition: filter 0.2s, background var(--ixlm-anim-time);
 }
+
 #ixlambda-gui.ixlm-minimized #ixlambda-minimize {
     background: var(--ixlm-min-active);
     transition: filter 0.2s, background var(--ixlm-anim-time);
