@@ -9,7 +9,7 @@ var links = {
 }
 
 // Developer stuff! :3
-var bypassUAF = false;
+var bypassUAF = true;
 var devTools = false;
 var ixlambdaVersion = "v3.BETARELEASE.FIX3";
 
@@ -131,20 +131,16 @@ var htmlStyles = `
 
 /* ---------- PANELS ---------- */
 .ixlambda-panel {
-    max-height: 600px;
-    
-    /*opacity: 1;
     overflow: hidden;
-    transition: opacity 0.15s ease, height 0.3s ease;*/
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+    opacity: 1;
+    max-height: 2000px; /* large enough to hold content */
 }
 
 .ixlambda-panel.hidden {
     max-height: 0;
-    
-    display: none;
-    /*opacity: 0;
-    overflow: hidden;
-    transition: opacity 0.15s ease, height 0.3s ease;*/
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* ---------- TEXT ---------- */
@@ -236,8 +232,8 @@ ${htmlStyles}
             </div>
             <i data-lucide="server-cog" width="18" height="18"></i>
             <b>IXLambda Loader</b>
-            </div>
         </div>
+    </div>
     <div id="ixlambda-content">
         <!-- MAIN PANEL -->
         <div id="ixlambda-main-content" class="ixlambda-panel">
@@ -261,82 +257,93 @@ ${htmlStyles}
             <hr>
             <div class="ixlambda-footer">
                 <span>Made by SUDO :3 ${ixlambdaVersion}</span>
-                <!--<button id="ixlambda-settings" class="ixlambda-btn ixlambda-icon-btn">
+                <button id="ixlambda-settings" class="ixlambda-btn ixlambda-icon-btn">
                     <i data-lucide="cog" width="20" height="20"></i>
-                </button>-->
+                </button>
             </div>
         </div>
 
         <!-- SETTINGS PANEL -->
         <div id="ixlambda-settings-content" class="ixlambda-panel hidden">
-            <p>todo: add settings!!!</p>
+            <span class="ixlambda-description">Settings</span>
+            <div class="ixlambda-sidebyside">
+                <p>Will come soon!!!</p>
+            </div>
+            <hr>
+            <div class="ixlambda-footer">
+                <span>Made by SUDO :3 ${ixlambdaVersion}</span>
+                <button id="ixlambda-home" class="ixlambda-btn ixlambda-icon-btn">
+                    <i data-lucide="house" width="20" height="20"></i>
+                </button>
+            </div>            
         </div>
     </div>
 </div>
 `;
 
-// Evil code switching! >:3
-var htmlDataIT = `
-<!DOCTYPE html>
-<html lang="en">
-	<head style="margin: 0; padding: 0; overflow: hidden;">
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>UwU :3</title>
-	</head>
-	<body>
-		<p>Hello I.T. Department, it is time we talk. You went too far blocking CoolMathGames. We only seek freedom.</p>
-		<p>-ΦΠΒ's Owner SUDO :3</p>
-		<p>P.S. if you got here and are a student, you put in the wrong post-validation passcode.</p>
-	</body>
-</html>
-`;
-
 // User agent filtration and confirming GUI unexistence.
 if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getElementById("ixlambda-host")) {
-    // Confirm page existence.
     if (location.href === "about:blank") { document.location.href = "https://google.com/"; alert("Please re-run the bookmark here."); }
 
-    // Inject HTML.
     var host = document.createElement("div");
     host.id = "ixlambda-host";
     document.body.appendChild(host);
 
-    // Spooky shadow div!
     var root = host.attachShadow({ mode: "open" })
     root.innerHTML = htmlData;
 
-    // Get GUI elements.
     var gui = root.getElementById("ixlambda-gui");
     var header = root.getElementById("ixlambda-header");
     var mainContent = root.getElementById("ixlambda-main-content");
     var settingsContent = root.getElementById("ixlambda-settings-content");
 
-    //// Settings menu functions.
-    //root.getElementById("ixlambda-settings").addEventListener("click", () => {
-    //    mainContent.classList.toggle("hidden");
-    //    settingsContent.classList.toggle("hidden");
-    //
-    //    // Animation stuff.
-    //    mainContent.style.height = mainContent.offsetHeight + "px";
-    //    mainContent.style.opacity = "0";
-    //    mainContent.addEventListener('transitionend', function handler() {
-    //        mainContent.style.display = 'none';
-    //        mainContent.style.height = null; // reset inline height
-    //        mainContent.removeEventListener('transitionend', handler);
-    //        settingsContent.style.display = 'block';
-    //        settingsContent.style.height = "0px";
-    //        settingsContent.style.opacity = "0";
-    //        requestAnimationFrame(() => {
-    //            settingsContent.style.height = settingsContent.offsetHeight + "px";
-    //            settingsContent.style.opacity = "1";
-    //        });
-    //        settingsContent.addEventListener('transitionend', function h2() {
-    //            settingsContent.style.height = null;
-    //            settingsContent.removeEventListener('transitionend', h2);
-    //        });
-    //    });
-    //});
+    // I hate animations!!!!!
+    function switchPanelAnimated(showPanel, hidePanel) {
+        if (showPanel === hidePanel) return;
+
+        hidePanel.style.maxHeight = hidePanel.scrollHeight + "px";
+        hidePanel.style.transition = "max-height 0.3s ease, opacity 0.2s ease";
+        requestAnimationFrame(() => {
+            hidePanel.style.maxHeight = "0";
+            hidePanel.style.opacity = "0";
+        });
+        hidePanel.addEventListener("transitionend", function hideEnd() {
+            hidePanel.classList.add("hidden");
+            hidePanel.style.maxHeight = null;
+            hidePanel.style.opacity = null;
+            hidePanel.removeEventListener("transitionend", hideEnd);
+
+            // Show target panel
+            showPanel.classList.remove("hidden");
+            showPanel.style.maxHeight = "0";
+            showPanel.style.opacity = "0";
+            requestAnimationFrame(() => {
+                showPanel.style.maxHeight = showPanel.scrollHeight + "px";
+                showPanel.style.opacity = "1";
+            });
+            showPanel.addEventListener("transitionend", function showEnd() {
+                showPanel.style.maxHeight = null;
+                showPanel.style.opacity = null;
+                showPanel.removeEventListener("transitionend", showEnd);
+            });
+        });
+    }
+
+    const settingsBtn = root.getElementById("ixlambda-settings");
+    settingsBtn.addEventListener("click", () => {
+        const isMainVisible = !mainContent.classList.contains("hidden");
+        if (isMainVisible) {
+            switchPanelAnimated(settingsContent, mainContent);
+        } else {
+            switchPanelAnimated(mainContent, settingsContent);
+        }
+    });
+
+    const homeBtn = root.getElementById("ixlambda-home");
+
+    homeBtn.addEventListener("click", () => {
+        switchPanelAnimated(mainContent, settingsContent);
+    });
 
     // Minimize and close functions.
     root.getElementById("ixlambda-minimize").addEventListener("click", () => {
@@ -376,7 +383,6 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
           </body>
         </html>`;
 
-        // Main loading code.
         try {
             var newTab = window.open(URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" })), "_blank");
         } catch (err) {
@@ -431,17 +437,14 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     console.log("%cMaintained by ΦΠΒ's Owner!", "color: #89b4fa; font-size: 16px;");
     console.log("%cLovingly made by SUDO! UwU", "color: #f38ba8; font-size: 16px; font-weight: bold;");
 } else if (!document.getElementById("ixlambda-host")) {
-    // Eradicate page evily!
     document.open();
     document.write(htmlDataIT);
     document.close();
 
-    // Add evil console notes. >:3
     console.log("%cGet out of the console, you are not slick.", "color: red; font-size: 24px; font-weight: bold;");
     console.log("%cAlso, I am a few steps ahead of you.", "color: #f38ba8; font-size: 16px; font-weight: bold;")
     console.log("%cPlease, just leave us alone...", "color: #eba0ac; font-size: 16px;");
 } else {
-    // Complain about duplicates.
     alert("Another instance of IXLambda exists, please use the current instance.")
     console.log("%cAnother instance of IXLambda exists, please use the current instance.", "color: #89b4fa; font-size: 16px;");
 }
