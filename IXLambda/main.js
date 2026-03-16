@@ -1,6 +1,6 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
 var links = {
-    overcloaked: `figswriu${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
+    overcloaked: `figswriu${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}home.html`,
     fern: `${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`,
     infamous: `secure-mathclass${atob("LmItY2RuLm5ldC8=")}`,
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
@@ -11,7 +11,7 @@ var links = {
 // Developer stuff! :3
 var bypassUAF = false;
 var devTools = false;
-var ixlambdaVersion = "v3.BETARELEASE";
+var ixlambdaVersion = "v3.BETARELEASE.FIX1";
 
 // Stylesheet to be appended.
 var htmlStyles = `
@@ -358,12 +358,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
 
     // Launch as about:blank.
     function openLink(link) {
-        var aboutblank = window.open("about:blank", "_blank");
-        if (!aboutblank) {
-            alert("Pop-up blocked!");
-            return;
-        }
-        aboutblank.document.write(`
+		var linkHtmlData = `
         <title>IXLambda</title>
         <script>
             document.getElementById("mainIframe").onload = () => {
@@ -376,11 +371,18 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
         </script>`}
         <style>
             html, body{ margin:0; height:100%; }
-            iframe { position:fixed; width:100%; height:100%; border:none; inset:0; }
+            embed { position:fixed; width:100%; height:100%; border:none; inset:0; }
         </style>
-        <iframe id="mainIframe" src="${link}" referrerpolicy="no-referrer"></iframe>`);
-        aboutblank.document.close();
-    }
+        <embed id="mainPage" type="text/html" src="${link}">`;
+
+		// Main loading code.
+		var blobUrl = URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" }));
+		var proxyPage = window.open(blobUrl, "_blank");
+        if (!proxyPage) {
+            alert("Pop-up blocked!");
+            return;
+        }
+	}
 
     // Loading code.
     root.getElementById("ixlambda-launch").addEventListener("click", () => {
