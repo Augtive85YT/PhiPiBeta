@@ -10,7 +10,7 @@ var links = {
 };
 
 // Developer stuff! :3
-var bypassUAF = true;
+var bypassUAF = false;
 var devTools = false;
 var ixlambdaVersion = "v3.BETARELEASE.1";
 
