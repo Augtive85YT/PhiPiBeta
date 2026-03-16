@@ -37,7 +37,7 @@ var htmlStyles = `
 
     --ixlm-radius: 6px;
     --ixlm-blur: 16px;
-    --ixlm-anim-time: 2s;
+    --ixlm-anim-time: 0.3s;
     --ixlm-font: "JetBrains Mono", monospace;
 
     width: 300px;
