@@ -11,7 +11,7 @@ var links = {
 // Developer stuff! :3
 var bypassUAF = false;
 var devTools = false;
-var ixlambdaVersion = "v3.BETARELEASE.FIX1";
+var ixlambdaVersion = "v3.BETARELEASE.FIX3";
 
 // Stylesheet to be appended.
 var htmlStyles = `
