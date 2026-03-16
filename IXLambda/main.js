@@ -16,7 +16,7 @@ var ixlambdaVersion = "v2.3.1";
 // Stylesheet to be appended.
 var htmlStyles = `
 <style>
-@import url("https://fonts.googleapis.com/css?family=JetBrains+Mono");
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 :host { all: initial; }
 
