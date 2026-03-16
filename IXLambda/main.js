@@ -1,6 +1,7 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
 var links = {
-    overcloaked: `ndjdxbv${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
+    overcloaked: `01-overcloaked${atob("LmItY2RuLm5ldC8=")}`,
+    overcloaked_beanweb: `0gykoqai${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     fern: `${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`,
     infamous: `lizard${atob("LmItY2RuLm5ldC8=")}`,
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
@@ -9,9 +10,9 @@ var links = {
 }
 
 // Developer stuff! :3
-var bypassUAF = false;
+var bypassUAF = true;
 var devTools = false;
-var ixlambdaVersion = "v3.BETARELEASE.FIX3";
+var ixlambdaVersion = "v3.BETARELEASE.1";
 
 // Stylesheet to be appended.
 var htmlStyles = `
