@@ -11,7 +11,7 @@ var links = {
 // Developer stuff! :3
 var bypassUAF = true;
 var devTools = false;
-var ixlambdaVersion = "v2.3.1";
+var ixlambdaVersion = "v3.BETARELEASE";
 
 // Stylesheet to be appended.
 var htmlStyles = `
@@ -94,23 +94,27 @@ var htmlStyles = `
 
     color: transparent;
     filter: brightness(.9);
-    transition: filter 0.2s;
 }
 
 #ixlambda-header button:hover {
     filter: brightness(1.1);
 }
 
-#ixlambda-minimize { background: var(--ixlm-min); }
-#ixlambda-close { background: var(--ixlm-close); }
-
+#ixlambda-close {
+    background: var(--ixlm-close);
+    transition: background var(--ixlm-anim-time);
+}
+#ixlambda-minimize {
+    background: var(--ixlm-min);
+    transition: filter 0.2s, background var(--ixlm-anim-time);
+}
 #ixlambda-gui.ixlm-minimized #ixlambda-minimize {
     background: var(--ixlm-min-active);
+    transition: filter 0.2s, background var(--ixlm-anim-time);
 }
 
 #ixlambda-header svg {
     padding-left: 8px;
-    padding-right: 8px;
 }
 
 /* ---------- CONTENT ---------- */
@@ -220,6 +224,7 @@ var htmlStyles = `
 
 // HTML body data to inject.
 var htmlData = `
+<link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
 ${htmlStyles}
 <div id="ixlambda-gui">
     <div id="ixlambda-header">
@@ -228,7 +233,7 @@ ${htmlStyles}
                 <button id="ixlambda-close"></button>
                 <button id="ixlambda-minimize"></button>
             </div>
-            <i data-lucide="server-cog"></i>
+            <i data-lucide="server-cog" width="18" height="18"></i>
             <b>IXLambda Loader</b>
             </div>
         </div>
@@ -251,13 +256,13 @@ ${htmlStyles}
             </div>
             <hr>
             <span class="ixlambda-description">Javascript Loader</span>
-            <button id="ixlambda-mstaums-launch" class="ixlambda-btn">Launch MSTaums</button>
+            <button id="ixlambda-scriptix-launch" class="ixlambda-btn">Launch Scriptix (Made by TEDA)</button>
             <hr>
             <div class="ixlambda-footer">
                 <span>Made by SUDO :3 ${ixlambdaVersion}</span>
-                <button id="ixlambda-settings" class="ixlambda-btn ixlambda-icon-btn">
+                <!--<button id="ixlambda-settings" class="ixlambda-btn ixlambda-icon-btn">
                     <i data-lucide="cog" width="20" height="20"></i>
-                </button>
+                </button>-->
             </div>
         </div>
 
@@ -305,30 +310,31 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     var mainContent = root.getElementById("ixlambda-main-content");
     var settingsContent = root.getElementById("ixlambda-settings-content");
 
-    // Settings menu functions.
-    root.getElementById("ixlambda-settings").addEventListener("click", () => {
-        mainContent.classList.toggle("hidden");
-        settingsContent.classList.toggle("hidden");
-        //// Animation stuff.
-        //mainContent.style.height = mainContent.offsetHeight + "px";
-        //mainContent.style.opacity = "0";
-        //mainContent.addEventListener('transitionend', function handler() {
-        //    mainContent.style.display = 'none';
-        //    mainContent.style.height = null; // reset inline height
-        //    mainContent.removeEventListener('transitionend', handler);
-        //    settingsContent.style.display = 'block';
-        //    settingsContent.style.height = "0px";
-        //    settingsContent.style.opacity = "0";
-        //    requestAnimationFrame(() => {
-        //        settingsContent.style.height = settingsContent.offsetHeight + "px";
-        //        settingsContent.style.opacity = "1";
-        //    });
-        //    settingsContent.addEventListener('transitionend', function h2() {
-        //        settingsContent.style.height = null;
-        //        settingsContent.removeEventListener('transitionend', h2);
-        //    });
-        //});
-    });
+    //// Settings menu functions.
+    //root.getElementById("ixlambda-settings").addEventListener("click", () => {
+    //    mainContent.classList.toggle("hidden");
+    //    settingsContent.classList.toggle("hidden");
+    //
+    //    // Animation stuff.
+    //    mainContent.style.height = mainContent.offsetHeight + "px";
+    //    mainContent.style.opacity = "0";
+    //    mainContent.addEventListener('transitionend', function handler() {
+    //        mainContent.style.display = 'none';
+    //        mainContent.style.height = null; // reset inline height
+    //        mainContent.removeEventListener('transitionend', handler);
+    //        settingsContent.style.display = 'block';
+    //        settingsContent.style.height = "0px";
+    //        settingsContent.style.opacity = "0";
+    //        requestAnimationFrame(() => {
+    //            settingsContent.style.height = settingsContent.offsetHeight + "px";
+    //            settingsContent.style.opacity = "1";
+    //        });
+    //        settingsContent.addEventListener('transitionend', function h2() {
+    //            settingsContent.style.height = null;
+    //            settingsContent.removeEventListener('transitionend', h2);
+    //        });
+    //    });
+    //});
 
     // Minimize and close functions.
     root.getElementById("ixlambda-minimize").addEventListener("click", () => {
@@ -346,7 +352,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     lucideScript.onload = () => {
         lucide.createIcons({root: root});
     }
-    gui.appendChild(lucideScript);
+    root.appendChild(lucideScript);
 
     // Launch as about:blank.
     function openLink(link) {
@@ -357,6 +363,11 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
         }
         aboutblank.document.write(`
         <title>IXLambda</title>
+        <script>
+            document.getElementById("mainIframe").onload = () => {
+                getElementById("mainIframe").contentWindow.location.reload();
+            };
+        </script>
         ${devTools ? "" : `<script>
             if (window.eruda) { eruda.destroy(); }
             Object.defineProperty(window,"eruda",{set(v){v&&(v.init=()=>{});this._e=v},get(){return this._e}});
@@ -365,7 +376,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
             html, body{ margin:0; height:100%; }
             iframe { position:fixed; width:100%; height:100%; border:none; inset:0; }
         </style>
-        <iframe src="${link}"></iframe>`);
+        <iframe id="mainIframe" src="${link}" referrerpolicy="no-referrer"></iframe>`);
         aboutblank.document.close();
     }
 
@@ -373,9 +384,9 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     root.getElementById("ixlambda-launch").addEventListener("click", () => {
         openLink("https://" + links[root.getElementById("ixlambda-proxy-selector").value]);
     });
-    root.getElementById("ixlambda-mstaums-launch").addEventListener("click", () => {
+    root.getElementById("ixlambda-scriptix-launch").addEventListener("click", () => {
         var script = document.createElement("script");
-        script.src = "https://raw-githack-com.translate.goog/MohanIShim47/MSTaums/main/Bookmarklet%20Manager/main.js";
+        script.src = "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/Bookmarklet%20Manager/main.js";
         document.head.appendChild(script);
     });
 
