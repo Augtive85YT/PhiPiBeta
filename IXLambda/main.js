@@ -287,6 +287,7 @@ var htmlDataIT = `
 	<body>
 		<p>Hello I.T. Department, it is time we talk. You went too far blocking CoolMathGames. We only seek freedom.</p>
 		<p>-ΦΠΒ's Owner SUDO :3</p>
+		<p>P.S. if you got here and are a student, you put in the wrong post-validation passcode.</p>
 	</body>
 </html>
 `;
@@ -350,38 +351,39 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     // Lucide implementation.
     var lucideScript = document.createElement("script");
     lucideScript.src = "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js";
-    lucideScript.onload = () => {
-        lucide.createIcons({root: root});
-    }
+    lucideScript.onload = () => { lucide.createIcons({root: root}); }
     root.appendChild(lucideScript);
 
-    // Launch as about:blank.
+    // Launch as blob URL.
     function openLink(link) {
-		var linkHtmlData = `
-        <title>IXLambda</title>
-        <script>
-            document.getElementById("mainIframe").onload = () => {
-                getElementById("mainIframe").contentWindow.location.reload();
-            };
-        </script>
-        ${devTools ? "" : `<script>
-            if (window.eruda) { eruda.destroy(); }
-            Object.defineProperty(window,"eruda",{set(v){v&&(v.init=()=>{});this._e=v},get(){return this._e}});
-        </script>`}
-        <style>
-            html, body { margin:0; height:100%; }
-            iframe { position:fixed; width:100%; height:100%; border:none; inset:0; }
-        </style>
-        <iframe id="mainPage" type="text/html" src="${link + "?" + Date.now()}">If you see this text, the link did not load.</iframe>`;
+        var linkHtmlData = `
+        <!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <title>IXLambda</title>
+            ${devTools ? "" : `
+            <script>
+                if (window.eruda) { eruda.destroy(); }
+                Object.defineProperty(window,"eruda",{set(v){v&&(v.init=()=>{});this._e=v},get(){return this._e}});
+            </script>`}
+            <style>
+              body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+              iframe { width: 100vw; height: 100vh; border: none; }
+            </style>
+          </head>
+          <body>
+            <iframe src="${link}"></iframe>
+          </body>
+        </html>`;
 
-		// Main loading code.
-		var blobUrl = URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" }));
-		var proxyPage = window.open(blobUrl, "_blank");
-        if (!proxyPage) {
-            alert("Pop-up blocked!");
-            return;
+        // Main loading code.
+        try {
+            var newTab = window.open(URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" })), "_blank");
+        } catch (err) {
+            console.error("Proxy launching failed:", err);
         }
-	}
+        if (!newTab) { alert("Popup Failed! 3:"); }
+    }
 
     // Loading code.
     root.getElementById("ixlambda-launch").addEventListener("click", () => {
