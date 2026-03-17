@@ -36,7 +36,6 @@ var htmlStyles = `
     --ixlm-btn-text: #11111b;
     --ixlm-border: #45475a;
 
-    --ixlm-settings: #74c7ec;
     --ixlm-min: #f9e2af;
     --ixlm-min-active: #a6e3a1;
     --ixlm-close: #f38ba8;
@@ -378,18 +377,17 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     function setTheme(theme) {
         themes = {
             mocha: {
-                "--ixlm-bg": "rgba(49, 50, 68, 0.9)",
-                "--ixlm-header": "rgba(30, 30, 46, 0.9)",
-                "--ixlm-control-bg": "#181825",
-                "--ixlm-text": "#cdd6f4",
-                "--ixlm-accent": "#89b4fa",
-                "--ixlm-accent-hover": "#b4befe",
-                "--ixlm-btn-text": "#11111b",
-                "--ixlm-border": "#45475a",
-                "--ixlm-settings": "#74c7ec",
-                "--ixlm-min": "#f9e2af",
-                "--ixlm-min-active": "#a6e3a1",
-                "--ixlm-close": "#f38ba8",
+                "--ixlm-bg": "rgba(49, 50, 68, 0.9)", // Surface 0
+                "--ixlm-header": "rgba(30, 30, 46, 0.9)", // Base
+                "--ixlm-control-bg": "#181825", // Mantle
+                "--ixlm-text": "#cdd6f4", // Text
+                "--ixlm-accent": "#89b4fa", // Blue
+                "--ixlm-accent-hover": "#b4befe", // Lavender
+                "--ixlm-btn-text": "#11111b", // Crust
+                "--ixlm-border": "#45475a", // Surface 1
+                "--ixlm-min": "#f9e2af", // Yellow
+                "--ixlm-min-active": "#a6e3a1", // Green
+                "--ixlm-close": "#f38ba8", // Red
                 "--ixlm-radius": "6px",
                 "--ixlm-blur": "16px",
                 "--ixlm-anim-time": "0.3s",
@@ -403,7 +401,6 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-accent-hover": "#7287fd",
                 "--ixlm-btn-text": "#dce0e8",
                 "--ixlm-border": "#6c7086",
-                "--ixlm-settings": "#209fb5",
                 "--ixlm-min": "#df8e1d",
                 "--ixlm-min-active": "#40a02b",
                 "--ixlm-close": "#d20f39",
