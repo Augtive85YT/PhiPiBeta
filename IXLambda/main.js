@@ -267,9 +267,11 @@ ${htmlStyles}
         <!-- SETTINGS PANEL -->
         <div id="ixlambda-settings-content" class="ixlambda-panel hidden">
             <span class="ixlambda-description">Settings</span>
-            <div class="ixlambda-sidebyside">
-                <p>Will come soon!!!</p>
-            </div>
+            <!--<hr>
+            <span class="ixlambda-description">Themes</span>
+            <select id="ixlambda-theme-selector" class="ixlambda-selector">
+                <<option value="dark">Dark</option>
+            </select>-->
             <hr>
             <div class="ixlambda-footer">
                 <span>Made by SUDO :3 ${ixlambdaVersion}</span>
@@ -297,6 +299,24 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     var header = root.getElementById("ixlambda-header");
     var mainContent = root.getElementById("ixlambda-main-content");
     var settingsContent = root.getElementById("ixlambda-settings-content");
+
+    // Figure it out Augtive85yt
+    //function setTheme(theme){
+    //  Do stuff
+    //}
+
+    //const selector=document.getElementById("theme-selector");
+    //selector.onchange=()=>{
+        const theme=selector.value;
+        setTheme(theme);
+        localStorage.setItem("scriptix-theme",theme);
+    //};
+
+    //const saved=localStorage.getItem("scriptix-theme");
+    //if(saved){
+        setTheme(saved);
+        selector.value=saved;
+    //}
 
     // I hate animations!!!!!
     function switchPanelAnimated(showPanel, hidePanel) {
