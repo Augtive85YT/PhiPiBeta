@@ -19,7 +19,7 @@ var links = {
 // Developer stuff! :3
 var bypassUAF = false;
 var devTools = false;
-var ixlambdaVersion = "v3.0.0";
+var ixlambdaVersion = "v3.1.0";
 
 // Stylesheet to be appended.
 var htmlStyles = `
@@ -248,7 +248,7 @@ ${htmlStyles}
                     <option disabled value="space">Space</option>
                     <option value="gnmath">GN-Math</option>
                     <option disabled value="selenite">Selenite</option>
-                    <option value="daydreamx">DayDreamX</option>
+                    <option disabled value="daydreamx">DayDreamX</option>
                 </select>
                 <button id="ixlambda-launch" class="ixlambda-btn ixlambda-half">Launch</button>
             </div>
@@ -274,6 +274,9 @@ ${htmlStyles}
                 <option value="latte">Catppuccin Latte (Light)</option>
                 <option value="hacker">Pro Haxxor</option>
             </select>
+			<hr>
+            <span class="ixlambda-description">Developer</span>
+			<p>IGNORE THIS IM SORRY I DONT HAVE TIME :sob:</p>
             <hr>
             <div class="ixlambda-footer">
                 <span>Made by SUDO :3 ${ixlambdaVersion}</span>
@@ -286,7 +289,7 @@ ${htmlStyles}
 </div>
 `;
 
-// Evil code switching! >:3
+// Evil code to inject! >:3
 var htmlDataIT = `
 <!DOCTYPE html>
 <html lang="en">
@@ -426,6 +429,8 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-anim-time": "0.2s",
                 "--ixlm-font": '"JetBrains Mono", monospace'}
         };
+
+		// Find correct theme.
         Object.entries(themes[theme]).forEach(([key, value]) => {
             gui.style.setProperty(key, value);
         });
@@ -515,7 +520,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
         var erudaScript = document.createElement("script");
         erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
         erudaScript.className = "ixlambda-destroy";
-        erudaScript.onload = e => { eruda.init(); }
+        erudaScript.onload = () => { eruda.init(); }
         document.head.appendChild(erudaScript);
     }
 
