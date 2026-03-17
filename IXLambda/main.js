@@ -6,7 +6,7 @@ var links = {
     infamous: `lizard${atob("LmItY2RuLm5ldC8=")}`,
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     gnmath: `nowayway${atob("LmItY2RuLm5ldC8=")}`,
-    daydreamx: `com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
+    daydreamx_removed: `com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
 }
 
 // Developer stuff! :3
@@ -247,7 +247,7 @@ ${htmlStyles}
                     <option value="infamous">Infamous</option>
                     <option value="space">Space</option>
                     <option value="gnmath">GN-Math</option>
-                    <option value="daydreamx">DayDreamX</option>
+                    <!--<option value="daydreamx">DayDreamX</option>-->
                 </select>
                 <button id="ixlambda-launch" class="ixlambda-btn ixlambda-half">Launch</button>
             </div>
