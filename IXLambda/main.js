@@ -411,7 +411,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-font": '"JetBrains Mono", monospace'},
 			hacker: {
                 "--ixlm-bg": "#000000",
-                "--ixlm-header": "#111111",
+                "--ixlm-header": "#222222",
                 "--ixlm-control-bg": "#111111",
                 "--ixlm-text": "#00ff00",
                 "--ixlm-accent": "#00ff00",
