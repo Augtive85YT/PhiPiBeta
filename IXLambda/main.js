@@ -1,5 +1,6 @@
 // Suffixes
 // .cdn.cloudflare.net/ > ${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}
+// .beanweb.qzz.io.cdn.cloudflare.net/ > ${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}
 // .b-cdn.net/ > ${atob("LmItY2RuLm5ldC8=")}
 // .info.north-kazakhstan.su.cdn.cloudflare.net/ > ${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}
 //
@@ -242,7 +243,7 @@ ${htmlStyles}
             <span class="ixlambda-description">Proxy Loader</span>
             <div class="ixlambda-sidebyside">
                 <select id="ixlambda-proxy-selector" class="ixlambda-selector">
-                    <option value="overcloaked">OverCloaked</option>
+                    <option disabled value="overcloaked">OverCloaked</option>
                     <option value="fern">Fern</option>
                     <option value="infamous">Infamous</option>
                     <option value="space">Space</option>
