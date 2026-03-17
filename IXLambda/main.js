@@ -7,10 +7,10 @@ var links = {
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     gnmath: `nowayway${atob("LmItY2RuLm5ldC8=")}`,
     daydreamx: `com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
-};
+}
 
 // Developer stuff! :3
-var bypassUAF = false;
+var bypassUAF = true;
 var devTools = false;
 var ixlambdaVersion = "v3.BETARELEASE.1";
 
@@ -49,7 +49,7 @@ var htmlStyles = `
     color: var(--ixlm-text);
     border: 1px solid var(--ixlm-border);
     border-radius: var(--ixlm-radius);
-	transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 /* ---------- HEADER ---------- */
@@ -145,7 +145,7 @@ var htmlStyles = `
 }
 
 /* ---------- TEXT ---------- */
-#ixlambda-main-content span {
+#ixlambda-content span {
     display: block;
     margin: 8px 0;
 }
@@ -222,7 +222,6 @@ var htmlStyles = `
 
 // HTML body data to inject.
 var htmlData = `
-<link href="https://fonts.googleapis.com/css?family=JetBrains+Mono" rel="stylesheet">
 ${htmlStyles}
 <div id="ixlambda-gui">
     <div id="ixlambda-header">
@@ -284,87 +283,42 @@ ${htmlStyles}
 </div>
 `;
 
+// Evil code switching! >:3
+var htmlDataIT = `
+<!DOCTYPE html>
+<html lang="en">
+	<head style="margin: 0; padding: 0; overflow: hidden;">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>UwU :3</title>
+	</head>
+	<body>
+		<p>Hello I.T. Department, it is time we talk. You went too far blocking CoolMathGames. We only seek freedom.</p>
+		<p>-ΦΠΒ's Owner SUDO :3</p>
+		<p>P.S. if you got here and are a student, you put in the wrong post-validation passcode.</p>
+	</body>
+</html>
+`;
+
 // User agent filtration and confirming GUI unexistence.
 if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getElementById("ixlambda-host")) {
+    // Confirm page existence.
     if (location.href === "about:blank") { document.location.href = "https://google.com/"; alert("Please re-run the bookmark here."); }
 
+    // Inject HTML.
     var host = document.createElement("div");
     host.id = "ixlambda-host";
     document.body.appendChild(host);
 
+    // Spooky shadow div!
     var root = host.attachShadow({ mode: "open" })
     root.innerHTML = htmlData;
 
+    // Get GUI elements.
     var gui = root.getElementById("ixlambda-gui");
     var header = root.getElementById("ixlambda-header");
     var mainContent = root.getElementById("ixlambda-main-content");
     var settingsContent = root.getElementById("ixlambda-settings-content");
-
-    // Figure it out Augtive85yt
-    //function setTheme(theme){
-    //  Do stuff
-    //}
-
-    //const selector=document.getElementById("theme-selector");
-    //selector.onchange=()=>{
-        const theme=selector.value;
-        setTheme(theme);
-        localStorage.setItem("scriptix-theme",theme);
-    //};
-
-    //const saved=localStorage.getItem("scriptix-theme");
-    //if(saved){
-        setTheme(saved);
-        selector.value=saved;
-    //}
-
-    // I hate animations!!!!!
-    function switchPanelAnimated(showPanel, hidePanel) {
-        if (showPanel === hidePanel) return;
-
-        hidePanel.style.maxHeight = hidePanel.scrollHeight + "px";
-        hidePanel.style.transition = "max-height 0.3s ease, opacity 0.2s ease";
-        requestAnimationFrame(() => {
-            hidePanel.style.maxHeight = "0";
-            hidePanel.style.opacity = "0";
-        });
-        hidePanel.addEventListener("transitionend", function hideEnd() {
-            hidePanel.classList.add("hidden");
-            hidePanel.style.maxHeight = null;
-            hidePanel.style.opacity = null;
-            hidePanel.removeEventListener("transitionend", hideEnd);
-
-            // Show target panel
-            showPanel.classList.remove("hidden");
-            showPanel.style.maxHeight = "0";
-            showPanel.style.opacity = "0";
-            requestAnimationFrame(() => {
-                showPanel.style.maxHeight = showPanel.scrollHeight + "px";
-                showPanel.style.opacity = "1";
-            });
-            showPanel.addEventListener("transitionend", function showEnd() {
-                showPanel.style.maxHeight = null;
-                showPanel.style.opacity = null;
-                showPanel.removeEventListener("transitionend", showEnd);
-            });
-        });
-    }
-
-    const settingsBtn = root.getElementById("ixlambda-settings");
-    settingsBtn.addEventListener("click", () => {
-        const isMainVisible = !mainContent.classList.contains("hidden");
-        if (isMainVisible) {
-            switchPanelAnimated(settingsContent, mainContent);
-        } else {
-            switchPanelAnimated(mainContent, settingsContent);
-        }
-    });
-
-    const homeBtn = root.getElementById("ixlambda-home");
-
-    homeBtn.addEventListener("click", () => {
-        switchPanelAnimated(mainContent, settingsContent);
-    });
 
     // Minimize and close functions.
     root.getElementById("ixlambda-minimize").addEventListener("click", () => {
@@ -381,6 +335,64 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     lucideScript.src = "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js";
     lucideScript.onload = () => { lucide.createIcons({root: root}); }
     root.appendChild(lucideScript);
+
+    // Animation stuff. (suffering!)
+    function switchPanelAnim(showPanel, hidePanel) {
+        if (showPanel === hidePanel) return;
+        hidePanel.style.maxHeight = hidePanel.scrollHeight + "px";
+        hidePanel.style.transition = "max-height 0.3s ease, opacity 0.2s ease";
+        requestAnimationFrame(() => {
+            hidePanel.style.maxHeight = "0";
+            hidePanel.style.opacity = "0";
+        });
+        hidePanel.addEventListener("transitionend", function hideEnd() {
+            // Hide shown element.
+            hidePanel.classList.add("hidden");
+            hidePanel.style.maxHeight = null;
+            hidePanel.style.opacity = null;
+            hidePanel.removeEventListener("transitionend", hideEnd);
+
+            // Show hidden element.
+            showPanel.classList.remove("hidden");
+            showPanel.style.maxHeight = "0";
+            showPanel.style.opacity = "0";
+            requestAnimationFrame(() => {
+                showPanel.style.maxHeight = showPanel.scrollHeight + "px";
+                showPanel.style.opacity = "1";
+            });
+            showPanel.addEventListener("transitionend", e => {
+                showPanel.style.maxHeight = null;
+                showPanel.style.opacity = null;
+                showPanel.removeEventListener("transitionend", e);
+            });
+        });
+    }
+
+    // Setup switching buttons.
+    root.getElementById("ixlambda-settings").addEventListener("click", () => {
+        switchPanelAnim(settingsContent, mainContent);
+    });
+    root.getElementById("ixlambda-home").addEventListener("click", () => {
+        switchPanelAnim(mainContent, settingsContent);
+    });
+
+    // Theme handling.
+    //function setTheme(theme){
+    //  Do stuff
+    //}
+
+    //const selector=document.getElementById("theme-selector");
+    //selector.onchange=()=>{
+    //const theme=selector.value;
+    //setTheme(theme);
+    //localStorage.setItem("scriptix-theme",theme);
+    //};
+
+    //const saved=localStorage.getItem("scriptix-theme");
+    //if(saved){
+    //setTheme(saved);
+    //selector.value=saved;
+    //}
 
     // Launch as blob URL.
     function openLink(link) {
@@ -404,6 +416,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
           </body>
         </html>`;
 
+        // Main loading code.
         try {
             var newTab = window.open(URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" })), "_blank");
         } catch (err) {
@@ -458,12 +471,17 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     console.log("%cMaintained by ΦΠΒ's Owner!", "color: #89b4fa; font-size: 16px;");
     console.log("%cLovingly made by SUDO! UwU", "color: #f38ba8; font-size: 16px; font-weight: bold;");
 } else if (!document.getElementById("ixlambda-host")) {
+    // Eradicate page evily!
     document.open();
     document.write(htmlDataIT);
     document.close();
 
+    // Add evil console notes. >:3
     console.log("%cGet out of the console, you are not slick.", "color: red; font-size: 24px; font-weight: bold;");
     console.log("%cAlso, I am a few steps ahead of you.", "color: #f38ba8; font-size: 16px; font-weight: bold;")
     console.log("%cPlease, just leave us alone...", "color: #eba0ac; font-size: 16px;");
 } else {
+    // Complain about duplicates.
     alert("Another instance of IXLambda exists, please use the current instance.")
+    console.log("%cAnother instance of IXLambda exists, please use the current instance.", "color: #89b4fa; font-size: 16px;");
+}
