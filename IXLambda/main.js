@@ -246,7 +246,7 @@ ${htmlStyles}
                     <option disabled value="overcloaked">OverCloaked</option>
                     <option value="fern">Fern</option>
                     <option value="infamous">Infamous</option>
-                    <option value="space">Space</option>
+                    <option disabled value="space">Space</option>
                     <option value="gnmath">GN-Math</option>
                     <option disabled value="selenite">Selenite</option>
                     <option value="daydreamx">DayDreamX</option>
