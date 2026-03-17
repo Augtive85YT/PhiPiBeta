@@ -402,7 +402,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-accent": "#1e66f5",
                 "--ixlm-accent-hover": "#7287fd",
                 "--ixlm-btn-text": "#dce0e8",
-                "--ixlm-border": "#9ca0b0",
+                "--ixlm-border": "#6c7086",
                 "--ixlm-settings": "#209fb5",
                 "--ixlm-min": "#df8e1d",
                 "--ixlm-min-active": "#40a02b",
