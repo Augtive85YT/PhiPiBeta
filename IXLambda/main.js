@@ -1,3 +1,8 @@
+// Suffixes
+// .cdn.cloudflare.net/ > ${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}
+// .b-cdn.net/ > ${atob("LmItY2RuLm5ldC8=")}
+// .info.north-kazakhstan.su.cdn.cloudflare.net/ > ${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}
+//
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
 var links = {
     overcloaked: `01-overcloaked${atob("LmItY2RuLm5ldC8=")}`,
@@ -6,13 +11,14 @@ var links = {
     infamous: `lizard${atob("LmItY2RuLm5ldC8=")}`,
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     gnmath: `nowayway${atob("LmItY2RuLm5ldC8=")}`,
-    daydreamx_removed: `com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
+    selenite: `DISABLED`,
+    daydreamx: `pondering.is-a.software${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
 }
 
 // Developer stuff! :3
-var bypassUAF = true;
+var bypassUAF = false;
 var devTools = false;
-var ixlambdaVersion = "v3.BETARELEASE.1";
+var ixlambdaVersion = "v3.0.0";
 
 // Stylesheet to be appended.
 var htmlStyles = `
@@ -93,7 +99,6 @@ var htmlStyles = `
     justify-content: center;
 
     color: transparent;
-    filter: brightness(.9);
 }
 
 #ixlambda-header button:hover {
@@ -132,16 +137,11 @@ var htmlStyles = `
 
 /* ---------- PANELS ---------- */
 .ixlambda-panel {
-    overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.2s ease;
     opacity: 1;
-    max-height: 2000px; /* large enough to hold content */
 }
 
 .ixlambda-panel.hidden {
-    max-height: 0;
-    opacity: 0;
-    pointer-events: none;
+    display: none;
 }
 
 /* ---------- TEXT ---------- */
@@ -247,7 +247,8 @@ ${htmlStyles}
                     <option value="infamous">Infamous</option>
                     <option value="space">Space</option>
                     <option value="gnmath">GN-Math</option>
-                    <!--<option value="daydreamx">DayDreamX</option>-->
+                    <option disabled value="selenite">Selenite</option>
+                    <option value="daydreamx">DayDreamX</option>
                 </select>
                 <button id="ixlambda-launch" class="ixlambda-btn ixlambda-half">Launch</button>
             </div>
@@ -266,11 +267,12 @@ ${htmlStyles}
         <!-- SETTINGS PANEL -->
         <div id="ixlambda-settings-content" class="ixlambda-panel hidden">
             <span class="ixlambda-description">Settings</span>
-            <!--<hr>
+            <hr>
             <span class="ixlambda-description">Themes</span>
             <select id="ixlambda-theme-selector" class="ixlambda-selector">
-                <<option value="dark">Dark</option>
-            </select>-->
+                <option value="mocha">Catppuccin Mocha (Dark)</option>
+                <option value="latte">Catppuccin Latte (Light)</option>
+            </select>
             <hr>
             <div class="ixlambda-footer">
                 <span>Made by SUDO :3 ${ixlambdaVersion}</span>
@@ -295,7 +297,7 @@ var htmlDataIT = `
 	<body>
 		<p>Hello I.T. Department, it is time we talk. You went too far blocking CoolMathGames. We only seek freedom.</p>
 		<p>-ΦΠΒ's Owner SUDO :3</p>
-		<p>P.S. if you got here and are a student, you put in the wrong post-validation passcode.</p>
+		<p>P.S. if you got here and are a student, you put in the wrong post-validation passcode. Please try again.</p>
 	</body>
 </html>
 `;
@@ -303,7 +305,7 @@ var htmlDataIT = `
 // User agent filtration and confirming GUI unexistence.
 if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getElementById("ixlambda-host")) {
     // Confirm page existence.
-    if (location.href === "about:blank") { document.location.href = "https://google.com/"; alert("Please re-run the bookmark here."); }
+    if (["about:blank", "about:newtab", ""].includes(location.href)) { document.location.href = "https://google.com/"; alert("Please re-run the bookmark here."); }
 
     // Inject HTML.
     var host = document.createElement("div");
@@ -339,33 +341,28 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     // Animation stuff. (suffering!)
     function switchPanelAnim(showPanel, hidePanel) {
         if (showPanel === hidePanel) return;
-        hidePanel.style.maxHeight = hidePanel.scrollHeight + "px";
-        hidePanel.style.transition = "max-height 0.3s ease, opacity 0.2s ease";
-        requestAnimationFrame(() => {
-            hidePanel.style.maxHeight = "0";
-            hidePanel.style.opacity = "0";
-        });
-        hidePanel.addEventListener("transitionend", function hideEnd() {
-            // Hide shown element.
+        const content = showPanel.closest("#ixlambda-content");
+        if (!content) return;
+        content.style.height = content.offsetHeight + "px";
+        hidePanel.style.transition = "opacity 0.1s ease";
+        hidePanel.style.opacity = "0";
+        setTimeout(() => {
             hidePanel.classList.add("hidden");
-            hidePanel.style.maxHeight = null;
-            hidePanel.style.opacity = null;
-            hidePanel.removeEventListener("transitionend", hideEnd);
-
-            // Show hidden element.
+            hidePanel.style.opacity = "";
             showPanel.classList.remove("hidden");
-            showPanel.style.maxHeight = "0";
             showPanel.style.opacity = "0";
+            const newHeight = showPanel.scrollHeight;
+            content.style.transition = "height 0.3s cubic-bezier(.4,0,.2,1)";
+            content.style.height = newHeight + "px";
             requestAnimationFrame(() => {
-                showPanel.style.maxHeight = showPanel.scrollHeight + "px";
+                showPanel.style.transition = "opacity 0.1s ease";
                 showPanel.style.opacity = "1";
             });
-            showPanel.addEventListener("transitionend", e => {
-                showPanel.style.maxHeight = null;
-                showPanel.style.opacity = null;
-                showPanel.removeEventListener("transitionend", e);
-            });
-        });
+            setTimeout(() => {
+                content.style.height = "";
+                showPanel.style.opacity = "";
+            }, 300);
+        }, 100);
     }
 
     // Setup switching buttons.
@@ -377,22 +374,63 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     });
 
     // Theme handling.
-    //function setTheme(theme){
-    //  Do stuff
-    //}
+    function setTheme(theme) {
+        themes = {
+            mocha: {
+                "--ixlm-bg": "rgba(49, 50, 68, 0.9)",
+                "--ixlm-header": "rgba(30, 30, 46, 0.9)",
+                "--ixlm-control-bg": "#181825",
+                "--ixlm-text": "#cdd6f4",
+                "--ixlm-accent": "#89b4fa",
+                "--ixlm-accent-hover": "#b4befe",
+                "--ixlm-btn-text": "#11111b",
+                "--ixlm-border": "#45475a",
+                "--ixlm-settings": "#74c7ec",
+                "--ixlm-min": "#f9e2af",
+                "--ixlm-min-active": "#a6e3a1",
+                "--ixlm-close": "#f38ba8",
+                "--ixlm-radius": "6px",
+                "--ixlm-blur": "16px",
+                "--ixlm-anim-time": "0.3s",
+                "--ixlm-font": '"JetBrains Mono", monospace'},
+        latte: {
+                "--ixlm-bg": "rgba(204, 208, 218, 0.9)",
+                "--ixlm-header": "rgba(239, 241, 245, 0.9)",
+                "--ixlm-control-bg": "#e6e9ef",
+                "--ixlm-text": "#4c4f69",
+                "--ixlm-accent": "#1e66f5",
+                "--ixlm-accent-hover": "#7287fd",
+                "--ixlm-btn-text": "#dce0e8",
+                "--ixlm-border": "#9ca0b0",
+                "--ixlm-settings": "#209fb5",
+                "--ixlm-min": "#df8e1d",
+                "--ixlm-min-active": "#40a02b",
+                "--ixlm-close": "#d20f39",
+                "--ixlm-radius": "6px",
+                "--ixlm-blur": "16px",
+                "--ixlm-anim-time": "0.3s",
+                "--ixlm-font": '"JetBrains Mono", monospace'}
+        };
+        Object.entries(themes[theme]).forEach(([key, value]) => {
+            gui.style.setProperty(key, value);
+        });
+    }
 
-    //const selector=document.getElementById("theme-selector");
-    //selector.onchange=()=>{
-    //const theme=selector.value;
-    //setTheme(theme);
-    //localStorage.setItem("scriptix-theme",theme);
-    //};
+    // Saved theme.
+    var themeSelector = root.getElementById("ixlambda-theme-selector");
+    themeSelector.onchange = ()=> {
+        var theme= themeSelector.value;
+        setTheme(theme);
+        localStorage.setItem("ixlambda-theme", theme);
+    };
+    var savedTheme = localStorage.getItem("ixlambda-theme");
+    if (savedTheme) { setTheme(savedTheme); themeSelector.value = savedTheme; }
 
-    //const saved=localStorage.getItem("scriptix-theme");
-    //if(saved){
-    //setTheme(saved);
-    //selector.value=saved;
-    //}
+    // Saved proxy.
+    var proxySelector = root.getElementById("ixlambda-proxy-selector");
+    proxySelector.onchange = ()=> { localStorage.setItem("ixlambda-proxy", proxySelector.value); }
+    var savedProxy = localStorage.getItem("ixlambda-proxy");
+    if (savedProxy) { proxySelector.value = savedProxy; }
 
     // Launch as blob URL.
     function openLink(link) {
