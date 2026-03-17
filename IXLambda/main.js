@@ -53,7 +53,7 @@ var htmlStyles = `
 
     font-family: var(--ixlm-font);
     color: var(--ixlm-text);
-    border: 1px solid var(--ixlm-border);
+    /*border: 1px solid var(--ixlm-border);*/
     border-radius: var(--ixlm-radius);
     transform: translateZ(0);
 }
@@ -384,7 +384,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-accent": "#89b4fa", // Blue
                 "--ixlm-accent-hover": "#b4befe", // Lavender
                 "--ixlm-btn-text": "#11111b", // Crust
-                "--ixlm-border": "#45475a", // Surface 1
+                "--ixlm-border": "#585b70", // Surface 2
                 "--ixlm-min": "#f9e2af", // Yellow
                 "--ixlm-min-active": "#a6e3a1", // Green
                 "--ixlm-close": "#f38ba8", // Red
@@ -400,7 +400,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-accent": "#1e66f5",
                 "--ixlm-accent-hover": "#7287fd",
                 "--ixlm-btn-text": "#dce0e8",
-                "--ixlm-border": "#6c7086",
+                "--ixlm-border": "#acb0be",
                 "--ixlm-min": "#df8e1d",
                 "--ixlm-min-active": "#40a02b",
                 "--ixlm-close": "#d20f39",
