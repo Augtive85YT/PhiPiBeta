@@ -1,17 +1,18 @@
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
 var links = {
-    overcloaked: `ndjdxbv${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
+    overcloaked: `01-overcloaked${atob("LmItY2RuLm5ldC8=")}`,
+    overcloaked_beanweb: `0gykoqai${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     fern: `${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`,
     infamous: `lizard${atob("LmItY2RuLm5ldC8=")}`,
     space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
     gnmath: `nowayway${atob("LmItY2RuLm5ldC8=")}`,
     daydreamx: `com${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
-}
+};
 
 // Developer stuff! :3
 var bypassUAF = true;
 var devTools = false;
-var ixlambdaVersion = "v3.BETARELEASE.FIX3";
+var ixlambdaVersion = "v3.BETARELEASE.1";
 
 // Stylesheet to be appended.
 var htmlStyles = `
@@ -446,5 +447,3 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
     console.log("%cPlease, just leave us alone...", "color: #eba0ac; font-size: 16px;");
 } else {
     alert("Another instance of IXLambda exists, please use the current instance.")
-    console.log("%cAnother instance of IXLambda exists, please use the current instance.", "color: #89b4fa; font-size: 16px;");
-}
