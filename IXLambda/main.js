@@ -272,6 +272,7 @@ ${htmlStyles}
             <select id="ixlambda-theme-selector" class="ixlambda-selector">
                 <option value="mocha">Catppuccin Mocha (Dark)</option>
                 <option value="latte">Catppuccin Latte (Light)</option>
+                <option value="hacker">Pro Haxxor</option>
             </select>
             <hr>
             <div class="ixlambda-footer">
@@ -392,7 +393,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-blur": "16px",
                 "--ixlm-anim-time": "0.3s",
                 "--ixlm-font": '"JetBrains Mono", monospace'},
-        latte: {
+        	latte: {
                 "--ixlm-bg": "rgba(204, 208, 218, 0.9)",
                 "--ixlm-header": "rgba(239, 241, 245, 0.9)",
                 "--ixlm-control-bg": "#e6e9ef",
@@ -407,6 +408,22 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-radius": "6px",
                 "--ixlm-blur": "16px",
                 "--ixlm-anim-time": "0.3s",
+                "--ixlm-font": '"JetBrains Mono", monospace'},
+			hacker: {
+                "--ixlm-bg": "#000000",
+                "--ixlm-header": "#111111",
+                "--ixlm-control-bg": "#111111",
+                "--ixlm-text": "#00ff00",
+                "--ixlm-accent": "#00ff00",
+                "--ixlm-accent-hover": "#55ff55",
+                "--ixlm-btn-text": "#000000",
+                "--ixlm-border": "#00ff00",
+                "--ixlm-min": "#ffff00",
+                "--ixlm-min-active": "#00ff00",
+                "--ixlm-close": "#ff0000",
+                "--ixlm-radius": "3px",
+                "--ixlm-blur": "0px",
+                "--ixlm-anim-time": "0.2s",
                 "--ixlm-font": '"JetBrains Mono", monospace'}
         };
         Object.entries(themes[theme]).forEach(([key, value]) => {
