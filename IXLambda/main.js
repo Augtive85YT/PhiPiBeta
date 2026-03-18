@@ -251,13 +251,13 @@ ${htmlStyles}
             <span class="ixlambda-description">Proxy Loader</span>
             <div class="ixlambda-sidebyside">
                 <select id="ixlambda-proxy-selector" class="ixlambda-selector">
-                    <option disabled value="overcloaked">OverCloaked</option>
+                    <option value="overcloaked">OverCloaked</option>
                     <option value="fern">Fern</option>
                     <option value="infamous">Infamous</option>
                     <option disabled value="space">Space</option>
                     <option value="gnmath">GN-Math</option>
                     <option disabled value="selenite">Selenite</option>
-                    <option disabled value="daydreamx">DayDreamX</option>
+                    <option value="daydreamx">DayDreamX</option>
                 </select>
                 <button id="ixlambda-launch" class="ixlambda-btn ixlambda-half">Launch</button>
             </div>
@@ -318,6 +318,7 @@ var htmlDataIT = `
 // User agent filtration and confirming GUI unexistence.
 if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getElementById("ixlambda-host")) {
     // Confirm page existence.
+    console.log("Augtive85yt Likes to eat poo")
     if (["about:blank", "about:newtab", ""].includes(location.href)) { document.location.href = "https://google.com/"; alert("Please re-run the bookmark here."); }
 
     // Inject HTML.
