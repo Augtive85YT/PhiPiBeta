@@ -246,6 +246,7 @@ ${htmlStyles}
         <!-- MAIN PANEL -->
         <div id="ixlambda-main-content" class="ixlambda-panel">
             <span class="ixlambda-description">Freedom is a universal right.</span>
+            <span class="ixlambda-description>Lucas Anderson is so annoying.</span>
             <hr>
             <span class="ixlambda-description">Proxy Loader</span>
             <div class="ixlambda-sidebyside">
