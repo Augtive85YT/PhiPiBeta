@@ -1,19 +1,28 @@
-// Suffixes
-// .cdn.cloudflare.net/ > ${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}
-// .beanweb.qzz.io.cdn.cloudflare.net/ > ${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}
-// .b-cdn.net/ > ${atob("LmItY2RuLm5ldC8=")}
-// .info.north-kazakhstan.su.cdn.cloudflare.net/ > ${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}
-//
 // I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
+var cloudflareCDN = atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8="); // .cdn.cloudflare.net/
+var beanwebCloudflare = atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8="); // .beanweb.qzz.io.cdn.cloudflare.net/
+var bunnyCDN = atob("LmItY2RuLm5ldC8="); // .b-cdn.net/
+var northKazCloudflare = atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv"); // .info.north-kazakhstan.su.cdn.cloudflare.net/
+var amazonAWS = atob("czMuYW1hem9uYXdzLmNvbS8="); // s3.amazonaws.com/
+var googleAPI = atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS8=" ); // storage.googleapis.com/
+
+// Some stuff I think?
 var links = {
-    overcloaked: `01-overcloaked${atob("LmItY2RuLm5ldC8=")}`,
-    overcloaked_beanweb: `0gykoqai${atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
-    fern: `${atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS9mZXJuaXNiZXN0L2luZGV4Lmh0bWw=")}`,
-    infamous: `lizard${atob("LmItY2RuLm5ldC8=")}`,
-    space: `planets.is-a.software${atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8=")}`,
-    gnmath: `nowayway${atob("LmItY2RuLm5ldC8=")}`,
-    selenite: `DISABLED`,
-    daydreamx: `pondering.is-a.software${atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv")}`
+    // Main links.
+    overcloaked: `mzn8q00b${beanwebCloudflare}`,
+    fern: `${googleAPI}fernisbest/index.html`,
+    infamous: `lizard${bunnyCDN}`,
+    space: `dev.desmos.live${cloudflareCDN}`,
+    gnmath: `nowayway${bunnyCDN}`,
+    daydreamx: `${googleAPI}daydreaming/dist/index.html`,
+
+    // Backup links
+    fern_01: `${amazonAWS}fernisbest/index.html`,
+    infamous_01: `uhhhh${bunnyCDN}`,
+    infamous_02: `another-one${bunnyCDN}`,
+    gnmath_01: `${amazonAWS}prageru-server/mathematics.html`,
+    daydreamx_01: `trigonometery.is-a.software${cloudflareCDN}`,
+    daydreamx_02: `space${northKazCloudflare}`
 }
 
 // Developer stuff! :3
@@ -276,7 +285,7 @@ ${htmlStyles}
             </select>
 			<hr>
             <span class="ixlambda-description">Developer</span>
-			<p>IGNORE THIS IM SORRY I DONT HAVE TIME :sob:</p>
+			<p>There will be a text box here eventually!</p>
             <hr>
             <div class="ixlambda-footer">
                 <span>Made by SUDO :3 ${ixlambdaVersion}</span>
