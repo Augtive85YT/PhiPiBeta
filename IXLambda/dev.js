@@ -337,82 +337,25 @@ function openLink(link) {
     if (!newTab) { alert("Popup Failed! 3:"); }
 }
 
-// Storage core handlers.
-var iframeGetQueues = new WeakMap();
-window.addEventListener("message", (event) => {
-    var data = event.data;
-    if (!data || !data.status) return;
-    var queue = iframeGetQueues.get(event.source);
-    if (!queue) return;
-    if (data.status === "retrieved" && queue[data.key]) {
-        queue[data.key](data.value);
-        delete queue[data.key];
-    }
-});
-
-function createStorage(iframe) {
-    // Await iFrame.
-    let winMap = new WeakMap();
-    let ready = new Promise((resolve) => {
-        if (iframe.contentWindow && iframe.contentDocument?.readyState === "complete") { resolve(); }
-        else { iframe.onload = () => resolve(); }
-    });
-
-    // Listen once globally
-    window.addEventListener("message", (event) => {
-        let data = event.data;
-        if (!data || !data.requestId) return;
-        const queue = winMap.get(event.source);
-        if (!queue) return;
-        if (queue[data.requestId]) {
-            queue[data.requestId](data.value);
-            delete queue[data.requestId];
-        }
-    });
-
-    function ensureQueue(win) {
-        if (!winMap.has(win)) { winMap.set(win, {}); }
-        return winMap.get(win);
-    }
-
-    async function send(action, key, value) {
-        await ready;
-        let win = iframe.contentWindow;
-        let queue = ensureQueue(win);
-        return new Promise((resolve) => {
-            let requestId = Math.random().toString(36).slice(2);
-            queue[requestId] = resolve;
-            win.postMessage({ action, key, value, requestId }, "*");
-        });
-    }
-    return {
-        async get(key) { return await send("get", key); },
-        async set(key, value) { await send("store", key, value); },
-        async remove(key) { await send("clear", key); }
-    };
-}
-
 // Booleans.
 let isIpad = /Mac/i.test(window.navigator.userAgent);
 let noIXLambda = !document.getElementById("ixlambda-host")
 let notNewtab = ["about:blank", "about:newtab"].includes(location.href);
-let verifiedUser = null;
+let verifiedUser = localStorage.getItem("ixlambda-verified-user");
 
-// Creating temporary storage.
-let tempStorage = document.createElement("iframe");
-tempStorage.id = "ixlambda-temporary-storage"
-tempStorage.src = "https://augtive85yt-github-io.translate.goog/phipibeta/store.html?_x_tr_sl=de&_x_tr_tl=en"
-createStorage(tempStorage).get("ixlambda-valid-user").then(valid => { verifiedUser = valid; });
-
-if (!verifiedUser || isIpad) {
+if (!verifiedUser && !isIpad) {
     var userString = prompt("Please enter bypass code:");
     if (userString) {
         let hashResult;
         hashSHA256(userString).then(result => { hashResult = result; });
         validUser = (hashResult === "63cece6e54b78d5598bcd231bb7caf49403c47b29878fabeeb43e913b9d9c218");
-        tempStorage.setItem("ixlambda-valid-user", validUser);
+        localStorage.setItem("ixlambda-valid-user", validUser);
         if (validUser) { alert("Validation succeeded! Please re-run the bookmark."); }
+    } else {
+        
+        
     }
+}
     
 // Main function.
 if ((isIpad || verifiedUser) && noIXLambda) {
