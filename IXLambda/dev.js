@@ -351,30 +351,74 @@ window.addEventListener("message", (event) => {
     }
 });
 
-// Store a value.
-function setData(iframe, key, value) {
-    iframe.contentWindow.postMessage({action: "store", key, value}, "*");
-}
+function createStorage(iframe) {
+    // Await iFrame.
+    let winMap = new WeakMap();
+    let ready = new Promise((resolve) => {
+        if (iframe.contentWindow && iframe.contentDocument?.readyState === "complete") { resolve(); }
+        else { iframe.onload = () => resolve(); }
+    });
 
-// Get a value.
-function getData(iframe, key, callback) {
-    if (!iframeGetQueues.has(iframe)) {
-        iframeGetQueues.set(iframe, {});
+    // Listen once globally
+    window.addEventListener("message", (event) => {
+        let data = event.data;
+        if (!data || !data.requestId) return;
+        const queue = winMap.get(event.source);
+        if (!queue) return;
+        if (queue[data.requestId]) {
+            queue[data.requestId](data.value);
+            delete queue[data.requestId];
+        }
+    });
+
+    function ensureQueue(win) {
+        if (!winMap.has(win)) { winMap.set(win, {}); }
+        return winMap.get(win);
     }
-    var queue = iframeGetQueues.get(iframe);
-    queue[key] = callback;
-    iframe.contentWindow.postMessage({action: "get", key}, "*");
+
+    async function send(action, key, value) {
+        await ready;
+        let win = iframe.contentWindow;
+        let queue = ensureQueue(win);
+        return new Promise((resolve) => {
+            let requestId = Math.random().toString(36).slice(2);
+            queue[requestId] = resolve;
+            win.postMessage({ action, key, value, requestId }, "*");
+        });
+    }
+    return {
+        async get(key) { return await send("get", key); },
+        async set(key, value) { await send("store", key, value); },
+        async remove(key) { await send("clear", key); }
+    };
 }
 
-// Remove a value.
-function removeData(iframe, key) {
-    iframe.contentWindow.postMessage({action: "clear", key}, "*");
-}
+// Booleans.
+let isIpad = /Mac/i.test(window.navigator.userAgent);
+let noIXLambda = !document.getElementById("ixlambda-host")
+let notNewtab = ["about:blank", "about:newtab"].includes(location.href);
+let verifiedUser = null;
 
-// User agent filtration and confirming GUI unexistence.
-if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF || localStorage.getItem("ixlambda-valid-user")) && !document.getElementById("ixlambda-host")) {
+// Creating temporary storage.
+let tempStorage = document.createElement("iframe");
+tempStorage.id = "ixlambda-temporary-storage"
+tempStorage.src = "https://augtive85yt-github-io.translate.goog/phipibeta/store.html?_x_tr_sl=de&_x_tr_tl=en"
+createStorage(tempStorage).get("ixlambda-valid-user").then(valid => { verifiedUser = valid; });
+
+if (!verifiedUser || isIpad) {
+    var userString = prompt("Please enter bypass code:");
+    if (userString) {
+        let hashResult;
+        hashSHA256(userString).then(result => { hashResult = result; });
+        validUser = (hashResult === "63cece6e54b78d5598bcd231bb7caf49403c47b29878fabeeb43e913b9d9c218");
+        tempStorage.setItem("ixlambda-valid-user", validUser);
+        if (validUser) { alert("Validation succeeded! Please re-run the bookmark."); }
+    }
+    
+// Main function.
+if ((isIpad || verifiedUser) && noIXLambda) {
     // Confirm page existence.
-    if (["about:blank", "about:newtab"].includes(location.href)) { document.location.href = "https://google.com/"; alert("Please re-run the bookmark here."); }
+    if (notNewtab) { document.location.href = "https://google.com/"; alert("Please re-run the bookmark here."); }
 
     // Inject HTML.
     var host = document.createElement("div");
@@ -409,7 +453,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF || localStorage.getIte
     root.appendChild(lucideScript);
 
     // Animation stuff. (suffering!)
-    function switchPanelAnim(showPanel, hidePanel) {
+    function switchPanel(showPanel, hidePanel) {
         if (showPanel === hidePanel) return;
         const content = showPanel.closest("#ixlambda-content");
         if (!content) return;
@@ -439,10 +483,10 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF || localStorage.getIte
 
     // Setup switching buttons.
     root.getElementById("ixlambda-settings").addEventListener("click", () => {
-        switchPanelAnim(settingsContent, mainContent);
+        switchPanel(settingsContent, mainContent);
     });
     root.getElementById("ixlambda-home").addEventListener("click", () => {
-        switchPanelAnim(mainContent, settingsContent);
+        switchPanel(mainContent, settingsContent);
     });
 
     // Theme handling.
@@ -521,7 +565,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF || localStorage.getIte
     };
     getData(storageIframe, "ixlambda-proxy", savedProxy => { if (savedProxy) { proxySelector.value = savedProxy; } });
 
-    // Loading code.
+    // Button code.
     root.getElementById("ixlambda-launch").addEventListener("click", () => {
         openLink("https://" + links[root.getElementById("ixlambda-proxy-selector").value]);
     });
@@ -567,45 +611,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF || localStorage.getIte
     console.log("%cMaintained by ΦΠΒ's Owner!", "color: #89b4fa; font-size: 16px;");
     console.log("%cLovingly made by SUDO! UwU", "color: #f38ba8; font-size: 16px; font-weight: bold;");
 } else if (!document.getElementById("ixlambda-host")) {
-    var validUser = localStorage.getItem("ixlambda-valid-user");
-    if (!validUser) {
-        var userString = prompt("Please enter bypass code:");
-        if (userString) {
-            var hashResult = hashSHA256(userString).then(r)
-            validUser = (hashResult === "");
-            localStorage.setItem("ixlambda-valid-user", validUser);
-        }
-    }
-    if (validUser) {
-        alert("Validation succeeded! Please re-run the bookmark.")
-    } else {
-        // Evil code to inject! >:3
-        var htmlDataIT = `
-        <!DOCTYPE html>
-        <html lang="en">
-        	<head>
-        		<meta charset="UTF-8">
-        		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        		<title>Validation Failure</title>
-        	</head>
-        	<body>
-        		<p>Hello! You have failed the validation check.</p>
-        		<p>There is a pop-up if you fail the automatic check, and you must use a bypass password.</p>
-        		<p>This is meant to combat quicker blocking from the I.T. department</p>
-        	</body>
-        </html>
-        `;
 
-        // Eradicate page evilly!
-        document.open();
-        document.write(htmlDataIT);
-        document.close();
-
-        // Add evil console notes. >:3
-        console.log("%cGet out of the console, you are not slick.", "color: red; font-size: 24px; font-weight: bold;");
-        console.log("%cAlso, I am a few steps ahead of you.", "color: #f38ba8; font-size: 16px; font-weight: bold;")
-        console.log("%cPlease, just leave us alone...", "color: #eba0ac; font-size: 16px;");
-    }
 } else {
     // Complain about duplicates.
     alert("Another instance of IXLambda exists, please use the current instance.")
