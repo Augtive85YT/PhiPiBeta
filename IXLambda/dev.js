@@ -13,14 +13,13 @@ var links = {
     fern: `${googleAPI}fernisbest/index.html`,
     infamous: `lizard${bunnyCDN}`,
     space: `dev.desmos.live${cloudflareCDN}`,
-    gnmath: `nowayway${bunnyCDN}`,
+    gnmath: `${amazonAWS}prageru-server/mathematics.html`,
     daydreamx: `${googleAPI}daydreaming/dist/index.html`,
 
     // Backup links
     fern_01: `${amazonAWS}fernisbest/index.html`,
     infamous_01: `uhhhh${bunnyCDN}`,
     infamous_02: `another-one${bunnyCDN}`,
-    gnmath_01: `${amazonAWS}prageru-server/mathematics.html`,
     daydreamx_01: `trigonometery.is-a.software${cloudflareCDN}`,
     daydreamx_02: `space${northKazCloudflare}`
 }
