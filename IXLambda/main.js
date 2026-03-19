@@ -1,4 +1,4 @@
-// I walked on my keyboard. (Get it, because I'm a furry? No? OK. 3:)
+// Cat on keyboard, sorrtargshrsgwya.
 var cloudflareCDN = atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8="); // .cdn.cloudflare.net/
 var beanwebCloudflare = atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8="); // .beanweb.qzz.io.cdn.cloudflare.net/
 var bunnyCDN = atob("LmItY2RuLm5ldC8="); // .b-cdn.net/
@@ -12,18 +12,19 @@ var links = {
     overcloaked: `mzn8q00b${beanwebCloudflare}`,
     fern: `${googleAPI}fernisbest/index.html`,
     infamous: `lizard${bunnyCDN}`,
-    space: `dev.desmos.live${cloudflareCDN}`,
     gnmath: `${amazonAWS}prageru-server/mathematics.html`,
+    dogeub: `edu-gov-k12-school-learn-study.is-a.software${cloudflareCDN}`,
+    space: `dev.desmos.live${cloudflareCDN}`,
     daydreamx: `${googleAPI}daydreaming/dist/index.html`,
 
     // Backup links
     fern_01: `${amazonAWS}fernisbest/index.html`,
     infamous_01: `uhhhh${bunnyCDN}`,
     infamous_02: `another-one${bunnyCDN}`,
+    infamous_03: `grimmreaper${bunnyCDN}`,
     daydreamx_01: `trigonometery.is-a.software${cloudflareCDN}`,
     daydreamx_02: `space${northKazCloudflare}`
-}
-
+};
 // Developer stuff! :3
 var bypassUAF = false;
 var devTools = false;
@@ -389,7 +390,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
 
     // Theme handling.
     function setTheme(theme) {
-        themes = {
+        var themes = {
             mocha: {
                 "--ixlm-bg": "rgba(49, 50, 68, 0.9)", // Surface 0
                 "--ixlm-header": "rgba(30, 30, 46, 0.9)", // Base
@@ -406,7 +407,7 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-blur": "16px",
                 "--ixlm-anim-time": "0.3s",
                 "--ixlm-font": '"JetBrains Mono", monospace'},
-        	latte: {
+            latte: {
                 "--ixlm-bg": "rgba(204, 208, 218, 0.9)",
                 "--ixlm-header": "rgba(239, 241, 245, 0.9)",
                 "--ixlm-control-bg": "#e6e9ef",
@@ -422,7 +423,39 @@ if ((/Mac/i.test(window.navigator.userAgent) || bypassUAF) && !document.getEleme
                 "--ixlm-blur": "16px",
                 "--ixlm-anim-time": "0.3s",
                 "--ixlm-font": '"JetBrains Mono", monospace'},
-			hacker: {
+            macchiato: {
+                "--ixlm-bg": "rgba(65, 69, 89, 0.9)",
+                "--ixlm-header": "rgba(48, 52, 70, 0.9)",
+                "--ixlm-control-bg": "#292c3c",
+                "--ixlm-text": "#c6d0f5",
+                "--ixlm-accent": "#8caaee",
+                "--ixlm-accent-hover": "#babbf1",
+                "--ixlm-btn-text": "#181926",
+                "--ixlm-border": "#626880",
+                "--ixlm-min": "#e5c890",
+                "--ixlm-min-active": "#a6d189",
+                "--ixlm-close": "#e78284",
+                "--ixlm-radius": "6px",
+                "--ixlm-blur": "16px",
+                "--ixlm-anim-time": "0.3s",
+                "--ixlm-font": '"JetBrains Mono", monospace'},
+            frappe: {
+                "--ixlm-bg": "rgba(65, 69, 89, 0.9)",
+                "--ixlm-header": "rgba(48, 52, 70, 0.9)",
+                "--ixlm-control-bg": "#292c3c",
+                "--ixlm-text": "#c6d0f5",
+                "--ixlm-accent": "#8caaee",
+                "--ixlm-accent-hover": "#babbf1",
+                "--ixlm-btn-text": "#232634",
+                "--ixlm-border": "#626880",
+                "--ixlm-min": "#e5c890",
+                "--ixlm-min-active": "#a6d189",
+                "--ixlm-close": "#e78284",
+                "--ixlm-radius": "6px",
+                "--ixlm-blur": "16px",
+                "--ixlm-anim-time": "0.3s",
+                "--ixlm-font": '"JetBrains Mono", monospace'},
+            hacker: {
                 "--ixlm-bg": "#000000",
                 "--ixlm-header": "#222222",
                 "--ixlm-control-bg": "#111111",
