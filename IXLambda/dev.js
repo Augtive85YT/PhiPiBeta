@@ -13,8 +13,8 @@ var links = {
     fern: `${googleAPI}fernisbest/index.html`,
     infamous: `lizard${bunnyCDN}`,
     gnmath: `${amazonAWS}prageru-server/mathematics.html`,
-    dogeub: `edu-gov-k12-school-learn-study.is-a.software${cloudflareCDN}`,
-    space: `dev.desmos.live${cloudflareCDN}`,
+    dogeub: `BLOCKED_FIND_NEW`,
+    space: `BLOCKED_FIND_NEW`,
     daydreamx: `${googleAPI}daydreaming/dist/index.html`,
 
     // Backup links
@@ -165,7 +165,7 @@ var htmlStyles = `
 }
 
 /* ---------- BUTTONS ---------- */
-.ixlambda-btn, .ixlambda-selector {
+.ixlambda-btn, .ixlambda-selector, .ixlambda-input {
     width: 100%;
     font-size: 14px;
     padding: 10px;
@@ -280,6 +280,7 @@ var htmlStyles = `
 // HTML body data to inject.
 var htmlData = `
 ${htmlStyles}
+<iframe id="ixlambda-block-checker" src="" style="display: none;"></iframe>
 <div id="ixlambda-gui">
     <div id="ixlambda-header">
         <div class="ixlambda-sidebyside">
@@ -335,7 +336,7 @@ ${htmlStyles}
             </select>
 			<hr>
             <span class="ixlambda-description">Developer</span>
-			<p>IGNORE THIS IM SORRY I DONT HAVE TIME :sob:</p>
+			<input class="ixlambda-input">Dev Code</input>
             <hr>
             <div class="ixlambda-footer">
                 <span>Made by SUDO :3 ${ixlambdaVersion}</span>
@@ -373,6 +374,25 @@ function hashString(str) {
             (h1 >>> 0).toString(16).padStart(8, "0")
         );
     } catch (e) { return null; }
+}
+
+// Check for a block!
+function isPageBlocked(url) {
+    var iframeChecker = root.getElementById("ixlambda-block-checker");
+    iframeChecker.src = url;
+    var iframeDoc = iframeChecker.document;
+    var iterator = iframeDoc.createNodeIterator(
+        iframeDoc.documentElement,
+        NodeFilter.SHOW_COMMENT,
+        null
+    );
+    var node;
+    while (node = iterator.nextNode()) {
+        if (node.nodeValue.includes("com.apple.webcontentfilter.accessrestricted")) {
+            return true;
+        }
+    }
+    return false;
 }
 
 // Modal magic!
@@ -444,7 +464,7 @@ function openLink(link) {
     try {
         var newTab = window.open(URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" })), "_blank");
     } catch (err) {
-        console.error("Proxy launching failed:", err);
+        console.error("Link launching failed:", err);
     }
     if (!newTab) { alert("Popup Failed! 3:"); }
 }
@@ -495,235 +515,246 @@ if (!verifiedUser && !/Mac/i.test(window.navigator.userAgent) && !bypassUAF) {
 }
 
 // Main function.
-if (verifiedUser && !document.getElementById("ixlambda-host")) {
-    // Create IXLambda div.
-    var host = document.createElement("div");
-    host.id = "ixlambda-host";
-    document.body.appendChild(host);
-
-    // Spooky shadow div!
-    var root = host.attachShadow({ mode: "open" });
-
-    // Load HTML data.
-    root.innerHTML = htmlData;
-
-    // Get GUI elements.
-    var gui = root.getElementById("ixlambda-gui");
-    var header = root.getElementById("ixlambda-header");
-    var mainContent = root.getElementById("ixlambda-main-content");
-    var settingsContent = root.getElementById("ixlambda-settings-content");
-    var storageIframe = root.getElementById("ixlambda-storage-iframe");
-
-    // Minimize and close functions.
-    root.getElementById("ixlambda-minimize").addEventListener("click", () => {
-        gui.classList.toggle("ixlm-minimized");
-    });
-    root.getElementById("ixlambda-close").addEventListener("click", () => {
-        root.querySelectorAll(".ixlambda-destroy").forEach(e => e.remove());
-        if (devTools) { eruda.destroy(); }
-        document.getElementById("ixlambda-host").remove();
-    });
-
-    // Lucide implementation.
-    var lucideScript = document.createElement("script");
-    lucideScript.src = "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js";
-    lucideScript.onload = () => { lucide.createIcons({root: root}); }
-    root.appendChild(lucideScript);
-
-    // Animation stuff. (suffering!)
-    function switchPanel(showPanel, hidePanel) {
-        if (showPanel === hidePanel) return;
-        var content = showPanel.closest("#ixlambda-content");
-        if (!content) return;
-        content.style.height = content.offsetHeight + "px";
-        hidePanel.style.transition = "opacity 0.1s ease";
-        hidePanel.style.opacity = "0";
-        setTimeout(() => {
-            hidePanel.classList.add("hidden");
-            hidePanel.style.opacity = "";
-            showPanel.classList.remove("hidden");
-            showPanel.style.opacity = "0";
-            const newHeight = showPanel.scrollHeight;
-            content.style.transition = "height 0.3s cubic-bezier(.4,0,.2,1)";
-            content.style.height = newHeight + "px";
-            requestAnimationFrame(() => {
-                showPanel.style.transition = "opacity 0.1s ease";
-                showPanel.style.opacity = "1";
-            });
-            setTimeout(() => {
-                content.style.height = "";
-                content.style.transition = "";
-                showPanel.style.opacity = "";
-                hidePanel.style.transition = "";
-            }, 300);
-        }, 100);
-    }
-
-    // Setup switching buttons.
-    root.getElementById("ixlambda-settings").addEventListener("click", () => {
-        switchPanel(settingsContent, mainContent);
-    });
-    root.getElementById("ixlambda-home").addEventListener("click", () => {
-        switchPanel(mainContent, settingsContent);
-    });
-
-    // Theme handling.
-    function setTheme(theme) {
-        var themes = {
-            mocha: {
-                "--ixlm-bg": "rgba(49, 50, 68, 0.9)", // Surface 0
-                "--ixlm-header": "rgba(30, 30, 46, 0.9)", // Base
-                "--ixlm-control-bg": "#181825", // Mantle
-                "--ixlm-text": "#cdd6f4", // Text
-                "--ixlm-accent": "#89b4fa", // Blue
-                "--ixlm-accent-hover": "#b4befe", // Lavender
-                "--ixlm-btn-text": "#11111b", // Crust
-                "--ixlm-border": "#585b70", // Surface 2
-                "--ixlm-min": "#f9e2af", // Yellow
-                "--ixlm-min-active": "#a6e3a1", // Green
-                "--ixlm-close": "#f38ba8", // Red
-                "--ixlm-radius": "6px",
-                "--ixlm-blur": "16px",
-                "--ixlm-anim-time": "0.3s",
-                "--ixlm-font": '"JetBrains Mono", monospace'},
-            latte: {
-                "--ixlm-bg": "rgba(204, 208, 218, 0.9)",
-                "--ixlm-header": "rgba(239, 241, 245, 0.9)",
-                "--ixlm-control-bg": "#e6e9ef",
-                "--ixlm-text": "#4c4f69",
-                "--ixlm-accent": "#1e66f5",
-                "--ixlm-accent-hover": "#7287fd",
-                "--ixlm-btn-text": "#dce0e8",
-                "--ixlm-border": "#acb0be",
-                "--ixlm-min": "#df8e1d",
-                "--ixlm-min-active": "#40a02b",
-                "--ixlm-close": "#d20f39",
-                "--ixlm-radius": "6px",
-                "--ixlm-blur": "16px",
-                "--ixlm-anim-time": "0.3s",
-                "--ixlm-font": '"JetBrains Mono", monospace'},
-            macchiato: {
-                "--ixlm-bg": "rgba(65, 69, 89, 0.9)",
-                "--ixlm-header": "rgba(48, 52, 70, 0.9)",
-                "--ixlm-control-bg": "#292c3c",
-                "--ixlm-text": "#c6d0f5",
-                "--ixlm-accent": "#8caaee",
-                "--ixlm-accent-hover": "#babbf1",
-                "--ixlm-btn-text": "#181926",
-                "--ixlm-border": "#626880",
-                "--ixlm-min": "#e5c890",
-                "--ixlm-min-active": "#a6d189",
-                "--ixlm-close": "#e78284",
-                "--ixlm-radius": "6px",
-                "--ixlm-blur": "16px",
-                "--ixlm-anim-time": "0.3s",
-                "--ixlm-font": '"JetBrains Mono", monospace'},
-            frappe: {
-                "--ixlm-bg": "rgba(65, 69, 89, 0.9)",
-                "--ixlm-header": "rgba(48, 52, 70, 0.9)",
-                "--ixlm-control-bg": "#292c3c",
-                "--ixlm-text": "#c6d0f5",
-                "--ixlm-accent": "#8caaee",
-                "--ixlm-accent-hover": "#babbf1",
-                "--ixlm-btn-text": "#232634",
-                "--ixlm-border": "#626880",
-                "--ixlm-min": "#e5c890",
-                "--ixlm-min-active": "#a6d189",
-                "--ixlm-close": "#e78284",
-                "--ixlm-radius": "6px",
-                "--ixlm-blur": "16px",
-                "--ixlm-anim-time": "0.3s",
-                "--ixlm-font": '"JetBrains Mono", monospace'},
-            hacker: {
-                "--ixlm-bg": "#000000",
-                "--ixlm-header": "#222222",
-                "--ixlm-control-bg": "#111111",
-                "--ixlm-text": "#00ff00",
-                "--ixlm-accent": "#00ff00",
-                "--ixlm-accent-hover": "#55ff55",
-                "--ixlm-btn-text": "#000000",
-                "--ixlm-border": "#00ff00",
-                "--ixlm-min": "#ffff00",
-                "--ixlm-min-active": "#00ff00",
-                "--ixlm-close": "#ff0000",
-                "--ixlm-radius": "3px",
-                "--ixlm-blur": "0px",
-                "--ixlm-anim-time": "0.2s",
-                "--ixlm-font": '"JetBrains Mono", monospace'}
-        };
-
-        // Find correct theme.
-        Object.entries(themes[theme]).forEach(([key, value]) => {
-            gui.style.setProperty(key, value);
-        });
-    }
-
-    // Saved theme.
-    var themeSelector = root.getElementById("ixlambda-theme-selector");
-    themeSelector.onchange = ()=> {
-        var theme = themeSelector.value;
-        setTheme(theme);
-        localStorage.setItem("ixlambda-theme", theme);
-    };
-    var savedTheme = localStorage.getItem("ixlambda-theme");
-    if (savedTheme) { setTheme(savedTheme); themeSelector.value = savedTheme; } }
-
-    // Saved proxy.
-    var proxySelector = root.getElementById("ixlambda-proxy-selector");
-    proxySelector.onchange = ()=> {
-        var proxy = proxySelector.value;
-        localStorage.setItem("ixlambda-proxy", proxy);
-    };
-    var savedProxy = localStorage.getItem("ixlambda-proxy");
-    if (savedProxy) { proxySelector.value = savedProxy; }
-
-    // Button code.
-    root.getElementById("ixlambda-launch").addEventListener("click", () => {
-        openLink("https://" + links[root.getElementById("ixlambda-proxy-selector").value]);
-    });
-    root.getElementById("ixlambda-scriptix-launch").addEventListener("click", () => {
-        var script = document.createElement("script");
-        script.src = "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/Bookmarklet%20Manager/main.js";
-        document.head.appendChild(script);
-    });
-
-    // Movement variables.
-    var dragging = false;
-    var offsetX = 0;
-    var offsetY = 0;
-
-    // Movement logic.
-    header.addEventListener("pointerdown", e => {
-        dragging = true;
-        offsetX = e.clientX - gui.offsetLeft;
-        offsetY = e.clientY - gui.offsetTop;
-        header.style.cursor = "move";
-    });
-    document.addEventListener("pointermove", e => {
-        if (!dragging) return;
-        gui.style.left = (e.clientX - offsetX) + "px";
-        gui.style.top = (e.clientY - offsetY) + "px";
-    });
-    document.addEventListener("pointerup", () => {
-        dragging = false;
-        header.style.cursor = "";
-    });
-
-    // Initialize Eruda dev tools.
-    if (devTools) {
-        var erudaScript = document.createElement("script");
-        erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
-        erudaScript.className = "ixlambda-destroy";
-        erudaScript.onload = () => { eruda.init(); }
-        document.head.appendChild(erudaScript);
-    }
-
-    // Add silly console notes.
-    console.log("%cIXLambda loaded successfully! :3", "color: #74c7ec; font-size: 24px; font-weight: bold;");
-    console.log("%cMaintained by ΦΠΒ's Owner!", "color: #89b4fa; font-size: 16px;");
-    console.log("%cLovingly made by SUDO! UwU", "color: #f38ba8; font-size: 16px; font-weight: bold;");
-} else {
+if (verifiedUser && document.getElementById("ixlambda-host")) {
     // Complain about duplicates.
     alert("Another instance of IXLambda exists, please use the current instance.")
     console.log("%cAnother instance of IXLambda exists, please use the current instance.", "color: #89b4fa; font-size: 16px;");
+    throw "IXLAMBDA-FORCE-END";
 }
+
+// Create IXLambda div.
+var host = document.createElement("div");
+host.id = "ixlambda-host";
+document.body.appendChild(host);
+
+// Spooky shadow div!
+var root = host.attachShadow({ mode: "open" });
+
+// Load HTML data.
+root.innerHTML = htmlData;
+
+// Get GUI elements.
+var gui = root.getElementById("ixlambda-gui");
+var header = root.getElementById("ixlambda-header");
+var mainContent = root.getElementById("ixlambda-main-content");
+var settingsContent = root.getElementById("ixlambda-settings-content");
+var storageIframe = root.getElementById("ixlambda-storage-iframe");
+
+// Minimize and close functions.
+root.getElementById("ixlambda-minimize").addEventListener("click", () => {
+    gui.classList.toggle("ixlm-minimized");
+});
+root.getElementById("ixlambda-close").addEventListener("click", () => {
+    root.querySelectorAll(".ixlambda-destroy").forEach(e => e.remove());
+    if (devTools) { eruda.destroy(); }
+    document.getElementById("ixlambda-host").remove();
+});
+
+// Lucide implementation.
+var lucideScript = document.createElement("script");
+lucideScript.src = "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js";
+lucideScript.onload = () => { lucide.createIcons({root: root}); }
+root.appendChild(lucideScript);
+
+// Animation stuff. (suffering!)
+function switchPanel(showPanel, hidePanel) {
+    if (showPanel === hidePanel) return;
+    var content = showPanel.closest("#ixlambda-content");
+    if (!content) return;
+    content.style.height = content.offsetHeight + "px";
+    hidePanel.style.transition = "opacity 0.1s ease";
+    hidePanel.style.opacity = "0";
+    setTimeout(() => {
+        hidePanel.classList.add("hidden");
+        hidePanel.style.opacity = "";
+        showPanel.classList.remove("hidden");
+        showPanel.style.opacity = "0";
+        var newHeight = showPanel.scrollHeight;
+        content.style.transition = "height 0.3s cubic-bezier(.4,0,.2,1)";
+        content.style.height = newHeight + "px";
+        requestAnimationFrame(() => {
+            showPanel.style.transition = "opacity 0.1s ease";
+            showPanel.style.opacity = "1";
+        });
+        setTimeout(() => {
+            content.style.height = "";
+            content.style.transition = "";
+            showPanel.style.opacity = "";
+            hidePanel.style.transition = "";
+        }, 300);
+    }, 100);
+}
+
+// Setup switching buttons.
+root.getElementById("ixlambda-settings").addEventListener("click", () => {
+    switchPanel(settingsContent, mainContent);
+});
+root.getElementById("ixlambda-home").addEventListener("click", () => {
+    switchPanel(mainContent, settingsContent);
+});
+
+// Theme handling.
+function setTheme(theme) {
+    var themes = {
+        mocha: {
+            "--ixlm-bg": "rgba(49, 50, 68, 0.9)", // Surface 0
+            "--ixlm-header": "rgba(30, 30, 46, 0.9)", // Base
+            "--ixlm-control-bg": "#181825", // Mantle
+            "--ixlm-text": "#cdd6f4", // Text
+            "--ixlm-accent": "#89b4fa", // Blue
+            "--ixlm-accent-hover": "#b4befe", // Lavender
+            "--ixlm-btn-text": "#11111b", // Crust
+            "--ixlm-border": "#585b70", // Surface 2
+            "--ixlm-min": "#f9e2af", // Yellow
+            "--ixlm-min-active": "#a6e3a1", // Green
+            "--ixlm-close": "#f38ba8", // Red
+            "--ixlm-radius": "6px",
+            "--ixlm-round-radius": "100px",
+            "--ixlm-circle-radius": "50%",
+            "--ixlm-blur": "16px",
+            "--ixlm-anim-time": "0.3s",
+            "--ixlm-font": '"JetBrains Mono", monospace'},
+        latte: {
+            "--ixlm-bg": "rgba(204, 208, 218, 0.9)",
+            "--ixlm-header": "rgba(239, 241, 245, 0.9)",
+            "--ixlm-control-bg": "#e6e9ef",
+            "--ixlm-text": "#4c4f69",
+            "--ixlm-accent": "#1e66f5",
+            "--ixlm-accent-hover": "#7287fd",
+            "--ixlm-btn-text": "#dce0e8",
+            "--ixlm-border": "#acb0be",
+            "--ixlm-min": "#df8e1d",
+            "--ixlm-min-active": "#40a02b",
+            "--ixlm-close": "#d20f39",
+            "--ixlm-radius": "6px",
+            "--ixlm-round-radius": "100px",
+            "--ixlm-circle-radius": "50%",
+            "--ixlm-blur": "16px",
+            "--ixlm-anim-time": "0.3s",
+            "--ixlm-font": '"JetBrains Mono", monospace'},
+        macchiato: {
+            "--ixlm-bg": "rgba(54, 58, 79, 0.9)",
+            "--ixlm-header": "rgba(36, 39, 58, 0.9)",
+            "--ixlm-control-bg": "#1e2030",
+            "--ixlm-text": "#cad3f5",
+            "--ixlm-accent": "#ed8796",
+            "--ixlm-accent-hover": "#ee99a0",
+            "--ixlm-btn-text": "#181926",
+            "--ixlm-border": "#626880",
+            "--ixlm-min": "#eed49f",
+            "--ixlm-min-active": "#a6da95",
+            "--ixlm-close": "#ed8796",
+            "--ixlm-radius": "6px",
+            "--ixlm-round-radius": "100px",
+            "--ixlm-circle-radius": "50%",
+            "--ixlm-blur": "16px",
+            "--ixlm-anim-time": "0.3s",
+            "--ixlm-font": '"JetBrains Mono", monospace'},
+        frappe: {
+            "--ixlm-bg": "rgba(65, 69, 89, 0.9)",
+            "--ixlm-header": "rgba(48, 52, 70, 0.9)",
+            "--ixlm-control-bg": "#292c3c",
+            "--ixlm-text": "#c6d0f5",
+            "--ixlm-accent": "#ca9ee6",
+            "--ixlm-accent-hover": "#f4b8e4",
+            "--ixlm-btn-text": "#232634",
+            "--ixlm-border": "#626880",
+            "--ixlm-min": "#e5c890",
+            "--ixlm-min-active": "#a6d189",
+            "--ixlm-close": "#e78284",
+            "--ixlm-radius": "6px",
+            "--ixlm-round-radius": "100px",
+            "--ixlm-circle-radius": "50%",
+            "--ixlm-blur": "16px",
+            "--ixlm-anim-time": "0.3s",
+            "--ixlm-font": '"JetBrains Mono", monospace'},
+        hacker: {
+            "--ixlm-bg": "#000000",
+            "--ixlm-header": "#222222",
+            "--ixlm-control-bg": "#111111",
+            "--ixlm-text": "#00ff00",
+            "--ixlm-accent": "#00ff00",
+            "--ixlm-accent-hover": "#55ff55",
+            "--ixlm-btn-text": "#000000",
+            "--ixlm-border": "#00ff00",
+            "--ixlm-min": "#999999",
+            "--ixlm-min-active": "#00ff00",
+            "--ixlm-close": "#ff0000",
+            "--ixlm-radius": "3px",
+            "--ixlm-round-radius": "0",
+            "--ixlm-circle-radius": "0",
+            "--ixlm-blur": "0",
+            "--ixlm-anim-time": "0.1s",
+            "--ixlm-font": '"JetBrains Mono", monospace'}
+    };
+
+    // Find correct theme.
+    Object.entries(themes[theme]).forEach(([key, value]) => {
+        gui.style.setProperty(key, value);
+    });
+}
+
+// Saved theme.
+var themeSelector = root.getElementById("ixlambda-theme-selector");
+    themeSelector.onchange = ()=> {
+    var theme = themeSelector.value;
+    setTheme(theme);
+    localStorage.setItem("ixlambda-theme", theme);
+};
+var savedTheme = localStorage.getItem("ixlambda-theme");
+if (savedTheme) { setTheme(savedTheme); themeSelector.value = savedTheme; }
+
+// Saved proxy.
+var proxySelector = root.getElementById("ixlambda-proxy-selector");
+proxySelector.onchange = ()=> {
+    var proxy = proxySelector.value;
+    localStorage.setItem("ixlambda-proxy", proxy);
+};
+var savedProxy = localStorage.getItem("ixlambda-proxy");
+if (savedProxy) { proxySelector.value = savedProxy; }
+
+// Button code.
+root.getElementById("ixlambda-launch").addEventListener("click", () => {
+    openLink("https://" + links[root.getElementById("ixlambda-proxy-selector").value]);
+});
+root.getElementById("ixlambda-scriptix-launch").addEventListener("click", () => {
+    var script = document.createElement("script");
+    script.src = "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/Bookmarklet%20Manager/main.js";
+    document.head.appendChild(script);
+});
+
+// Movement variables.
+var dragging = false;
+var offsetX = 0;
+var offsetY = 0;
+
+// Movement logic.
+header.addEventListener("pointerdown", e => {
+    dragging = true;
+    offsetX = e.clientX - gui.offsetLeft;
+    offsetY = e.clientY - gui.offsetTop;
+    header.style.cursor = "move";
+    });
+document.addEventListener("pointermove", e => {
+    if (!dragging) return;
+    gui.style.left = (e.clientX - offsetX) + "px";
+    gui.style.top = (e.clientY - offsetY) + "px";
+});
+document.addEventListener("pointerup", () => {
+    dragging = false;
+    header.style.cursor = "";
+});
+
+// Initialize Eruda dev tools.
+if (devTools) {
+    var erudaScript = document.createElement("script");
+    erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
+    erudaScript.className = "ixlambda-destroy";
+    erudaScript.onload = () => { eruda.init(); }
+    document.head.appendChild(erudaScript);
+}
+
+// Add silly console notes.
+console.log("%cIXLambda loaded successfully! :3", "color: #74c7ec; font-size: 24px; font-weight: bold;");
+console.log("%cMaintained by ΦΠΒ's Owner!", "color: #89b4fa; font-size: 16px;");
+console.log("%cLovingly made by SUDO! UwU", "color: #f38ba8; font-size: 16px; font-weight: bold;");
