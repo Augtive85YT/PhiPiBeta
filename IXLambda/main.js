@@ -449,6 +449,7 @@ function openLink(link) {
         <html lang="en">
           <head>
             <title>IXLambda</title>
+            <link rel="icon" href="https://raw.githubusercontent.com/Augtive85YT/PhiPiBeta/main/IXLambda/assets/img/ixlambda-favicon.png">
             ${devTools ? "" : `
             <script>
                 if (window.eruda) { eruda.destroy(); }
