@@ -204,6 +204,11 @@ var htmlStyles = `
     width: calc(100% - 20px);
 }
 
+.ixlambda-input::placeholder {
+  color: var(--ixlm-text);
+  opacity: 1;
+}
+
 /* ---------- MODALS ---------- */
 .ixlm-modal {
   position: absolute;
@@ -340,7 +345,10 @@ ${htmlStyles}
             </select>
 			<hr>
             <span class="ixlambda-description">Developer</span>
-			<input id="ixlambda-dev-input" class="ixlambda-input" placeholder="Dev Code...">
+			<div class="ixlambda-sidebyside">
+				<input id="ixlambda-dev-input" class="ixlambda-input" placeholder="Dev Code...">
+				<button id="ixlambda-dev-enter" class="ixlambda-btn ixlambda-half">Enter</button>
+			</div>
             <hr>
             <div class="ixlambda-footer">
                 <span>Made by SUDO :3 ${ixlambdaVersion}</span>
