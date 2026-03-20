@@ -11,7 +11,7 @@ var links = {
     // Main links.
     overcloaked: `mzn8q00b${beanwebCloudflare}`,
     fern: `${googleAPI}fernisbest/index.html`,
-    infamous: `lizard${bunnyCDN}`,
+    infamous: `BLOCKED_FIND_NEW`,
     gnmath: `${amazonAWS}prageru-server/mathematics.html`,
     dogeub: `BLOCKED_FIND_NEW`,
     space: `BLOCKED_FIND_NEW`,
@@ -19,9 +19,6 @@ var links = {
 
     // Backup links
     fern_01: `${amazonAWS}fernisbest/index.html`,
-    infamous_01: `uhhhh${bunnyCDN}`,
-    infamous_02: `another-one${bunnyCDN}`,
-    infamous_03: `grimmreaper${bunnyCDN}`,
     daydreamx_01: `trigonometery.is-a.software${cloudflareCDN}`,
     daydreamx_02: `space${northKazCloudflare}`
 };
@@ -308,9 +305,9 @@ ${htmlStyles}
             <span class="ixlambda-description">Proxy Loader</span>
             <div class="ixlambda-sidebyside">
                 <select id="ixlambda-proxy-selector" class="ixlambda-selector">
-                    <option value="overcloaked">OverCloaked</option>
+                    <option value="overcloaked">OverCloaked SORRY DOES NOT WORK</option>
                     <option value="fern">Fern</option>
-                    <option value="infamous">Infamous</option>
+                    <option disabled value="infamous">Infamous</option>
                     <option value="gnmath">GN-Math</option>
                     <option disabled value="dogeub">DogeUB</option>
                     <option disabled value="space">Space</option>
