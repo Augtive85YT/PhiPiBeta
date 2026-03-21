@@ -5,7 +5,7 @@ We have been fed up with blocking and filters for long enough, so we created **I
 Links to individual READMEs are below, along with icons and descriptions.
 
 ## Passwords
-Due tO us deciding this operation should be private we've put a passwords on both our programs, IXLambda and Scriptix, so if you must run it you either need to get the code from SUDO or me. This was made to protect our programs, so please do not hate us for this change. (Also because We wanted to learn cryptography)
+Due to us deciding this operation should be private we've put a passwords on both our programs, IXLambda and Scriptix, so if you must run it you either need to get the code from SUDO or me. This was made to protect our programs, so please do not hate us for this change. (Also because We wanted to learn cryptography)
 
 Thank you, The Owners of ΦΠΒ
 
