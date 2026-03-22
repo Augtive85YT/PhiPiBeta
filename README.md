@@ -5,7 +5,7 @@ We have been fed up with blocking and filters for long enough, so we created **I
 Links to individual READMEs are below, along with icons and descriptions.
 
 ## Passwords
-We have decided our organization should be private, thus we have put a passwords on both our products, IXLambda* and Scriptix. If you need it you must get the code from SUDO or TEDA. This was made to protect our products from bad actors, so we apologize do not hate us for this change.
+We have decided our organization should be private, thus we have put a passwords on both our products, IXLambda* and Scriptix. If you need it you must get the code from SUDO or TEDA. This was made to protect our products from bad actors, so we apologize and hope you do not hate us for our decision.
 
 Thank you, the owners of ΦΠΒ.
 
