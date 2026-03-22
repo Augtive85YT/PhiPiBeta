@@ -5,9 +5,11 @@ We have been fed up with blocking and filters for long enough, so we created **I
 Links to individual READMEs are below, along with icons and descriptions.
 
 ## Passwords
-Due to us deciding this operation should be private we've put a passwords on both our programs, IXLambda and Scriptix, so if you must run it you either need to get the code from SUDO or me. This was made to protect our programs, so please do not hate us for this change. (Also because We wanted to learn cryptography)
+We have decided our organization should be private, thus we have put a passwords on both our products, IXLambda* and Scriptix. If you need it you must get the code from SUDO or TEDA. This was made to protect our products from bad actors, so we apologize do not hate us for this change.
 
-Thank you, The Owners of ΦΠΒ
+Thank you, the owners of ΦΠΒ.
+
+<sup><sub>\*IXLambda has been password locked for computers and non-iPad devices only.</sub></sup>
 
 ***
 
