@@ -31,7 +31,7 @@ var links = {
 // Developer stuff! :3
 var bypassUAF = false;
 var devTools = false;
-var ixlambdaVersion = "v3.2.1";
+var ixlambdaVersion = "v3.5.1";
 
 // HTML body data to inject.
 var htmlData = `
@@ -211,6 +211,12 @@ var htmlData = `
     border: none;
 }
 
+.ixlambda-surface {
+    background: var(--ixlm-surface);
+    border-radius: var(--ixlm-radius);
+    padding: 8px;
+}
+
 #ixlambda-layout span {
     display: block;
     margin: 8px 0;
@@ -269,7 +275,7 @@ var htmlData = `
 }
 
 .ixlambda-input::placeholder {
-  color: var(--ixlm-text);
+  color: var(--ixlm-btn-text);
   opacity: 1;
 }
 
@@ -367,9 +373,13 @@ var htmlData = `
         </div>
         <div id="ixlambda-content">
             <div id="ixlambda-home-page" class="ixlambda-panel">
-                <!--<iframe src="https://augtive85yt-github-io.translate.goog/phipibeta/ixlambda-iframe.html?_x_tr_sl=en&_x_tr_tl=de&t=${Date.now()}" width="100%" height="100%"></iframe>-->
-                <!--<iframe id="ixlambda-news-iframe" srcdoc="" width="100%" height="100%"></iframe>-->
-                <span>Sorry about a few bugs here and there, I had to implement a huge overhaul in 2 days. :sob:</span>
+                <div class="ixlambda-surface">
+                    <!--<iframe src="https://augtive85yt-github-io.translate.goog/phipibeta/ixlambda-iframe.html?_x_tr_sl=en&_x_tr_tl=de&t=${Date.now()}" width="100%" height="100%"></iframe>-->
+                    <!--<iframe id="ixlambda-news-iframe" srcdoc="" width="100%" height="100%"></iframe>-->
+                    <span style="font-size: 24px">Sorry about a few bugs here and there, I had to implement a huge overhaul in 2 days. :sob:</span>
+                    <br>
+                    <span>P.S. (It looks bad right now, but I swear I will fix it! :< )</span>
+                </div>
             </div>
             <div id="ixlambda-proxies-page" class="ixlambda-panel hidden">
                 <span class="ixlambda-description">Freedom is a universal right.</span>
@@ -391,10 +401,6 @@ var htmlData = `
                 <hr>
                 <span class="ixlambda-description">Javascript Loader</span>
                 <button id="ixlambda-scriptix-launch" class="ixlambda-btn">Launch Scriptix</button>
-                <hr>
-                <div class="ixlambda-footer">
-                    <span>Made by SUDO :3 ${ixlambdaVersion}</span>
-                </div>
             </div>
             <div id="ixlambda-settings-page" class="ixlambda-panel hidden">
                 <span class="ixlambda-description">Settings</span>
@@ -408,16 +414,19 @@ var htmlData = `
                     <option value="hacker">Pro Haxxor</option>
                     <option value="ai">AI Generated</option>
                 </select>
+                <hr>
+                <span class="ixlambda-description">Data [CURRENTLY UNFINISHED]</span>
+		    	<div class="ixlambda-parallel">
+		    	    <button id="ixlambda-export-data" class="ixlambda-btn">Export Data</button>
+		    	    <button id="ixlambda-import-data" class="ixlambda-btn">Import Data</button>
+		    	    <button id="ixlambda-import-data" class="ixlambda-btn">Clear Data</button>
+		    	</div>
 		    	<hr>
-                <span class="ixlambda-description">Developer</span>
+                <span class="ixlambda-description">Developer [CURRENTLY UNFINISHED]</span>
 		    	<div class="ixlambda-parallel">
 		    		<input id="ixlambda-dev-input" class="ixlambda-input" placeholder="Dev Code...">
 		    		<button id="ixlambda-dev-enter" class="ixlambda-btn ixlambda-half">Enter</button>
 		    	</div>
-                <hr>
-                <div class="ixlambda-footer">
-                    <span>Made by SUDO :3 ${ixlambdaVersion}</span>
-                </div>            
             </div>
         </div>
     </div>
@@ -640,9 +649,9 @@ sideBarButtons.forEach((el) => {
     el.onclick = () => {
         sideBarButtons.forEach((button) => button.classList.remove("active"));
         el.classList.add("active");
-
         root.querySelectorAll(".ixlambda-panel").forEach((panel) => panel.classList.add("hidden"));
         root.getElementById(`ixlambda-${el.value}-page`).classList.remove("hidden");
+        localStorage.setItem("ixlambda-page", el.value);
     };
 });
 
@@ -681,8 +690,8 @@ var newsHTMLData = `
 function setTheme(theme) {
     var themes = {
         mocha: {
-            "--ixlm-bg": "rgba(49, 50, 68, 0.9)", // Surface 0
-            "--ixlm-header": "rgba(30, 30, 46, 0.9)", // Base
+            "--ixlm-bg": "rgba(49, 50, 68, 0.6)", // Surface 0
+            "--ixlm-header": "rgba(30, 30, 46, 0.6)", // Base
             "--ixlm-control-bg": "#181825", // Mantle
             "--ixlm-text": "#cdd6f4", // Text
             "--ixlm-accent": "#89b4fa", // Blue
@@ -690,6 +699,7 @@ function setTheme(theme) {
             "--ixlm-btn-text": "#11111b", // Crust
             "--ixlm-border": "#585b70", // Surface 2
             "--ixlm-contrast": "#585b70", // Surface 2
+            "--ixlm-surface": "rgba(88, 91, 112, 0.4)", // Surface 2
             "--ixlm-min": "#f9e2af", // Yellow
             "--ixlm-min-active": "#a6e3a1", // Green
             "--ixlm-close": "#f38ba8", // Red
@@ -700,8 +710,8 @@ function setTheme(theme) {
             "--ixlm-anim-time": "0.3s",
             "--ixlm-font": '"JetBrains Mono", monospace'},
         latte: {
-            "--ixlm-bg": "rgba(204, 208, 218, 0.9)",
-            "--ixlm-header": "rgba(239, 241, 245, 0.9)",
+            "--ixlm-bg": "rgba(204, 208, 218, 0.6)",
+            "--ixlm-header": "rgba(239, 241, 245, 0.6)",
             "--ixlm-control-bg": "#e6e9ef",
             "--ixlm-text": "#4c4f69",
             "--ixlm-accent": "#1e66f5",
@@ -709,6 +719,7 @@ function setTheme(theme) {
             "--ixlm-btn-text": "#dce0e8",
             "--ixlm-border": "#acb0be",
             "--ixlm-contrast": "#acb0be",
+            "--ixlm-surface": "rgba(172, 176, 198, 0.4)",
             "--ixlm-min": "#df8e1d",
             "--ixlm-min-active": "#40a02b",
             "--ixlm-close": "#d20f39",
@@ -719,8 +730,8 @@ function setTheme(theme) {
             "--ixlm-anim-time": "0.3s",
             "--ixlm-font": '"JetBrains Mono", monospace'},
         macchiato: {
-            "--ixlm-bg": "rgba(54, 58, 79, 0.9)",
-            "--ixlm-header": "rgba(36, 39, 58, 0.9)",
+            "--ixlm-bg": "rgba(54, 58, 79, 0.6)",
+            "--ixlm-header": "rgba(36, 39, 58, 0.6)",
             "--ixlm-control-bg": "#1e2030",
             "--ixlm-text": "#cad3f5",
             "--ixlm-accent": "#ed8796",
@@ -728,6 +739,7 @@ function setTheme(theme) {
             "--ixlm-btn-text": "#181926",
             "--ixlm-border": "#626880",
             "--ixlm-contrast": "#626880",
+            "--ixlm-surface": "rgba(98, 104, 128, 0.4)",
             "--ixlm-min": "#eed49f",
             "--ixlm-min-active": "#a6da95",
             "--ixlm-close": "#ed8796",
@@ -738,8 +750,8 @@ function setTheme(theme) {
             "--ixlm-anim-time": "0.3s",
             "--ixlm-font": '"JetBrains Mono", monospace'},
         frappe: {
-            "--ixlm-bg": "rgba(65, 69, 89, 0.9)",
-            "--ixlm-header": "rgba(48, 52, 70, 0.9)",
+            "--ixlm-bg": "rgba(65, 69, 89, 0.6)",
+            "--ixlm-header": "rgba(48, 52, 70, 0.6)",
             "--ixlm-control-bg": "#292c3c",
             "--ixlm-text": "#c6d0f5",
             "--ixlm-accent": "#ca9ee6",
@@ -747,6 +759,7 @@ function setTheme(theme) {
             "--ixlm-btn-text": "#232634",
             "--ixlm-border": "#626880",
             "--ixlm-contrast": "#626880",
+            "--ixlm-surface": "rgba(98, 104, 128, 0.4)",
             "--ixlm-min": "#e5c890",
             "--ixlm-min-active": "#a6d189",
             "--ixlm-close": "#e78284",
@@ -766,6 +779,7 @@ function setTheme(theme) {
             "--ixlm-btn-text": "#000000",
             "--ixlm-border": "#00ff00",
             "--ixlm-contrast": "#999999",
+            "--ixlm-surface": "rgba(153, 153, 153, 0.4)",
             "--ixlm-min": "#999999",
             "--ixlm-min-active": "#00ff00",
             "--ixlm-close": "#ff0000",
@@ -785,6 +799,7 @@ function setTheme(theme) {
             "--ixlm-btn-text": "#020617",
             "--ixlm-border": "#334155",
             "--ixlm-contrast": "#334155",
+            "--ixlm-surface": "rgba(51, 65, 85, 0.4)",
             "--ixlm-min": "#facc15",
             "--ixlm-min-active": "#4ade80",
             "--ixlm-close": "#fb7185",
@@ -812,6 +827,15 @@ themeSelector.onchange = ()=> {
 };
 var savedTheme = localStorage.getItem("ixlambda-theme");
 if (savedTheme) { setTheme(savedTheme); themeSelector.value = savedTheme; }
+
+// Saved page.
+var savedPage = localStorage.getItem("ixlambda-page");
+if (savedPage) {
+    sideBarButtons.forEach((button) => button.classList.remove("active"));
+    root.getElementById(`ixlambda-nav-${savedPage}`).classList.add("active");
+    root.querySelectorAll(".ixlambda-panel").forEach((panel) => panel.classList.add("hidden"));
+    root.getElementById(`ixlambda-${savedPage}-page`).classList.remove("hidden");
+}
 
 // Saved proxy.
 var proxySelector = root.getElementById("ixlambda-proxy-selector");
