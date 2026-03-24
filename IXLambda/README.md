@@ -1,7 +1,7 @@
 <p align="center">
   <img src="assets/img/ixlambda-favicon.png" width="200" alt="IXLambda Icon" style="centered"></img>
   <br>
-  <img src="https://img.shields.io/badge/version-v3.1%20-89b4fa?style=for-the-badge">
+  <img src="https://img.shields.io/badge/version-v3.5.3%20-89b4fa?style=for-the-badge">
   <img src="https://img.shields.io/github/stars/Augtive85YT/PhiPiBeta?color=b4befe&style=for-the-badge">
 </p>
 
