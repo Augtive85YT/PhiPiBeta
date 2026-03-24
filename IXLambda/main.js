@@ -32,7 +32,7 @@ const links = {
 // Developer stuff! :3
 const bypassUAF = false;
 const devTools = false;
-const ixlmVersion = "v3.5.1";
+const ixlmVersion = "v3.5.3";
 
 const themeBase = {
     "--ixlm-radius": "6px",
