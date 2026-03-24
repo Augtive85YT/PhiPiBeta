@@ -1,43 +1,157 @@
+(() => {
 // Cat on keyboard, sorrtargshrsgwya.
-var cloudflareCDN = atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8="); // .cdn.cloudflare.net/
-var beanwebCloudflare = atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8="); // .beanweb.qzz.io.cdn.cloudflare.net/
-var bunnyCDN = atob("LmItY2RuLm5ldC8="); // .b-cdn.net/
-var northKazCloudflare = atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv"); // .info.north-kazakhstan.su.cdn.cloudflare.net/
-var amazonAWS = atob("czMuYW1hem9uYXdzLmNvbS8="); // s3.amazonaws.com/
-var googleAPI = atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS8=" ); // storage.googleapis.com/
+const cloudflareCDN = atob("LmNkbi5jbG91ZGZsYXJlLm5ldC8="); // .cdn.cloudflare.net/
+const beanwebCloudflare = atob("LmJlYW53ZWIucXp6LmlvLmNkbi5jbG91ZGZsYXJlLm5ldC8="); // .beanweb.qzz.io.cdn.cloudflare.net/
+const bunnyCDN = atob("LmItY2RuLm5ldC8="); // .b-cdn.net/
+const northKazCloudflare = atob("LmluZm8ubm9ydGgta2F6YWtoc3Rhbi5zdS5jZG4uY2xvdWRmbGFyZS5uZXQv"); // .info.north-kazakhstan.su.cdn.cloudflare.net/
+const amazonAWS = atob("czMuYW1hem9uYXdzLmNvbS8="); // s3.amazonaws.com/
+const googleAPI = atob("c3RvcmFnZS5nb29nbGVhcGlzLmNvbS8=" ); // storage.googleapis.com/
 
 // Some stuff I think?
-var links = {
+const links = {
     // Main links.
-    overcloaked: `overunder1${bunnyCDN}`,
+    overcloaked: `overunder2${bunnyCDN}`,
     fern: `${googleAPI}fernisbest/index.html`, // Block this and I'll sell your soul.
     infamous: `${atob("c2Nob29sb2d5LmNvbS5uYXJiYWhhZHVyY2hhdWRoYXJ5LmNvbS5ucC8=")}`,
     gnmath: `prageru-server.${amazonAWS}mathematics.html`,
-    endis: `ac371r8r.ajh.quest${cloudflareCDN}`,
-    space: `BLOCKED_FIND_NEW`,
+    endis: `BLOCKED`,
     dogeub: `canvas-lms.${googleAPI}index.html`,
-    frogiesarcade: `${atob("cGhpLmJ6")}`,
+    space: `BLOCKED`,
+    frogiesarcade: `BLOCKED`,
     daydreamx: `${googleAPI}daydreaming/dist/index.html`,
 
     // Backup links
     overcloaked_1: `mzn8q00b${beanwebCloudflare}`,
-    overcloaked_2: `overunder2${bunnyCDN}`,
-    overcloaked_3: `overunder3${bunnyCDN}`,
+    overcloaked_2: `overunder3${bunnyCDN}`,
+    overcloaked_3: `overunder4${bunnyCDN}`,
     fern_01: `${atob("aGVscC5yZXNlYXJjaC5saWdodHNwZWUuZC50cmlidW1hdGVybmF0ZS5jbC8=")}`,
     daydreamx_01: `trigonometery.is-a.software${cloudflareCDN}`,
     daydreamx_02: `space${northKazCloudflare}`
 };
 
 // Developer stuff! :3
-var bypassUAF = false;
-var devTools = false;
-var ixlambdaVersion = "v3.5.1";
+const bypassUAF = false;
+const devTools = false;
+const ixlmVersion = "v3.5.1";
+
+const themeBase = {
+    "--ixlm-radius": "6px",
+    "--ixlm-round-radius": "100px",
+    "--ixlm-circle-radius": "50%",
+    "--ixlm-blur": "16px",
+    "--ixlm-anim-time": "0.3s",
+    "--ixlm-font": '"JetBrains Mono", monospace'
+};
+
+const themes = {
+    mocha: {
+        ...themeBase,
+        "--ixlm-bg": "rgba(49, 50, 68, 0.6)", // Surface 0
+        "--ixlm-header": "rgba(30, 30, 46, 0.6)", // Base
+        "--ixlm-control-bg": "#181825", // Mantle
+        "--ixlm-text": "#cdd6f4", // Text
+        "--ixlm-accent": "#89b4fa", // Blue
+        "--ixlm-accent-hover": "#b4befe", // Lavender
+        "--ixlm-btn-text": "#11111b", // Crust
+        "--ixlm-border": "#585b70", // Surface 2
+        "--ixlm-contrast": "#585b70", // Surface 2
+        "--ixlm-surface": "rgba(88, 91, 112, 0.4)", // Surface 2
+        "--ixlm-min": "#f9e2af", // Yellow
+        "--ixlm-min-active": "#a6e3a1", // Green
+        "--ixlm-close": "#f38ba8" // Red
+    },
+    latte: {
+        ...themeBase,
+        "--ixlm-bg": "rgba(204, 208, 218, 0.6)",
+        "--ixlm-header": "rgba(239, 241, 245, 0.6)",
+        "--ixlm-control-bg": "#e6e9ef",
+        "--ixlm-text": "#4c4f69",
+        "--ixlm-accent": "#1e66f5",
+        "--ixlm-accent-hover": "#7287fd",
+        "--ixlm-btn-text": "#dce0e8",
+        "--ixlm-border": "#acb0be",
+        "--ixlm-contrast": "#acb0be",
+        "--ixlm-surface": "rgba(172, 176, 198, 0.4)",
+        "--ixlm-min": "#df8e1d",
+        "--ixlm-min-active": "#40a02b",
+        "--ixlm-close": "#d20f39"
+    },
+    macchiato: {
+        ...themeBase,
+        "--ixlm-bg": "rgba(54, 58, 79, 0.6)",
+        "--ixlm-header": "rgba(36, 39, 58, 0.6)",
+        "--ixlm-control-bg": "#1e2030",
+        "--ixlm-text": "#cad3f5",
+        "--ixlm-accent": "#ed8796",
+        "--ixlm-accent-hover": "#ee99a0",
+        "--ixlm-btn-text": "#181926",
+        "--ixlm-border": "#626880",
+        "--ixlm-contrast": "#626880",
+        "--ixlm-surface": "rgba(98, 104, 128, 0.4)",
+        "--ixlm-min": "#eed49f",
+        "--ixlm-min-active": "#a6da95",
+        "--ixlm-close": "#ed8796"
+    },
+    frappe: {
+        ...themeBase,
+        "--ixlm-bg": "rgba(65, 69, 89, 0.6)",
+        "--ixlm-header": "rgba(48, 52, 70, 0.6)",
+        "--ixlm-control-bg": "#292c3c",
+        "--ixlm-text": "#c6d0f5",
+        "--ixlm-accent": "#ca9ee6",
+        "--ixlm-accent-hover": "#f4b8e4",
+        "--ixlm-btn-text": "#232634",
+        "--ixlm-border": "#626880",
+        "--ixlm-contrast": "#626880",
+        "--ixlm-surface": "rgba(98, 104, 128, 0.4)",
+        "--ixlm-min": "#e5c890",
+        "--ixlm-min-active": "#a6d189",
+        "--ixlm-close": "#e78284"
+    },
+    hacker: {
+        ...themeBase,
+        "--ixlm-bg": "#000000",
+        "--ixlm-header": "#222222",
+        "--ixlm-control-bg": "#111111",
+        "--ixlm-text": "#00ff00",
+        "--ixlm-accent": "#00ff00",
+        "--ixlm-accent-hover": "#55ff55",
+        "--ixlm-btn-text": "#000000",
+        "--ixlm-border": "#00ff00",
+        "--ixlm-contrast": "#999999",
+        "--ixlm-surface": "rgba(153, 153, 153, 0.4)",
+        "--ixlm-min": "#999999",
+        "--ixlm-min-active": "#00ff00",
+        "--ixlm-close": "#ff0000",
+        "--ixlm-radius": "3px",
+        "--ixlm-round-radius": "0",
+        "--ixlm-circle-radius": "0",
+        "--ixlm-blur": "0",
+        "--ixlm-anim-time": "0.1s"
+    },
+    ai: {
+        ...themeBase,
+        "--ixlm-bg": "rgba(30, 41, 59, 0.85)",
+        "--ixlm-header": "rgba(15, 23, 42, 0.9)",
+        "--ixlm-control-bg": "#0f172a",
+        "--ixlm-text": "#e2e8f0",
+        "--ixlm-accent": "#38bdf8",
+        "--ixlm-accent-hover": "#7dd3fc",
+        "--ixlm-btn-text": "#020617",
+        "--ixlm-border": "#334155",
+        "--ixlm-contrast": "#334155",
+        "--ixlm-surface": "rgba(51, 65, 85, 0.4)",
+        "--ixlm-min": "#facc15",
+        "--ixlm-min-active": "#4ade80",
+        "--ixlm-close": "#fb7185"
+    }
+};
 
 // HTML body data to inject.
-var htmlData = `
+const htmlData = `
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 <style>
-#ixlambda-gui {
+#ixlm-gui {
     --ixlm-bg: rgba(49, 50, 68, 0.9);
     --ixlm-header: rgba(30, 30, 46, 0.9);
     --ixlm-control-bg: #181825;
@@ -71,12 +185,12 @@ var htmlData = `
     transform: translateZ(0);
 }
 
-#ixlambda-gui.ixlm-minimized {
+#ixlm-gui.ixlm-minimized {
     max-width: 300px;
     transition: max-width var(--ixlm-anim-time) ease;
 }
 
-#ixlambda-header {
+#ixlm-header {
     display: flex;
     max-width: 1000px;
     font-size: 18px;
@@ -89,7 +203,7 @@ var htmlData = `
     backdrop-filter: blur(var(--ixlm-blur));
 }
 
-#ixlambda-controls {
+#ixlm-controls {
     display: flex;
     gap: 12px;
 
@@ -98,7 +212,7 @@ var htmlData = `
     background: var(--ixlm-control-bg);
 }
 
-#ixlambda-header button {
+#ixlm-header button {
     width: 12px;
     height: 12px;
     border: none;
@@ -113,36 +227,36 @@ var htmlData = `
     color: transparent;
 }
 
-#ixlambda-header button:hover {
+#ixlm-header button:hover {
     filter: brightness(1.1);
 }
 
-#ixlambda-header svg {
+#ixlm-header svg {
     padding-left: 8px;
 }
 
-#ixlambda-gui.ixlm-minimized #ixlambda-header {
+#ixlm-gui.ixlm-minimized #ixlm-header {
     border-radius: var(--ixlm-radius);
     max-width: 300px;
     transition: max-width var(--ixlm-anim-time) ease;
 }
 
-#ixlambda-minimize {
+#ixlm-minimize {
     background: var(--ixlm-min);
     transition: filter 0.2s, background var(--ixlm-anim-time);
 }
 
-#ixlambda-close {
+#ixlm-close {
     background: var(--ixlm-close);
     transition: background var(--ixlm-anim-time);
 }
 
-#ixlambda-gui.ixlm-minimized #ixlambda-minimize {
+#ixlm-gui.ixlm-minimized #ixlm-minimize {
     background: var(--ixlm-min-active);
     transition: filter 0.2s, background var(--ixlm-anim-time);
 }
 
-#ixlambda-layout {
+#ixlm-layout {
     display: flex;
     overflow: hidden;
     height: 300px;
@@ -152,12 +266,12 @@ var htmlData = `
     backdrop-filter: blur(var(--ixlm-blur));
 }
 
-#ixlambda-gui.ixlm-minimized #ixlambda-layout {
+#ixlm-gui.ixlm-minimized #ixlm-layout {
     height: 0;
     transition: height var(--ixlm-anim-time) ease;
 }
 
-#ixlambda-sidebar {
+#ixlm-sidebar {
     display: flex;
     flex-direction: column;
     background: var(--ixlm-header);
@@ -166,7 +280,7 @@ var htmlData = `
     gap: 8px;
 }
 
-.ixlambda-nav-item {
+.ixlm-nav-item {
     display: flex;
     align-items: center;
     justify-content: left;
@@ -182,57 +296,57 @@ var htmlData = `
     transition: background 0.2s
 }
 
-.ixlambda-nav-item:hover {
+.ixlm-nav-item:hover {
     background: var(--ixlm-contrast);
 }
 
-.ixlambda-nav-item.active {
+.ixlm-nav-item.active {
     color: var(--ixlm-btn-text);
     background: var(--ixlm-accent);
 }
 
-#ixlambda-content {
+#ixlm-content {
     position: relative;
     padding: 8px;
     width: 100%;
 }
 
-.ixlambda-panel {
+.ixlm-panel {
     width: 100%;
     height: 100%;
     opacity: 1;
 }
 
-.ixlambda-panel.hidden {
+.ixlm-panel.hidden {
     display: none;
 }
 
-.ixlambda-panel iframe {
+.ixlm-panel iframe {
     border: none;
 }
 
-.ixlambda-surface {
+.ixlm-surface {
     background: var(--ixlm-surface);
     border-radius: var(--ixlm-radius);
     padding: 8px;
 }
 
-#ixlambda-layout span {
+#ixlm-layout span {
     display: block;
     margin: 8px 0;
 }
 
-.ixlambda-description {
+.ixlm-description {
     font-size: 14px;
 }
 
-.ixlambda-parallel {
+.ixlm-parallel {
     display: flex;
     gap: 6px;
     align-items: center;
 }
 
-.ixlambda-btn, .ixlambda-selector, .ixlambda-input {
+.ixlm-btn, .ixlm-selector, .ixlm-input {
     width: 100%;
     height: 40px;
     font-size: 14px;
@@ -248,38 +362,38 @@ var htmlData = `
     color: var(--ixlm-btn-text);
 }
 
-.ixlambda-btn {
+.ixlm-btn {
     height: 40px;
     transition: background 0.2s, transform 0.1s;
 }
 
-.ixlambda-btn:hover {
+.ixlm-btn:hover {
     background: var(--ixlm-accent-hover);
 }
 
-.ixlambda-btn:active {
+.ixlm-btn:active {
     transform: translateY(1px);
 }
 
-.ixlambda-half {
+.ixlm-half {
     width: 50%;
 }
 
-.ixlambda-icon-btn {
+.ixlm-icon-btn {
     width: 40px;
     padding: 10px;
 }
 
-.ixlambda-input {
+.ixlm-input {
     height: 20px;
 }
 
-.ixlambda-input::placeholder {
+.ixlm-input::placeholder {
   color: var(--ixlm-btn-text);
   opacity: 1;
 }
 
-.ixlambda-footer {
+.ixlm-footer {
     display: flex;
     position: absolute;
     bottom: 0;
@@ -287,11 +401,11 @@ var htmlData = `
     justify-content: space-between;
 }
 
-.ixlambda-footer span {
+.ixlm-footer span {
     font-size: 12px;
 }
 
-#ixlambda-gui hr {
+#ixlm-gui hr {
     height: 2px;
     margin: 8px 0;
 
@@ -345,103 +459,105 @@ var htmlData = `
   box-shadow: 0 0 0 1px var(--ixlm-border);
 }
 </style>
-<div id="ixlambda-gui">
-    <div id="ixlambda-header">
-        <div class="ixlambda-parallel">
-            <div id="ixlambda-controls">
-                <button id="ixlambda-close"></button>
-                <button id="ixlambda-minimize"></button>
+<div id="ixlm-gui">
+    <div id="ixlm-header">
+        <div class="ixlm-parallel">
+            <div id="ixlm-controls">
+                <button id="ixlm-close"></button>
+                <button id="ixlm-minimize"></button>
             </div>
             <i data-lucide="server-cog" width="18" height="18"></i>
             <b>IXLambda Loader</b>
         </div>
     </div>
-    <div id="ixlambda-layout">
-        <div id="ixlambda-sidebar">
-            <button id="ixlambda-nav-home" class="ixlambda-nav-item active" value="home">
+    <div id="ixlm-layout">
+        <div id="ixlm-sidebar">
+            <button id="ixlm-nav-home" class="ixlm-nav-item active" value="home">
                 <i data-lucide="house" width="20" height="20"></i>
                 <span>Home</span>
             </button>
-            <button id="ixlambda-nav-proxies" class="ixlambda-nav-item" value="proxies">
+            <button id="ixlm-nav-proxies" class="ixlm-nav-item" value="proxies">
                 <i data-lucide="globe-lock" width="20" height="20"></i>
                 <span>Proxies</span>
             </button>
-            <button id="ixlambda-nav-settings" class="ixlambda-nav-item" value="settings">
+            <button id="ixlm-nav-settings" class="ixlm-nav-item" value="settings">
                 <i data-lucide="cog" width="20" height="20"></i>
                 <span>Settings</span>
             </button>
+            <div class="ixlm-footer">
+                <span>${ixlmVersion}</span>
+            </div>
         </div>
-        <div id="ixlambda-content">
-            <div id="ixlambda-home-page" class="ixlambda-panel">
-                <div class="ixlambda-surface">
-                    <!--<iframe src="https://augtive85yt-github-io.translate.goog/phipibeta/ixlambda-iframe.html?_x_tr_sl=en&_x_tr_tl=de&t=${Date.now()}" width="100%" height="100%"></iframe>-->
-                    <!--<iframe id="ixlambda-news-iframe" srcdoc="" width="100%" height="100%"></iframe>-->
+        <div id="ixlm-content">
+            <div id="ixlm-home-page" class="ixlm-panel">
+                <div class="ixlm-surface">
                     <span style="font-size: 24px">Sorry about a few bugs here and there, I had to implement a huge overhaul in 2 days. :sob:</span>
                     <br>
                     <span>P.S. (It looks bad right now, but I swear I will fix it! :< )</span>
                 </div>
             </div>
-            <div id="ixlambda-proxies-page" class="ixlambda-panel hidden">
-                <span class="ixlambda-description">Freedom is a universal right.</span>
+            <div id="ixlm-proxies-page" class="ixlm-panel hidden">
+                <span class="ixlm-description">Freedom is a universal right.</span>
                 <hr>
-                <span class="ixlambda-description">Proxy Loader</span>
-                <div class="ixlambda-parallel">
-                    <select id="ixlambda-proxy-selector" class="ixlambda-selector">
+                <span class="ixlm-description">Proxy Loader</span>
+                <div class="ixlm-parallel">
+                    <select id="ixlm-proxy-selector" class="ixlm-selector">
                         <option value="overcloaked">OverCloaked</option>
                         <option value="fern">Fern</option>
                         <option value="infamous">Infamous</option>
                         <option value="gnmath">GN-Math</option>
+                        <option value="endis">Endis</option>
                         <option value="dogeub">DogeUB</option>
+                        <option value="space">Space</option>
                         <option value="frogiesarcade">Frogie's Arcade</option>
-                        <option disabled value="space">Space</option>
                         <option value="daydreamx">DayDreamX</option>
                     </select>
-                    <button id="ixlambda-proxy-launch" class="ixlambda-btn ixlambda-half">Launch</button>
+                    <button id="ixlm-proxy-launch" class="ixlm-btn ixlm-half">Launch</button>
                 </div>
                 <hr>
-                <span class="ixlambda-description">Javascript Loader</span>
-                <button id="ixlambda-scriptix-launch" class="ixlambda-btn">Launch Scriptix</button>
+                <span class="ixlm-description">Javascript Loader</span>
+                <button id="ixlm-scriptix-launch" class="ixlm-btn">Launch Scriptix</button>
             </div>
-            <div id="ixlambda-settings-page" class="ixlambda-panel hidden">
-                <span class="ixlambda-description">Settings</span>
+            <div id="ixlm-settings-page" class="ixlm-panel hidden">
+                <span class="ixlm-description">Settings</span>
                 <hr>
-                <span class="ixlambda-description">Themes</span>
-                <select id="ixlambda-theme-selector" class="ixlambda-selector">
+                <span class="ixlm-description">Themes</span>
+                <select id="ixlm-theme-selector" class="ixlm-selector">
                     <option value="mocha">Catppuccin Mocha</option>
                     <option value="latte">Catppuccin Latte</option>
                     <option value="macchiato">Catppuccin Macchiato</option>
-                    <option value="frappe">Catppuccin Frappé</option>
+                    <option value="frappe">Catppuccin FrappÃ©</option>
                     <option value="hacker">Pro Haxxor</option>
                     <option value="ai">AI Generated</option>
                 </select>
                 <hr>
-                <span class="ixlambda-description">Data [CURRENTLY UNFINISHED]</span>
-		    	<div class="ixlambda-parallel">
-		    	    <button id="ixlambda-export-data" class="ixlambda-btn">Export Data</button>
-		    	    <button id="ixlambda-import-data" class="ixlambda-btn">Import Data</button>
-		    	    <button id="ixlambda-import-data" class="ixlambda-btn">Clear Data</button>
+                <span class="ixlm-description">Data [CURRENTLY UNFINISHED]</span>
+		    	<div class="ixlm-parallel">
+		    	    <button id="ixlm-export-data" class="ixlm-btn">Export Data</button>
+		    	    <button id="ixlm-import-data" class="ixlm-btn">Import Data</button>
+		    	    <button id="ixlm-import-data" class="ixlm-btn">Clear Data</button>
 		    	</div>
 		    	<hr>
-                <span class="ixlambda-description">Developer [CURRENTLY UNFINISHED]</span>
-		    	<div class="ixlambda-parallel">
-		    		<input id="ixlambda-dev-input" class="ixlambda-input" placeholder="Dev Code...">
-		    		<button id="ixlambda-dev-enter" class="ixlambda-btn ixlambda-half">Enter</button>
+                <span class="ixlm-description">Developer [CURRENTLY UNFINISHED]</span>
+		    	<div class="ixlm-parallel">
+		    		<input id="ixlm-dev-input" class="ixlm-input" placeholder="Dev Code...">
+		    		<button id="ixlm-dev-enter" class="ixlm-btn ixlm-half">Enter</button>
 		    	</div>
             </div>
         </div>
     </div>
 </div>
-<div id="ixlambda-modal" class="ixlambda-modal hidden">
-  <div class="ixlambda-modal-box">
-    <div id="ixlambda-modal-content"></div>
-    <div id="ixlambda-modal-actions" class="ixlambda-modal-actions"></div>
+<div id="ixlm-modal" class="ixlm-modal hidden">
+  <div class="ixlm-modal-box">
+    <div id="ixlm-modal-content"></div>
+    <div id="ixlm-modal-actions" class="ixlm-modal-actions"></div>
   </div>
 </div>
 `;
 
 // Open as blob URL.
 function openLink(link) {
-    var linkHtmlData = `
+    const linkHtmlData = `
         <!DOCTYPE html>
         <html lang="en">
           <head>
@@ -464,31 +580,32 @@ function openLink(link) {
 
     // Main loading code.
     try {
-        var newTab = window.open(URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" })), "_blank");
+        const newTab = window.open(URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" })), "_blank");
+        if (!newTab) { alert("Popup Failed! 3:"); }
     } catch (err) {
         console.error("Link launching failed:", err);
     }
-    if (!newTab) { alert("Popup Failed! 3:"); }
 }
 
 // Modal magic!
 function showModal(options) {
-    var modal = root.getElementById("ixlambda-modal");
-    var content = root.getElementById("ixlambda-modal-content");
-    var actions = root.getElementById("ixlambda-modal-actions");
+    const modal = root.getElementById("ixlm-modal");
+    const content = root.getElementById("ixlm-modal-content");
+    const actions = root.getElementById("ixlm-modal-actions");
+    const inputs = [];
+
     content.innerHTML = "";
     actions.innerHTML = "";
-    var inputs = [];
 
     // Add message.
-    var msgSpan = document.createElement("span");
+    const msgSpan = document.createElement("span");
     msgSpan.textContent = options.message || "";
     content.appendChild(msgSpan);
 
     // Add text inputs.
     if (options.inputs) {
-        options.inputs.forEach(opt => {
-            var input = document.createElement("input");
+        options.inputs.forEach((opt) => {
+            const input = document.createElement("input");
             input.type = "text";
             input.placeholder = opt.placeholder || "";
             input.value = opt.value || "";
@@ -498,13 +615,13 @@ function showModal(options) {
     }
 
     // Add buttons.
-    options.buttons.forEach(btn => {
-        var button = document.createElement("button");
-        button.className = "ixlambda-btn";
+    options.buttons.forEach((btn) => {
+        const button = document.createElement("button");
+        button.className = "ixlm-btn";
         button.textContent = btn.text;
         button.addEventListener("click", () => {
-            var values = inputs.map(i => i.value);
-            if (btn.onClick) btn.onClick(values);
+            const values = inputs.map((input) => input.value);
+            if (btn.onClick) { btn.onClick(values); }
             modal.classList.add("hidden");
         });
         actions.appendChild(button);
@@ -519,7 +636,7 @@ function hashString(str) {
     try {
         let h1 = 0xdeadbeef ^ str.length;
         let h2 = 0x41c6ce57 ^ str.length;
-        for (let i = 0; i < str.length; i++) {
+        for (let i = 0; i < str.length; i += 1) {
             const ch = str.charCodeAt(i);
             h1 = Math.imul(h1 ^ ch, 2654435761);
             h2 = Math.imul(h2 ^ ch, 1597334677);
@@ -538,7 +655,7 @@ function hashString(str) {
 }
 
 // Evil HTML data! >:3
-var blockHtmlData = `
+const blockHtmlData = `
 <!doctype HTML>
 <html lang="en">
 <head>
@@ -574,7 +691,7 @@ var blockHtmlData = `
 </html>`;
 
 // Previously verified?
-var verified = localStorage.getItem("ixlambda-valid-user") || bypassUAF;
+let verified = localStorage.getItem("ixlm-valid-user") || bypassUAF;
 
 // User agent check.
 verified = navigator.userAgent.match(/Mac/i) || verified;
@@ -592,225 +709,100 @@ if (!verified) {
     document.close();
     throw "OMEGAIOTA-BLOCKED";
 }
-localStorage.setItem("ixlambda-valid-user", "true");
+localStorage.setItem("ixlm-valid-user", "true");
 
 // Confirm page existence.
 if (["about:blank", "about:newtab"].includes(location.href)) {
     window.location.href = "https://google.com/";
     alert("Please re-open the bookmark on this page.");
-    throw "IXLAMBDA-FORCE-END";
+    throw "IXLM-FORCE-END";
 }
 
 // Complain about duplicates.
-if (document.getElementById("ixlambda-host")) {
-    alert("Another instance of IXLambda exists, please use the current instance.")
+if (document.getElementById("ixlm-host")) {
+    alert("Another instance of IXLambda exists, please use the current instance.");
     console.log("%cAnother instance of IXLambda exists, please use the current instance.", "color: #89b4fa; font-size: 16px;");
-    throw "IXLAMBDA-FORCE-END";
+    throw "IXLM-FORCE-END";
 }
 
 // Create IXLambda div.
-var host = document.createElement("div");
-host.id = "ixlambda-host";
+const host = document.createElement("div");
+host.id = "ixlm-host";
 document.body.appendChild(host);
 
 // Spooky shadow div!
-var root = host.attachShadow({ mode: "open" });
+const root = host.attachShadow({ mode: "open" });
 
 // Load HTML data.
 root.innerHTML = htmlData;
 
 // Get GUI elements.
-var gui = root.getElementById("ixlambda-gui");
-var header = root.getElementById("ixlambda-header");
+const gui = root.getElementById("ixlm-gui");
+const header = root.getElementById("ixlm-header");
 
 // Minimize and close functions.
-root.getElementById("ixlambda-minimize").addEventListener("click", () => {
+root.getElementById("ixlm-minimize").addEventListener("click", () => {
     gui.classList.toggle("ixlm-minimized");
 });
-root.getElementById("ixlambda-close").addEventListener("click", () => {
-    root.querySelectorAll(".ixlambda-destroy").forEach(e => e.remove());
-    if (devTools) { eruda.destroy(); }
-    document.getElementById("ixlambda-host").remove();
+root.getElementById("ixlm-close").addEventListener("click", () => {
+    root.querySelectorAll(".ixlm-destroy").forEach((element) => element.remove());
+    if (devTools && window.eruda) { eruda.destroy(); }
+    document.getElementById("ixlm-host").remove();
 });
 
 // Button code.
-root.getElementById("ixlambda-proxy-launch").addEventListener("click", () => {
-    openLink("https://" + links[root.getElementById("ixlambda-proxy-selector").value]);
+root.getElementById("ixlm-proxy-launch").addEventListener("click", () => {
+    openLink(`https://${links[root.getElementById("ixlm-proxy-selector").value]}`);
 });
-root.getElementById("ixlambda-scriptix-launch").addEventListener("click", () => {
-    var script = document.createElement("script");
+root.getElementById("ixlm-scriptix-launch").addEventListener("click", () => {
+    const script = document.createElement("script");
     script.src = "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/src/main.js";
     document.head.appendChild(script);
 });
 
 // Setup switching buttons.
-var sideBarButtons = root.querySelectorAll(".ixlambda-nav-item");
+const sideBarButtons = root.querySelectorAll(".ixlm-nav-item");
 sideBarButtons.forEach((el) => {
     el.onclick = () => {
         sideBarButtons.forEach((button) => button.classList.remove("active"));
         el.classList.add("active");
-        root.querySelectorAll(".ixlambda-panel").forEach((panel) => panel.classList.add("hidden"));
-        root.getElementById(`ixlambda-${el.value}-page`).classList.remove("hidden");
-        localStorage.setItem("ixlambda-page", el.value);
+        root.querySelectorAll(".ixlm-panel").forEach((panel) => panel.classList.add("hidden"));
+        root.getElementById(`ixlm-${el.value}-page`).classList.remove("hidden");
+        localStorage.setItem("ixlm-page", el.value);
     };
 });
 
+// Links blocked?
+Object.keys(links).forEach((key) => {
+    if (links[key] === "BLOCKED") {
+        const badLink = root.getElementById("ixlm-proxy-selector").querySelector(`option[value="${key}"]`);
+        if (badLink) {
+            badLink.disabled = true;
+            badLink.selected = false;
+        }
+    }
+});
+
 // Lucide implementation.
-var lucideScript = document.createElement("script");
+const lucideScript = document.createElement("script");
 lucideScript.src = "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js";
-lucideScript.onload = () => { lucide.createIcons({root: root}); }
+lucideScript.onload = () => { lucide.createIcons({root: root}); };
 root.appendChild(lucideScript);
 
 // Initialize Eruda dev tools.
 if (devTools) {
-    var erudaScript = document.createElement("script");
+    const erudaScript = document.createElement("script");
     erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
-    erudaScript.className = "ixlambda-destroy";
-    erudaScript.onload = () => { eruda.init(); }
+    erudaScript.className = "ixlm-destroy";
+    erudaScript.onload = () => { eruda.init(); };
     document.head.appendChild(erudaScript);
 }
 
-// Setup news system.
-var newsHTMLData = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="dark">
-</head>
-<body style="background: transparent;">
-    <p>Sorry about a few bugs here and there, I had to implement a huge overhaul in 2 days. :sob:</p>
-</body>
-</html>
-`;
-//root.getElementById("ixlambda-news-iframe").srcdoc = newsHTMLData;
-
 // Theme handling.
 function setTheme(theme) {
-    var themes = {
-        mocha: {
-            "--ixlm-bg": "rgba(49, 50, 68, 0.6)", // Surface 0
-            "--ixlm-header": "rgba(30, 30, 46, 0.6)", // Base
-            "--ixlm-control-bg": "#181825", // Mantle
-            "--ixlm-text": "#cdd6f4", // Text
-            "--ixlm-accent": "#89b4fa", // Blue
-            "--ixlm-accent-hover": "#b4befe", // Lavender
-            "--ixlm-btn-text": "#11111b", // Crust
-            "--ixlm-border": "#585b70", // Surface 2
-            "--ixlm-contrast": "#585b70", // Surface 2
-            "--ixlm-surface": "rgba(88, 91, 112, 0.4)", // Surface 2
-            "--ixlm-min": "#f9e2af", // Yellow
-            "--ixlm-min-active": "#a6e3a1", // Green
-            "--ixlm-close": "#f38ba8", // Red
-            "--ixlm-radius": "6px",
-            "--ixlm-round-radius": "100px",
-            "--ixlm-circle-radius": "50%",
-            "--ixlm-blur": "16px",
-            "--ixlm-anim-time": "0.3s",
-            "--ixlm-font": '"JetBrains Mono", monospace'},
-        latte: {
-            "--ixlm-bg": "rgba(204, 208, 218, 0.6)",
-            "--ixlm-header": "rgba(239, 241, 245, 0.6)",
-            "--ixlm-control-bg": "#e6e9ef",
-            "--ixlm-text": "#4c4f69",
-            "--ixlm-accent": "#1e66f5",
-            "--ixlm-accent-hover": "#7287fd",
-            "--ixlm-btn-text": "#dce0e8",
-            "--ixlm-border": "#acb0be",
-            "--ixlm-contrast": "#acb0be",
-            "--ixlm-surface": "rgba(172, 176, 198, 0.4)",
-            "--ixlm-min": "#df8e1d",
-            "--ixlm-min-active": "#40a02b",
-            "--ixlm-close": "#d20f39",
-            "--ixlm-radius": "6px",
-            "--ixlm-round-radius": "100px",
-            "--ixlm-circle-radius": "50%",
-            "--ixlm-blur": "16px",
-            "--ixlm-anim-time": "0.3s",
-            "--ixlm-font": '"JetBrains Mono", monospace'},
-        macchiato: {
-            "--ixlm-bg": "rgba(54, 58, 79, 0.6)",
-            "--ixlm-header": "rgba(36, 39, 58, 0.6)",
-            "--ixlm-control-bg": "#1e2030",
-            "--ixlm-text": "#cad3f5",
-            "--ixlm-accent": "#ed8796",
-            "--ixlm-accent-hover": "#ee99a0",
-            "--ixlm-btn-text": "#181926",
-            "--ixlm-border": "#626880",
-            "--ixlm-contrast": "#626880",
-            "--ixlm-surface": "rgba(98, 104, 128, 0.4)",
-            "--ixlm-min": "#eed49f",
-            "--ixlm-min-active": "#a6da95",
-            "--ixlm-close": "#ed8796",
-            "--ixlm-radius": "6px",
-            "--ixlm-round-radius": "100px",
-            "--ixlm-circle-radius": "50%",
-            "--ixlm-blur": "16px",
-            "--ixlm-anim-time": "0.3s",
-            "--ixlm-font": '"JetBrains Mono", monospace'},
-        frappe: {
-            "--ixlm-bg": "rgba(65, 69, 89, 0.6)",
-            "--ixlm-header": "rgba(48, 52, 70, 0.6)",
-            "--ixlm-control-bg": "#292c3c",
-            "--ixlm-text": "#c6d0f5",
-            "--ixlm-accent": "#ca9ee6",
-            "--ixlm-accent-hover": "#f4b8e4",
-            "--ixlm-btn-text": "#232634",
-            "--ixlm-border": "#626880",
-            "--ixlm-contrast": "#626880",
-            "--ixlm-surface": "rgba(98, 104, 128, 0.4)",
-            "--ixlm-min": "#e5c890",
-            "--ixlm-min-active": "#a6d189",
-            "--ixlm-close": "#e78284",
-            "--ixlm-radius": "6px",
-            "--ixlm-round-radius": "100px",
-            "--ixlm-circle-radius": "50%",
-            "--ixlm-blur": "16px",
-            "--ixlm-anim-time": "0.3s",
-            "--ixlm-font": '"JetBrains Mono", monospace'},
-        hacker: {
-            "--ixlm-bg": "#000000",
-            "--ixlm-header": "#222222",
-            "--ixlm-control-bg": "#111111",
-            "--ixlm-text": "#00ff00",
-            "--ixlm-accent": "#00ff00",
-            "--ixlm-accent-hover": "#55ff55",
-            "--ixlm-btn-text": "#000000",
-            "--ixlm-border": "#00ff00",
-            "--ixlm-contrast": "#999999",
-            "--ixlm-surface": "rgba(153, 153, 153, 0.4)",
-            "--ixlm-min": "#999999",
-            "--ixlm-min-active": "#00ff00",
-            "--ixlm-close": "#ff0000",
-            "--ixlm-radius": "3px",
-            "--ixlm-round-radius": "0",
-            "--ixlm-circle-radius": "0",
-            "--ixlm-blur": "0",
-            "--ixlm-anim-time": "0.1s",
-            "--ixlm-font": '"JetBrains Mono", monospace'},
-        ai: {
-            "--ixlm-bg": "rgba(30, 41, 59, 0.85)",
-            "--ixlm-header": "rgba(15, 23, 42, 0.9)",
-            "--ixlm-control-bg": "#0f172a",
-            "--ixlm-text": "#e2e8f0",
-            "--ixlm-accent": "#38bdf8",
-            "--ixlm-accent-hover": "#7dd3fc",
-            "--ixlm-btn-text": "#020617",
-            "--ixlm-border": "#334155",
-            "--ixlm-contrast": "#334155",
-            "--ixlm-surface": "rgba(51, 65, 85, 0.4)",
-            "--ixlm-min": "#facc15",
-            "--ixlm-min-active": "#4ade80",
-            "--ixlm-close": "#fb7185",
-            "--ixlm-radius": "6px",
-            "--ixlm-round-radius": "100px",
-            "--ixlm-circle-radius": "50%",
-            "--ixlm-blur": "16px",
-            "--ixlm-anim-time": "0.3s",
-            "--ixlm-font": '"JetBrains Mono", monospace'
-        }
-    };
+    if (!themes[theme]) {
+        return;
+    }
 
     // Find correct theme.
     Object.entries(themes[theme]).forEach(([key, value]) => {
@@ -819,49 +811,49 @@ function setTheme(theme) {
 }
 
 // Saved theme.
-var themeSelector = root.getElementById("ixlambda-theme-selector");
-themeSelector.onchange = ()=> {
-    var theme = themeSelector.value;
+const themeSelector = root.getElementById("ixlm-theme-selector");
+themeSelector.onchange = () => {
+    const theme = themeSelector.value;
     setTheme(theme);
-    localStorage.setItem("ixlambda-theme", theme);
+    localStorage.setItem("ixlm-theme", theme);
 };
-var savedTheme = localStorage.getItem("ixlambda-theme");
-if (savedTheme) { setTheme(savedTheme); themeSelector.value = savedTheme; }
+const savedTheme = localStorage.getItem("ixlm-theme");
+if (savedTheme && themes[savedTheme]) { setTheme(savedTheme); themeSelector.value = savedTheme; }
 
 // Saved page.
-var savedPage = localStorage.getItem("ixlambda-page");
-if (savedPage) {
+const savedPage = localStorage.getItem("ixlm-page");
+if (savedPage && root.getElementById(`ixlm-nav-${savedPage}`) && root.getElementById(`ixlm-${savedPage}-page`)) {
     sideBarButtons.forEach((button) => button.classList.remove("active"));
-    root.getElementById(`ixlambda-nav-${savedPage}`).classList.add("active");
-    root.querySelectorAll(".ixlambda-panel").forEach((panel) => panel.classList.add("hidden"));
-    root.getElementById(`ixlambda-${savedPage}-page`).classList.remove("hidden");
+    root.getElementById(`ixlm-nav-${savedPage}`).classList.add("active");
+    root.querySelectorAll(".ixlm-panel").forEach((panel) => panel.classList.add("hidden"));
+    root.getElementById(`ixlm-${savedPage}-page`).classList.remove("hidden");
 }
 
 // Saved proxy.
-var proxySelector = root.getElementById("ixlambda-proxy-selector");
-proxySelector.onchange = ()=> {
-    var proxy = proxySelector.value;
-    localStorage.setItem("ixlambda-proxy", proxy);
+const proxySelector = root.getElementById("ixlm-proxy-selector");
+proxySelector.onchange = () => {
+    const proxy = proxySelector.value;
+    localStorage.setItem("ixlm-proxy", proxy);
 };
-var savedProxy = localStorage.getItem("ixlambda-proxy");
+const savedProxy = localStorage.getItem("ixlm-proxy");
 if (savedProxy) { proxySelector.value = savedProxy; }
 
 // Movement variables.
-var dragging = false;
-var offsetX = 0;
-var offsetY = 0;
+let dragging = false;
+let offsetX = 0;
+let offsetY = 0;
 
 // Movement logic.
-header.addEventListener("pointerdown", e => {
+header.addEventListener("pointerdown", (e) => {
     dragging = true;
     offsetX = e.clientX - gui.offsetLeft;
     offsetY = e.clientY - gui.offsetTop;
     header.style.cursor = "move";
 });
-document.addEventListener("pointermove", e => {
-    if (!dragging) return;
-    gui.style.left = (e.clientX - offsetX) + "px";
-    gui.style.top = (e.clientY - offsetY) + "px";
+document.addEventListener("pointermove", (e) => {
+    if (!dragging) { return; }
+    gui.style.left = `${e.clientX - offsetX}px`;
+    gui.style.top = `${e.clientY - offsetY}px`;
 });
 document.addEventListener("pointerup", () => {
     dragging = false;
@@ -872,3 +864,4 @@ document.addEventListener("pointerup", () => {
 console.log("%cIXLambda loaded successfully! :3", "color: #74c7ec; font-size: 24px; font-weight: bold;");
 console.log("%cMaintained by ΦΠΒ's Owner!", "color: #89b4fa; font-size: 16px;");
 console.log("%cLovingly made by SUDO! UwU", "color: #f38ba8; font-size: 16px; font-weight: bold;");
+})();
