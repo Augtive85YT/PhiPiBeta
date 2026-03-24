@@ -491,9 +491,13 @@ const htmlData = `
         <div id="ixlm-content">
             <div id="ixlm-home-page" class="ixlm-panel">
                 <div class="ixlm-surface">
-                    <span style="font-size: 24px">Sorry about a few bugs here and there, I had to implement a huge overhaul in 2 days. :sob:</span>
+                    <div class="ixlm-parallel">
+                        <img src="https://raw.githubusercontent.com/Augtive85YT/PhiPiBeta/main/IXLambda/assets/img/ixlambda-favicon.png" width="100px" height="100px" alt="IXLambda Icon">
+                        <span class="ixlm-description">IXLambda is a dynamic content loader, currently used to load proxies.</span>
+                    </div>
                     <br>
-                    <span>P.S. (It looks bad right now, but I swear I will fix it! :< )</span>
+                    <span>Currently, my roadmap is ~30% done!</span>
+                    <span>Proxy updates are now slower as GitHub has been blocked.</span>
                 </div>
             </div>
             <div id="ixlm-proxies-page" class="ixlm-panel hidden">
