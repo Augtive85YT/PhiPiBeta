@@ -526,19 +526,12 @@ const htmlData = `
                     <option value="mocha">Catppuccin Mocha</option>
                     <option value="latte">Catppuccin Latte</option>
                     <option value="macchiato">Catppuccin Macchiato</option>
-                    <option value="frappe">Catppuccin FrappÃ©</option>
+                    <option value="frappe">Catppuccin Frappé</option>
                     <option value="hacker">Pro Haxxor</option>
                     <option value="ai">AI Generated</option>
                 </select>
-                <hr>
-                <span class="ixlm-description">Data [CURRENTLY UNFINISHED]</span>
-		    	<div class="ixlm-parallel">
-		    	    <button id="ixlm-export-data" class="ixlm-btn">Export Data</button>
-		    	    <button id="ixlm-import-data" class="ixlm-btn">Import Data</button>
-		    	    <button id="ixlm-import-data" class="ixlm-btn">Clear Data</button>
-		    	</div>
 		    	<hr>
-                <span class="ixlm-description">Developer [CURRENTLY UNFINISHED]</span>
+                <span class="ixlm-description">Developer</span>
 		    	<div class="ixlm-parallel">
 		    		<input id="ixlm-dev-input" class="ixlm-input" placeholder="Dev Code...">
 		    		<button id="ixlm-dev-enter" class="ixlm-btn ixlm-half">Enter</button>
@@ -750,7 +743,7 @@ root.getElementById("ixlm-close").addEventListener("click", () => {
     document.getElementById("ixlm-host").remove();
 });
 
-// Button code.
+// Assorted button code.
 root.getElementById("ixlm-proxy-launch").addEventListener("click", () => {
     openLink(`https://${links[root.getElementById("ixlm-proxy-selector").value]}`);
 });
@@ -758,6 +751,24 @@ root.getElementById("ixlm-scriptix-launch").addEventListener("click", () => {
     const script = document.createElement("script");
     script.src = "https://raw-githack-com.translate.goog/MohanIShim47/Scriptix/main/src/main.js";
     document.head.appendChild(script);
+});
+
+
+// Dev-mode shenanigans.
+let devMode = "987c59edd3b878c9" === hashString(localStorage.getItem("ixlm-dev-mode"));
+function devModeInit() {
+    if (devMode) {
+        localStorage.setItem("ixlm-dev-mode", root.getElementById("ixlm-dev-input").value);
+        const erudaScript = document.createElement("script");
+        erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
+        erudaScript.onload = () => { eruda.init(); };
+        document.head.appendChild(erudaScript);
+    }
+}
+devModeInit();
+root.getElementById("ixlm-dev-enter").addEventListener("click", () => {
+    devMode = devMode || "987c59edd3b878c9" === hashString(root.getElementById("ixlm-dev-input").value);
+    devModeInit();
 });
 
 // Setup switching buttons.
@@ -788,15 +799,6 @@ const lucideScript = document.createElement("script");
 lucideScript.src = "https://unpkg.com/lucide@0.577.0/dist/umd/lucide.min.js";
 lucideScript.onload = () => { lucide.createIcons({root: root}); };
 root.appendChild(lucideScript);
-
-// Initialize Eruda dev tools.
-if (devTools) {
-    const erudaScript = document.createElement("script");
-    erudaScript.src = "https://cdn.jsdelivr.net/npm/eruda";
-    erudaScript.className = "ixlm-destroy";
-    erudaScript.onload = () => { eruda.init(); };
-    document.head.appendChild(erudaScript);
-}
 
 // Theme handling.
 function setTheme(theme) {
