@@ -14,28 +14,28 @@ if (navigator.userAgent.match(/Mac/i)) {
 	switch (result) {
 		case "1":
 			window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/lucide.svg");
-			return;
+			break;
 		case "2":
     		window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/gnmath.svg");
-			return;
+			break;
 		case "3":
     		window.open("https://dogeub.storage.googleapis.com/index.html");
-			return;
+			break;
 		case "4":
     		window.open("https://s3.amazonaws.com/deaganfern/index.html");
-			return;
+			break;
 		case "5":
     		window.open("https://swiftsite2312.b-cdn.net");
-			return;
+			break;
 		case "6":
     		window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/lucide-qr.png");
-			return;
+			break;
 		case "7":
     		window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/gnmath-qr.png");
-			return;
+			break;
 		default:
 			alert("Type a number.")
-			return;
+			break;
 	}
 } else {
 	alert("Outsmarted by a furry? Not sorry to you, tech department.");
