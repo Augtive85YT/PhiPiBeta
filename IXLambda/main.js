@@ -1,14 +1,14 @@
 if (navigator.userAgent.match(/Mac/i)) {
 	const result = prompt(
 		`Made by a furry! :3 (Haters will be ignored >:3)
-		Select a Website (Type Number):
-			Lucide (Best Proxy and Games): 1
-			GN-Math (Games): 2
-			DogeUB: 3
-			Fern: 4
-			Infamous: 5
-			Share Lucide QR: 6
-			Share GN-Math QR: 7
+Select a Website (Type Number):
+	Lucide (Best Proxy and Games): 1
+	GN-Math (Games): 2
+	DogeUB: 3
+	Fern: 4
+	Infamous: 5
+	Share Lucide QR: 6
+	Share GN-Math QR: 7
 		`
 	);
 	switch (result) {
@@ -34,7 +34,7 @@ if (navigator.userAgent.match(/Mac/i)) {
     		window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/gnmath-qr.png");
 			break;
 		default:
-			alert("Type a number.")
+			alert("Type an accepted number.")
 			break;
 	}
 } else {
