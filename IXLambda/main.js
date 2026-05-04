@@ -1,39 +1,42 @@
 if (navigator.userAgent.match(/Mac/i)) {
 	const result = prompt(
-		`Select a Website (Type Number):\n	OverCloaked: 1\n	Fern: 2\n	Infamous: 3\n	DogeUB: 4\n	Space: 5
+		`Made by a furry! :3 (Haters will be ignored >:3)
+		Select a Website (Type Number):
+			Lucide (Best Proxy and Games): 1
+			GN-Math (Games): 2
+			DogeUB: 3
+			Fern: 4
+			Infamous: 5
+			Share Lucide QR: 6
+			Share GN-Math QR: 7
 		`
 	);
-	function openLink(link) {
-        const linkHtmlData = `
-        <!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <title>IXLambda</title>
-            <style>
-              body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
-              iframe { width: 100vw; height: 100vh; border: none; }
-            </style>
-          </head>
-          <body>
-            <iframe src="${link}"></iframe>
-          </body>
-        </html>`;
-        const newTab = window.open(URL.createObjectURL(new Blob([linkHtmlData], { type: "text/html" })), "_blank");
-    }
 	switch (result) {
 		case "1":
-			openLink("https://s3.amazonaws.com/elliotslinks-tnjavxyp/grade21246/index.html");
+			window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/lucide.svg");
+			return;
 		case "2":
-    		openLink("https://s3.amazonaws.com/deaganfern/index.html");
+    		window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/gnmath.svg");
+			return;
 		case "3":
-    		openLink("https://freshgrid9000.b-cdn.net");
+    		window.open("https://dogeub.storage.googleapis.com/index.html");
+			return;
 		case "4":
-    		openLink("https://s3.amazonaws.com/educationate/index.html");
+    		window.open("https://s3.amazonaws.com/deaganfern/index.html");
+			return;
 		case "5":
-    		openLink("https://space-night.b-cdn.net");
+    		window.open("https://swiftsite2312.b-cdn.net");
+			return;
+		case "6":
+    		window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/lucide-qr.png");
+			return;
+		case "7":
+    		window.open("https://cdn.jsdelivr.net/gh/PhiPiBeta/host/gnmath-qr.png");
+			return;
 		default:
-			alert("Type a number?")
+			alert("Type a number.")
+			return;
 	}
 } else {
-	alert("Sorry, I simplified my code, so computer access is broken I guess.");
+	alert("Outsmarted by a furry? Not sorry to you, tech department.");
 }
